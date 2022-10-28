@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codewars", "Codewars\Codewars.csproj", "{E4DE3C65-7F6D-4869-AF44-B9494CD68A4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeforce", "Codeforce\Codeforce.csproj", "{1883D731-1B2A-498E-804E-38F639F4D5CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{CDFF598F-361D-4E9E-A305-62249252C66B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4DE3C65-7F6D-4869-AF44-B9494CD68A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DE3C65-7F6D-4869-AF44-B9494CD68A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DE3C65-7F6D-4869-AF44-B9494CD68A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DE3C65-7F6D-4869-AF44-B9494CD68A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1883D731-1B2A-498E-804E-38F639F4D5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1883D731-1B2A-498E-804E-38F639F4D5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1883D731-1B2A-498E-804E-38F639F4D5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1883D731-1B2A-498E-804E-38F639F4D5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFF598F-361D-4E9E-A305-62249252C66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFF598F-361D-4E9E-A305-62249252C66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFF598F-361D-4E9E-A305-62249252C66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFF598F-361D-4E9E-A305-62249252C66B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
