@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace CodeForcesSimple.LeetCode;
 
-class TopNSortedArray
+class TopNSortedArray : IEnumerable<int>
 {
 	public int MaxSize { get; }
 
@@ -12,7 +14,7 @@ class TopNSortedArray
 		_data = new (MaxSize);
 	}
 
-	public void Insert(int value)
+	public void Add(int value)
 	{
 		if (_data.Count == 0)
 		{
@@ -59,4 +61,8 @@ class TopNSortedArray
 	{
 		_data.RemoveAt(index);
 	}
+
+	public IEnumerator<int> GetEnumerator() => _data.GetEnumerator();
+	
+	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

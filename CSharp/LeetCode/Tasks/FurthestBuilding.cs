@@ -24,12 +24,54 @@ public class FurthestBuilding
 			{
 				var h = heights[i];
 				b -= h;
-				tops.Insert(h - prev);
+				tops.Add(h - prev);
 				prev = h;
 				i++;
 			}
 		}
 
 		return i;
+	}
+}
+
+public class FurthestBuilding2
+{
+	public static int Solve(int[] heights, int bricks, int ladders)
+	{
+		var diffs = new int[heights.Length];
+		var p = 0;
+		for (var i = 0; i < heights.Length; i++)
+		{
+			var h = heights[i];
+			diffs[i] = h <= p ? 0 : h - p;
+			p = h;
+		}
+
+		var result = TrySolve(0, diffs.Length);
+		return result;
+
+		int TrySolve(int min, int max)
+		{
+			if (min > max) return -1;
+			
+			var maximums = new TopNSortedArray(ladders);
+			var m = (min + max) / 2;
+			var selected = diffs[0..m];
+			
+			var sum = 0;
+			foreach (var s in selected)
+			{
+				maximums.Add(s);
+				sum += s;
+			}
+
+			sum -= maximums.Sum();
+			if (sum == bricks || sum < bricks && min == max)
+			{
+				return m;
+			}
+			
+			return sum > bricks ? TrySolve(min, m - 1) : TrySolve(m + 1, max);
+		}
 	}
 }

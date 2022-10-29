@@ -1,5 +1,11 @@
-﻿using LeetCode;
+﻿using CodeForcesSimple.LeetCode;
+using LeetCode;
 
+
+//Console.WriteLine(FurthestBuilding2.Solve(new[] { 4, 2, 7, 6, 9, 14, 12 }, 5, 1));
+Console.WriteLine(FurthestBuilding2.Solve(new[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, 10, 2));
+
+//4,8,0,5,0,15,2,0,16
 
 // var p = new Permutations();
 //
@@ -87,8 +93,6 @@
 // Console.WriteLine(fancy.GetIndex(9));
 // Console.WriteLine(fancy.GetIndex(9));
 
-
-	
 return;
 
 var eq = new EqualFrequency();
@@ -105,8 +109,6 @@ Console.WriteLine("{0},{1}", false, eq.Solve("ddaccb"));
 Console.WriteLine("{0},{1}", false, eq.Solve("aazz"));
 Console.WriteLine("{0},{1}", true, eq.Solve("aazzd"));
 Console.WriteLine("{0},{1}", true, eq.Solve("abb"));
-
-
 
 //
 // var data = new char[9][]
