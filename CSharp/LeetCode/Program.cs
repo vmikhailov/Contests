@@ -1,12 +1,12 @@
 ﻿using LeetCode;
 
 
-var p = new Permutations();
-
-foreach (var s in p.Permute(new[] { 0, 1 }))
-{
-	Console.WriteLine(string.Join(", ", s));
-}
+// var p = new Permutations();
+//
+// foreach (var s in p.Permute(new[] { 0, 1 }))
+// {
+// 	Console.WriteLine(string.Join(", ", s));
+// }
 
 //
 // // Fancy fancy1 = new Fancy();
