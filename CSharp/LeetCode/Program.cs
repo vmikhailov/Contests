@@ -1,21 +1,39 @@
 ﻿using LeetCode;
 
-var data = new char[9][]
-{
-	new[] { '8', '3', '.', '.', '7', '.', '.', '.', '.' },
-	new[] { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
-	new[] { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
-	new[] { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
-	new[] { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
-	new[] { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
-	new[] { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
-	new[] { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
-	new[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
-};
+var eq = new EqualFrequency();
+Console.WriteLine("{0},{1}", true, eq.Solve("zz"));
+Console.WriteLine("{0},{1}", false, eq.Solve("cbccca"));
+Console.WriteLine("{0},{1}", false, eq.Solve("abbccc"));
+Console.WriteLine("{0},{1}", true, eq.Solve("abbcc"));
+Console.WriteLine("{0},{1}", true, eq.Solve("abcc"));
 
-var ss = new Sudoku();
+Console.WriteLine("{0},{1}", true, eq.Solve("cccaa"));
+Console.WriteLine("{0},{1}", true, eq.Solve("bac"));
+Console.WriteLine("{0},{1}", false, eq.Solve("ddaccb"));
 
-Console.WriteLine(ss.IsValidSudoku(data));
+Console.WriteLine("{0},{1}", false, eq.Solve("aazz"));
+Console.WriteLine("{0},{1}", true, eq.Solve("aazzd"));
+Console.WriteLine("{0},{1}", true, eq.Solve("abb"));
+
+
+
+//
+// var data = new char[9][]
+// {
+// 	new[] { '8', '3', '.', '.', '7', '.', '.', '.', '.' },
+// 	new[] { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
+// 	new[] { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
+// 	new[] { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
+// 	new[] { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
+// 	new[] { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+// 	new[] { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
+// 	new[] { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
+// 	new[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+// };
+
+//var ss = new Sudoku();
+
+//Console.WriteLine(ss.IsValidSudoku(data));
 //
 // var r1 = ContainerWithMostWater.MaxArea(new[] { 1, 2, 3 });
 // var r2 = ContainerWithMostWater.MaxArea(new[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 });
