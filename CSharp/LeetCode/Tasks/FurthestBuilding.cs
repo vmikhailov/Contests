@@ -4,45 +4,11 @@ public class FurthestBuilding
 {
 	public static int Solve(int[] heights, int bricks, int ladders)
 	{
-		var b = bricks;
-		var i = 0;
-		var n = heights.Length;
-
-		var tops = new TopNSortedArray(ladders);
-
-		while (ladders > 0 && i < n)
+		var diffs = new int[heights.Length - 1];
+		var p = heights[0];
+		for (var i = 0; i < heights.Length - 1; i++)
 		{
-			if (tops.Count > 0)
-			{
-				b += tops[tops.Count - 1];
-				tops.RemoveAt(tops.Count - 1);
-				ladders--;
-			}
-
-			var prev = 0;
-			while (i < n && b >= heights[i])
-			{
-				var h = heights[i];
-				b -= h;
-				tops.Add(h - prev);
-				prev = h;
-				i++;
-			}
-		}
-
-		return i;
-	}
-}
-
-public class FurthestBuilding2
-{
-	public static int Solve(int[] heights, int bricks, int ladders)
-	{
-		var diffs = new int[heights.Length];
-		var p = 0;
-		for (var i = 0; i < heights.Length; i++)
-		{
-			var h = heights[i];
+			var h = heights[i + 1];
 			diffs[i] = h <= p ? 0 : h - p;
 			p = h;
 		}
@@ -50,15 +16,20 @@ public class FurthestBuilding2
 		var result = TrySolve(0, diffs.Length);
 		return result;
 
-		int TrySolve(int min, int max)
+		int TrySolve(int min, int max, TopNSortedArray<long>? maximums = null)
 		{
 			if (min > max) return -1;
-			
-			var maximums = new TopNSortedArray(ladders);
 			var m = (min + max) / 2;
+
+			if (maximums != null)
+			{
+				var selected = diffs[0..m];
+				
+			}
+			maximums ??= new(ladders);
 			var selected = diffs[0..m];
-			
-			var sum = 0;
+
+			var sum = 0L;
 			foreach (var s in selected)
 			{
 				maximums.Add(s);
@@ -70,8 +41,25 @@ public class FurthestBuilding2
 			{
 				return m;
 			}
-			
-			return sum > bricks ? TrySolve(min, m - 1) : TrySolve(m + 1, max);
+
+			if (sum > bricks)
+			{
+				return TrySolve(min, m - 1);
+			}
+			else
+			{
+				var r = TrySolve(m + 1, max, maximums);
+				return r == -1 ? m : r;
+			}
 		}
+	}
+
+	public static (int[] Heights, int Bricks, int Ladders) ReadTestData(string file)
+	{
+		var f = File.OpenText(file);
+		var h = f.ReadLine()!.Trim('[',']').Split(',').Select(int.Parse).ToArray();
+		var b = int.Parse(f.ReadLine()!);
+		var l = int.Parse(f.ReadLine()!);
+		return (h, b, l);
 	}
 }

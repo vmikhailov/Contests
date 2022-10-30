@@ -2,11 +2,12 @@ using System.Collections;
 
 namespace CodeForcesSimple.LeetCode;
 
-class TopNSortedArray : IEnumerable<int>
+class TopNSortedArray<T> : IEnumerable<T>
+	where T : IComparable<T>
 {
 	public int MaxSize { get; }
 
-	private List<int> _data;
+	private List<T> _data;
 
 	public TopNSortedArray(int maxSize)
 	{
@@ -14,7 +15,7 @@ class TopNSortedArray : IEnumerable<int>
 		_data = new (MaxSize);
 	}
 
-	public void Add(int value)
+	public void Add(T value)
 	{
 		if (_data.Count == 0)
 		{
@@ -37,7 +38,7 @@ class TopNSortedArray : IEnumerable<int>
 		}
 	}
 
-	public int Find(int value)
+	public int Find(T value)
 	{
 		var l = 0;
 		var r = _data.Count - 1;
@@ -45,8 +46,9 @@ class TopNSortedArray : IEnumerable<int>
 		{
 			var m = (l + r) / 2;
 			var d = _data[m];
-			if (d == value) return m;
-			if (d < value) l = m + 1;
+			var c = d.CompareTo(value);
+			if (c == 0) return m;
+			if (c < 0) l = m + 1;
 			else r = m - 1;
 		}
 
@@ -55,14 +57,14 @@ class TopNSortedArray : IEnumerable<int>
 
 	public int Count => _data.Count;
 
-	public int this[int index] => _data[index];
+	public T this[int index] => _data[index];
 
 	public void RemoveAt(int index)
 	{
 		_data.RemoveAt(index);
 	}
 
-	public IEnumerator<int> GetEnumerator() => _data.GetEnumerator();
+	public IEnumerator<T> GetEnumerator() => _data.GetEnumerator();
 	
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

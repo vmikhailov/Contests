@@ -201,8 +201,7 @@ public class CircleBuffer<T> : IList<T>
 
 		return (default, -1);
 	}
-
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	
 	private int GetIndex(int index) => index < 0 ? index + MaxSize : index >= MaxSize ? index - MaxSize : index;
 
 	protected virtual bool ReleaseFor(T item) => false;
