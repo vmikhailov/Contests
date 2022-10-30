@@ -16,20 +16,22 @@ public class FurthestBuilding
 		var result = TrySolve(0, diffs.Length);
 		return result;
 
-		int TrySolve(int min, int max, TopNSortedArray<long>? maximums = null)
+		int TrySolve(int min, int max, long sum = 0, TopNSortedArray<long>? maximums = null)
 		{
 			if (min > max) return -1;
 			var m = (min + max) / 2;
 
+			int[] selected;
 			if (maximums != null)
 			{
-				var selected = diffs[0..m];
-				
+				selected = diffs[min..m];
 			}
-			maximums ??= new(ladders);
-			var selected = diffs[0..m];
-
-			var sum = 0L;
+			else
+			{
+				selected = diffs[0..m];
+				maximums = new(ladders);
+			}
+			
 			foreach (var s in selected)
 			{
 				maximums.Add(s);
@@ -48,7 +50,7 @@ public class FurthestBuilding
 			}
 			else
 			{
-				var r = TrySolve(m + 1, max, maximums);
+				var r = TrySolve(m + 1, max, sum, maximums.Clone());
 				return r == -1 ? m : r;
 			}
 		}
