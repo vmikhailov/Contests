@@ -43,6 +43,14 @@ public class CircleBuffer<T> : IList<T>
 		}
 	}
 
+	public void AddRange(IEnumerable<T> data)
+	{
+		foreach (var d in data)
+		{
+			Add(d);
+		}
+	}
+
 	public void Clear()
 	{
 		_left = 0;
@@ -108,9 +116,8 @@ public class CircleBuffer<T> : IList<T>
 		}
 		else if (index == c)
 		{
-			//_right = GetIndex(_right + 1);
-			_right = (_right + 1) % MaxSize;
 			_data[_right] = item;
+			_right = (_right + 1) % MaxSize;
 		}
 		else
 		{

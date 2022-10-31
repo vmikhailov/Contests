@@ -7,7 +7,8 @@ class TopNSortedArray<T> : IEnumerable<T>
 {
 	public int MaxSize { get; }
 
-	private List<T> _data;
+	private CircleBuffer<T> _data;
+	//private List<T> _data;
 
 	public TopNSortedArray(int maxSize)
 	{
@@ -15,14 +16,15 @@ class TopNSortedArray<T> : IEnumerable<T>
 		_data = new (MaxSize);
 	}
 
+	public TopNSortedArray(int maxSize, IEnumerable<T> data)
+	{
+		MaxSize = maxSize;
+		_data = new (MaxSize);
+		_data.AddRange(data);
+	}
+
 	public void Add(T value)
 	{
-		if (_data.Count == 0)
-		{
-			_data.Add(value);
-			return;
-		}
-		
 		var p = Find(value);
 		if (_data.Count == MaxSize)
 		{
@@ -63,8 +65,12 @@ class TopNSortedArray<T> : IEnumerable<T>
 	{
 		_data.RemoveAt(index);
 	}
+	
+	public TopNSortedArray<T> Clone() => new(MaxSize, _data);
 
 	public IEnumerator<T> GetEnumerator() => _data.GetEnumerator();
 	
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+	
 }

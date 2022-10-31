@@ -1,13 +1,40 @@
 ﻿using System.Diagnostics;
 using CodeForcesSimple.LeetCode;
 using LeetCode;
+using LeetCode.Tasks;
 
-var data = FurthestBuilding.ReadTestData("TestData/FurthestBuilding.txt");
+
+var eao = new ExpressionAddOperators();
+
+//var rr = eao.AddOperators("1234567890", 5);
 var sw = Stopwatch.StartNew();
-Console.WriteLine(FurthestBuilding.Solve(data.Heights, data.Bricks, data.Ladders));
+//var rr = eao.AddOperators("3456237490", 9191);
+var rr = eao.AddOperators("105", 5);
 Console.WriteLine(sw.Elapsed);
-Console.WriteLine(FurthestBuilding.Solve(new[] { 4, 2, 7, 6, 9, 14, 12 }, 5, 1));
-Console.WriteLine(FurthestBuilding.Solve(new[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, 10, 2));
+Console.WriteLine(eao.Computed);
+
+foreach (var r in rr)
+{
+	Console.WriteLine(r);
+}
+
+Console.WriteLine($"Total = {rr.Count}");
+
+//
+// Console.WriteLine(FurthestBuilding.Solve(new[] { 1, 2, 2 }, 0, 0));
+// Console.WriteLine(FurthestBuilding.Solve(new[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, 10, 2));
+// Console.WriteLine(FurthestBuilding.Solve(new[] { 14, 3, 19, 3 }, 17, 0));
+// Console.WriteLine(FurthestBuilding.Solve(new[] { 4, 2, 7, 6, 9, 14, 12 }, 5, 1));
+//
+// var data1 = FurthestBuilding.ReadTestData("TestData/FurthestBuilding_test1.txt");
+// var sw1 = Stopwatch.StartNew();
+// Console.WriteLine(FurthestBuilding.Solve(data1.Heights, data1.Bricks, data1.Ladders));
+// Console.WriteLine(sw1.Elapsed);
+//
+// var data2 = FurthestBuilding.ReadTestData("TestData/FurthestBuilding_test2.txt");
+// var sw2 = Stopwatch.StartNew();
+// Console.WriteLine(FurthestBuilding.Solve(data2.Heights, data2.Bricks, data2.Ladders));
+// Console.WriteLine(sw2.Elapsed);
 
 //4,8,0,5,0,15,2,0,16
 
