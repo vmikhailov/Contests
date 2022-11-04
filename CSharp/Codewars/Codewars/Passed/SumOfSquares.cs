@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Codewars.Codewars.Passed;
 
 public class SumOfSquares
 {
-	private static IDictionary<int, int> Cache = new Dictionary<int, int>();
-	public static int Hits = 0;
-	public static int Calls = 0;
 	public static int NSquaresFor(int n)
 	{
 		var nSquares = (int)Math.Sqrt(n);
@@ -18,40 +14,36 @@ public class SumOfSquares
 		{
 			qq[i - 1] = i * i;
 		}
-
-		Calls = 0;
 		return Find(n, n, qq);
 	}
 	
-	private static int Find(int k, int n, int[] squares)
+	private static int Find(int k, int n, ReadOnlySpan<int> squares)
 	{
-		Calls++;
 		var q = squares[^1];
 		if (q == n) return 1;
 
 		for (var i = squares.Length - 1; i >= 0; i--)
 		{
 			var m = n - squares[i];
-			var p = Array.BinarySearch(squares, m);
-			if (p >= 0) return 2;
+			var qq = (int)Math.Sqrt(m);
+			if (qq * qq == m) return 2;
 		}
 
-		k = Math.Min(Math.Min(n - q + 1, k), 4);
+		k = Math.Min(Math.Min(n - q + 1, k), 3);
 		
-		for (var i = 3; i <= k; i++)
+		if(k >= 3)
 		{
-			for (var j = squares.Length - 1; j >= 0; j--)
+			//4^2(8b+7)
+			var a = 0;
+			var f = n;
+			while (f % 4 == 0)
 			{
-				var m = n - squares[j];
-				if (m == 0) return 1;
-				if (i == 1) break;
-				
-				var p = Array.BinarySearch(squares, m);
-				var qq = p < 0 ? squares[..~p] : squares[..(p + 1)];
-				var r = qq[^1] == m ? 1 : qq.Length <= 1 ? 0 : Find(i - 1, m, qq);
-
-				if (r > 0) return r + 1;
+				a++;
+				f /= 4;
 			}
+
+			f -= 7;
+			return f % 8 == 0 ? 4 : 3; 
 		}
 		
 		return 0;
@@ -72,7 +64,6 @@ public class SumOfSquaresTest
 	public void Test1(int n, int k)
 	{
 		Assert.AreEqual(k, SumOfSquares.NSquaresFor(n));
-		TestContext.WriteLine(SumOfSquares.Hits);
 	}
 
 	[Test]
@@ -84,10 +75,22 @@ public class SumOfSquaresTest
 	[TestCase(1703434349)]
 	[TestCase(1703434350)]
 	[TestCase(1703434351)]
+	[TestCase(1703434352)]
 	[TestCase(2103434344)]
 	public void Test2(int n)
 	{
 		var k = SumOfSquares.NSquaresFor(n);
-		TestContext.WriteLine($"{n} {k} {SumOfSquares.Calls}");
+		TestContext.WriteLine($"{n} {k}");
+	}
+	
+	
+	[Test]
+	[TestCase(100000000, 10000)]
+	public void Test3(int n, int k)
+	{
+		for (var i = n; i < n + k; i++)
+		{
+			SumOfSquares.NSquaresFor(i);	
+		}
 	}
 }
