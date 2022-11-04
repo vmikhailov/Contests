@@ -4,21 +4,59 @@ using LeetCode;
 using LeetCode.Tasks;
 
 
-var eao = new ExpressionAddOperators();
+var lmt = new LargestMultipleOfThreeTask();
+Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 1, 9 }));
+Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 1, 1, 0 }));
+Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 6, 7, 1, 0 }));
 
-//var rr = eao.AddOperators("1234567890", 5);
-var sw = Stopwatch.StartNew();
-//var rr = eao.AddOperators("3456237490", 9191);
-var rr = eao.AddOperators("105", 5);
-Console.WriteLine(sw.Elapsed);
-Console.WriteLine(eao.Computed);
+// var md = new MedianFinder();
+// md.AddNum(6);
+// Console.WriteLine(md.FindMedian());
+// md.AddNum(10);
+// Console.WriteLine(md.FindMedian());
+// md.AddNum(2);
+// Console.WriteLine(md.FindMedian());
+// md.AddNum(6);
+// Console.WriteLine(md.FindMedian());
 
-foreach (var r in rr)
-{
-	Console.WriteLine(r);
-}
+//
+// var bc = new BasicCalculator();
+// Console.WriteLine(bc.Calculate("1+2"));
 
-Console.WriteLine($"Total = {rr.Count}");
+//
+// var mr = new MaximalRectangleTask();
+// var data = mr.ReadTestData("TestData/MaximalRectangleTask_test1.txt");
+//
+// Console.WriteLine(mr.MaximalRectangle(data));
+//
+// var matrix = new[]
+// {
+// 	new[] { '1', '0', '1', '0', '0' },
+// 	new[] { '1', '0', '1', '1', '1' },
+// 	new[] { '1', '1', '1', '1', '1' },
+// 	new[] { '1', '0', '0', '1', '0' }
+// };
+//
+// Console.WriteLine(mr.MaximalRectangle(matrix));
+//
+// Console.WriteLine(mr.MaximalRectangle(new[]{new[]{'0'}}));
+// Console.WriteLine(mr.MaximalRectangle(new[]{new[]{'1'}}));
+
+// var eao = new ExpressionAddOperators();
+//
+// //var rr = eao.AddOperators("1234567890", 5);
+// var sw = Stopwatch.StartNew();
+// //var rr = eao.AddOperators("3456237490", 9191);
+// var rr = eao.AddOperators("105", 5);
+// Console.WriteLine(sw.Elapsed);
+// Console.WriteLine(eao.Computed);
+//
+// foreach (var r in rr)
+// {
+// 	Console.WriteLine(r);
+// }
+//
+// Console.WriteLine($"Total = {rr.Count}");
 
 //
 // Console.WriteLine(FurthestBuilding.Solve(new[] { 1, 2, 2 }, 0, 0));
