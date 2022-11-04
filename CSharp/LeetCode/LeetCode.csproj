@@ -8,8 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="TestData\FurthestBuilding.txt">
+    <None Update="TestData\FurthestBuilding_test1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\FurthestBuilding_test2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\MaximalRectangleTask_test1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
