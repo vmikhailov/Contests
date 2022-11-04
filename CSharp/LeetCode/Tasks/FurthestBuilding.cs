@@ -32,19 +32,19 @@ public class FurthestBuilding
 				maximums = new(ladders);
 			}
 			
-			foreach (var s in selected)
+			foreach (var s in selected.Where(x => x > 0))
 			{
 				maximums.Add(s);
 				sum += s;
 			}
 
-			sum -= maximums.Sum();
-			if (sum == bricks || sum < bricks && min == max)
+			var remaining = sum - maximums.Sum();
+			if (remaining == bricks || remaining < bricks && min == max)
 			{
 				return m;
 			}
 
-			if (sum > bricks)
+			if (remaining > bricks)
 			{
 				return TrySolve(min, m - 1);
 			}
