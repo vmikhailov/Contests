@@ -23,14 +23,6 @@ class TopNSortedArray<T> : IEnumerable<T>
 		_data.AddRange(data);
 	}
 
-
-	public TopNSortedArray(int maxSize, IEnumerable<T> data)
-	{
-		MaxSize = maxSize;
-		_data = new (MaxSize);
-		_data.AddRange(data);
-	}
-
 	public void Add(T value)
 	{
 		var p = Find(value);
@@ -74,8 +66,6 @@ class TopNSortedArray<T> : IEnumerable<T>
 		_data.RemoveAt(index);
 	}
 	
-	public TopNSortedArray<T> Clone() => new(MaxSize, _data);
-
 	public TopNSortedArray<T> Clone() => new(MaxSize, _data);
 
 	public IEnumerator<T> GetEnumerator() => _data.GetEnumerator();

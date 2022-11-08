@@ -4,6 +4,60 @@ using LeetCode;
 using LeetCode.Tasks;
 
 
+var ms = new MySqrtTask();
+ms.MySqrt(4);
+ms.MySqrt(2147483647);
+ms.MySqrt(2147395599);
+
+//var ra = new RectangleArea();
+//Console.WriteLine(ra.ComputeArea(-3, 0, 3, 4, 0, -1, 9, 2));
+
+
+// var ss = new SubsetsTask();
+// var r = ss.Subsets(new[] { 1, 2, 3 });
+//
+// Console.WriteLine(string.Join(", ", r.Select(x => "[" + string.Join(", ", x) + "]")));
+//
+// return;
+// var pr = new PerfectRectangle();
+//
+// var r1 = new[] { new[] { 1, 1, 3, 3 }, new[] { 3, 1, 4, 2 }, new[] { 3, 2, 4, 4 }, new[] { 1, 3, 2, 4 }, new[] { 2, 3, 3, 4 } };
+// var r2 = new[] { new[] { 1, 1, 2, 3 }, new[] { 1, 3, 2, 4 }, new[] { 3, 1, 4, 2 }, new[] { 3, 2, 4, 4 } };
+// var r3 = new[] { new[] { 0, 0, 4, 1 }, new[] { 0, 0, 4, 1 } };
+// var r4 = pr.ReadTestData("TestData/PerfectRectangle.txt");
+//
+// Console.WriteLine(pr.IsRectangleCover(r4));
+// Console.WriteLine(pr.IsRectangleCover(r3));
+// Console.WriteLine(pr.IsRectangleCover(r1));
+// Console.WriteLine(pr.IsRectangleCover(r2));
+
+// var rl = new RotateListTask();
+// var r = rl.RotateRight(new(1, new(2, new(3))), 1);
+// return;
+
+// var mcmae = new MinimumCostToMakeArrayEqual();
+// mcmae.MinCost(new[] { 2, 2, 2, 2 }, new[] { 2, 3, 1, 14 });
+// Console.WriteLine(mcmae.MinCost(new[] { 1, 3, 5, 2 }, new[] { 2, 3, 1, 14 }));
+//
+// var nums = new[]
+// {
+// 	735103, 366367, 132236, 133334, 808160, 113001, 49051, 735598, 686615, 665317, 999793, 426087, 587000, 649989, 509946,
+// 	743518
+// };
+//
+// var cost = new[]
+// {
+// 	724182, 447415, 723725, 902336, 600863, 287644, 13836, 665183, 448859, 917248, 397790, 898215, 790754, 320604, 468575,
+// 	825614
+// };
+
+//Console.WriteLine(mcmae.MinCost(nums, cost));
+
+return;
+var spt = new ShortestPalindromeTask();
+Console.WriteLine(spt.ShortestPalindrome("aaa"));
+Console.WriteLine(spt.ShortestPalindrome("aacecaaa"));
+
 var lmt = new LargestMultipleOfThreeTask();
 Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 1, 9 }));
 Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 1, 1, 0 }));

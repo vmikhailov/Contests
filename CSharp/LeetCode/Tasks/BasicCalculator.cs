@@ -16,6 +16,7 @@ public class BasicCalculator
 			return func();
 		}
 
+		
 		return 0;
 	}
 
