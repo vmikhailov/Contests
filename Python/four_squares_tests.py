@@ -2,8 +2,8 @@ from four_squares import four_squares
 
 
 def fore_squares_tests():
-    for i in [0, 1, 17, 33, 215, 333, 2**12-3, 1234567890, 106369249365575352836589875696130383747]:
-    # for i in [1234567890, 106369249365575352836589875696130383747]:
+    for i in [0, 1, 17, 33, 215, 333, 2 ** 12 - 3, 1234567890, 106369249365575352836589875696130383747]:
+        # for i in [1234567890, 106369249365575352836589875696130383747]:
         a, b, c, d = four_squares(i)
         error_msg = None
         if type(a) is not int: error_msg = "1st square is not of type int"

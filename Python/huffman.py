@@ -2,9 +2,9 @@ class HuffmanTree:
     def __init__(self):
         pass
 
-    def build(self, str):
+    def build(self, s):
         freqs = {}
-        for c in str:
+        for c in s:
             if c not in freqs:
                 freqs[c] = 0
             freqs[c] += 1

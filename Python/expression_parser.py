@@ -2,7 +2,6 @@
 from collections import deque
 from enum import Enum
 
-
 class TokenType(Enum):
     End = 0
     Number = 1
@@ -79,14 +78,11 @@ class Calc:
 
     def get_value(self) -> [bool, float]:
         ok, a = self.calc_expression()
-        if ok and self.check(TokenType.End):
+        if ok and self.current.type == TokenType.End:
             return [True, a]
         return [False, 0]
 
-    def check(self, token_type: TokenType) -> bool:
-        return self.current.type == token_type
-
-    def check_values(self, token_type: TokenType, values: list) -> bool:
+    def check(self, token_type: TokenType, values: list) -> bool:
         return self.current.type == token_type and self.current.value in values
 
     def calc_expression(self) -> [bool, float]:
@@ -94,7 +90,7 @@ class Calc:
         if not ok:
             return [False, 0]
 
-        while self.check_values(TokenType.Operator, ['+', '-']):
+        while self.check(TokenType.Operator, ['+', '-']):
             op = self.current.value
             if not self.next():
                 return [False, 0]
@@ -112,7 +108,7 @@ class Calc:
         if not ok:
             return [False, 0]
 
-        while self.check_values(TokenType.Operator, ['*', '/']):
+        while self.check(TokenType.Operator, ['*', '/']):
             op = self.current.value
             if not self.next():
                 return [False, 0]
@@ -137,26 +133,28 @@ class Calc:
         elif self.current.type == TokenType.OpenParenthesis:
             if self.next():
                 ok, a = self.calc_expression()
-                if ok and self.check(TokenType.CloseParenthesis):
+                if ok and self.current.type == TokenType.CloseParenthesis:
                     return [self.next(), a]
         return [False, 0]
 
     def calc_number(self) -> [bool, float]:
-        if not self.check(TokenType.Number):
+        if not self.current.type == TokenType.Number:
             return [False, 0]
 
         v = float(self.current.value)
         return [self.next(), v]
 
 
-# for t in tokenize("(2 / (2 + 3.33) * 4) - -6"):
-for t in tokenize("2 + 3 * 4"):
-    print(t.type, "\t", t.value)
+# tests
+calc = Calc("2*3*4*5+99*321-12312312")
+print(calc.get_value()[1])
 
-# calc = Calc("2*3*4*5+99*321-12312312")
 calc = Calc("1*3-(7/1*3-9+1*4/8*9-9)*12+213")
 print(calc.get_value()[1])
 
-calc = Calc(5)
-r = calc.get_value()
-print(r[1])
+calc = Calc("1/10")
+ok, a = calc.get_value()
+print(a)
+
+# for t in tokenize("(2 / (2 + 3.33) * 4) - -6"):
+[print(t.type, "\t", t.value) for t in tokenize("2 + 3 * (4 + 4)")]

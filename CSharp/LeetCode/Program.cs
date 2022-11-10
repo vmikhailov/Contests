@@ -4,10 +4,17 @@ using LeetCode;
 using LeetCode.Tasks;
 
 
-var ms = new MySqrtTask();
-ms.MySqrt(4);
-ms.MySqrt(2147483647);
-ms.MySqrt(2147395599);
+MaximalRectangleTask.TestPerf();
+//
+// var zz = new ZigzagLevelOrderTask();
+//
+// zz.ZigzagLevelOrder(new(1, new(2), new(3, new(4), new(5))));
+// zz.ZigzagLevelOrder(new(1, new(2, new(4)), new(3, null, new(5))));
+
+// var ms = new MySqrtTask();
+// ms.MySqrt(4);
+// ms.MySqrt(2147483647);
+// ms.MySqrt(2147395599);
 
 //var ra = new RectangleArea();
 //Console.WriteLine(ra.ComputeArea(-3, 0, 3, 4, 0, -1, 9, 2));
@@ -53,16 +60,16 @@ ms.MySqrt(2147395599);
 
 //Console.WriteLine(mcmae.MinCost(nums, cost));
 
-return;
-var spt = new ShortestPalindromeTask();
-Console.WriteLine(spt.ShortestPalindrome("aaa"));
-Console.WriteLine(spt.ShortestPalindrome("aacecaaa"));
+// var spt = new ShortestPalindromeTask();
+// Console.WriteLine(spt.ShortestPalindrome("aaa"));
+// Console.WriteLine(spt.ShortestPalindrome("aacecaaa"));
+//
+// var lmt = new LargestMultipleOfThreeTask();
+// Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 1, 9 }));
+// Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 1, 1, 0 }));
+// Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 6, 7, 1, 0 }));
 
-var lmt = new LargestMultipleOfThreeTask();
-Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 1, 9 }));
-Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 1, 1, 0 }));
-Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 6, 7, 1, 0 }));
-
+// var md = new MedianFinder();
 // var md = new MedianFinder();
 // md.AddNum(6);
 // Console.WriteLine(md.FindMedian());
@@ -77,21 +84,24 @@ Console.WriteLine(lmt.LargestMultipleOfThree(new[] { 8, 6, 7, 1, 0 }));
 // var bc = new BasicCalculator();
 // Console.WriteLine(bc.Calculate("1+2"));
 
-//
+
 // var mr = new MaximalRectangleTask();
-// var data = mr.ReadTestData("TestData/MaximalRectangleTask_test1.txt");
-//
-// Console.WriteLine(mr.MaximalRectangle(data));
-//
 // var matrix = new[]
 // {
 // 	new[] { '1', '0', '1', '0', '0' },
 // 	new[] { '1', '0', '1', '1', '1' },
 // 	new[] { '1', '1', '1', '1', '1' },
-// 	new[] { '1', '0', '0', '1', '0' }
+// 	new[] { '0', '0', '0', '0', '0' },
+// 	new[] { '1', '1', '1', '1', '1' }
 // };
 //
-// Console.WriteLine(mr.MaximalRectangle(matrix));
+// var sw = Stopwatch.StartNew();
+// Console.WriteLine("{0} in {1}ms", mr.MaximalRectangle(matrix), sw.ElapsedMilliseconds);
+//
+//
+// var data = mr.ReadTestData("TestData/MaximalRectangleTask_test1.txt");
+// sw.Restart();
+// Console.WriteLine("{0} in {1}ms", mr.MaximalRectangle(data), sw.ElapsedMilliseconds);
 //
 // Console.WriteLine(mr.MaximalRectangle(new[]{new[]{'0'}}));
 // Console.WriteLine(mr.MaximalRectangle(new[]{new[]{'1'}}));
