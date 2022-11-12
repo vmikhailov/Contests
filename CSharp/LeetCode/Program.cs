@@ -4,7 +4,9 @@ using LeetCode;
 using LeetCode.Tasks;
 
 
-MaximalRectangleTask.TestPerf();
+var wp = new WordPatternTask();
+wp.WordPattern("aba", "dog cat cat");
+//MaximalRectangleTask.TestPerf();
 //
 // var zz = new ZigzagLevelOrderTask();
 //

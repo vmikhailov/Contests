@@ -110,7 +110,7 @@ public class MaximalRectangleTask
 		var sy = matrix.Length;
 		var sx = matrix[0].Length;
 		var r = new List<(int X1, int Y1, int X2, int Y2)>();
-		var visited = new HashSet<(int X, int Y)>();
+		var visited = new bool[sx * sy];
 		for (var y = 0; y < sy; y++)
 		{
 			for (var x = 0; x < sx; x++)
@@ -131,17 +131,16 @@ public class MaximalRectangleTask
 		int y,
 		int sx,
 		int sy,
-		ISet<(int X, int Y)> visited,
+		bool[] visited,
 		out (int X1, int Y1, int X2, int Y2)? bounds)
 	{
-		var current = new HashSet<(int X, int Y)>();
-		if (MarkConnected(x, y))
+		var x1 = sx - 1;
+		var x2 = 0;
+		var y1 = sy - 1;
+		var y2 = 0;
+		
+		if (MarkConnectedNoRecursion(x, y))
 		{
-			var x1 = current.Select(c => c.X).Min();
-			var x2 = current.Select(c => c.X).Max();
-			var y1 = current.Select(c => c.Y).Min();
-			var y2 = current.Select(c => c.Y).Max();
-
 			bounds = (x1, y1, x2, y2);
 			return true;
 		}
@@ -149,17 +148,59 @@ public class MaximalRectangleTask
 		bounds = null;
 		return false;
 
+		bool MarkConnectedNoRecursion(int xx, int yy)
+		{
+			if (visited[yy * sx + xx]) return false;
+			if (matrix[yy][xx] == '0')
+			{
+				visited[yy * sx + xx] = true;
+				return false;
+			}
+		    
+			var queue = new Queue<(int X, int Y)>();
+			queue.Enqueue((xx, yy));
+			var marked = false;
+			
+			while (queue.TryDequeue(out var p))
+			{
+				(xx, yy) = p;
+				if (matrix[yy][xx] == '1' && !visited[yy * sx + xx])
+				{
+					x1 = Math.Min(x1, xx);
+					y1 = Math.Min(y1, yy);
+					x2 = Math.Max(x2, xx);
+					y2 = Math.Max(y2, yy);
+					visited[yy * sx + xx] = true;
+					marked = true;
+					if (xx > 0) queue.Enqueue((xx - 1, yy));
+					if (yy > 0) queue.Enqueue((xx, yy - 1));
+					if (xx < sx - 1) queue.Enqueue((xx + 1, yy));
+					if (yy < sy - 1) queue.Enqueue((xx, yy + 1));
+				}
+			}
+
+			return marked;
+		}
+		
 		bool MarkConnected(int xx, int yy)
 		{
-			if (matrix[yy][xx] == '1' && visited.Add((xx, yy)) && current.Add((xx, yy)))
+			if (visited[yy * sx + xx]) return false;
+			
+			visited[yy * sx + xx] = true;
+			if(matrix[yy][xx] == '1')
 			{
+				x1 = Math.Min(x1, xx);
+				y1 = Math.Min(y1, yy);
+				x2 = Math.Max(x2, xx);
+				y2 = Math.Max(y2, yy);
+			
 				if (xx > 0) MarkConnected(xx - 1, yy);
 				if (yy > 0) MarkConnected(xx, yy - 1);
 				if (xx < sx - 1) MarkConnected(xx + 1, yy);
 				if (yy < sy - 1) MarkConnected(xx, yy + 1);
 				return true;
 			}
-
+			
 			return false;
 		}
 	}
@@ -184,7 +225,7 @@ public class MaximalRectangleTask
 		sw.Restart();
 		sw.Stop();
 
-		for (int i = 1; i < 10; i++)
+		for (int i = 10; i < 10; i++)
 		{
 			var t1 = GridTest(2500, i);
 			sw.Restart();
@@ -196,7 +237,7 @@ public class MaximalRectangleTask
 		var randOuts = new[] { 0, 4602, 5388, 4635, 4431, 3954 };
 		for (int i = 1; i < randOuts.Length; i++)
 		{
-			var t1 = RandTest(2500, i);
+			var t1 = RandTest(1000, i);
 			sw.Restart();
 			Verify(t1, randOuts[i]);
 			sw.Stop();
@@ -245,5 +286,6 @@ public class MaximalRectangleTask
 	}
 
 	private static void Verify(char[][] input, int output) =>
-		Trace.Assert(output == new MaximalRectangleTask().MaximalRectangle(input));
+		//Trace.Assert(output == new MaximalRectangleTask().MaximalRectangle(input));
+		new MaximalRectangleTask().MaximalRectangle(input);
 }
