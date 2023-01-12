@@ -4,14 +4,32 @@ using LeetCode;
 using LeetCode.Tasks;
 
 
-var wp = new WordPatternTask();
-wp.WordPattern("aba", "dog cat cat");
+var sm = new SpiralMatrixTask();
+var m = new int[][]
+{
+	new[] { 1, 2, 3, 4 },
+	new[] { 5, 6, 7, 8 },
+	new[] { 9, 10, 11, 12 }
+};
+
+var m3 = new int[][]
+{
+	new[] { 1, 2, 3 },
+	new[] { 8, 9, 4 },
+	new[] { 7, 6, 5 }
+};
+
+
+Console.WriteLine(string.Join(", ", sm.SpiralOrder(m)));
+
+//var wp = new WordPatternTask();
+//wp.WordPattern("aba", "dog cat cat");
 //MaximalRectangleTask.TestPerf();
-//
-// var zz = new ZigzagLevelOrderTask();
-//
-// zz.ZigzagLevelOrder(new(1, new(2), new(3, new(4), new(5))));
-// zz.ZigzagLevelOrder(new(1, new(2, new(4)), new(3, null, new(5))));
+
+//var zz = new ZigzagLevelOrderTask();
+
+//zz.ZigzagLevelOrder(new(1, new(2), new(3, new(4), new(5))));
+//zz.ZigzagLevelOrder(new(1, new(2, new(4)), new(3, null, new(5))));
 
 // var ms = new MySqrtTask();
 // ms.MySqrt(4);
@@ -20,7 +38,6 @@ wp.WordPattern("aba", "dog cat cat");
 
 //var ra = new RectangleArea();
 //Console.WriteLine(ra.ComputeArea(-3, 0, 3, 4, 0, -1, 9, 2));
-
 
 // var ss = new SubsetsTask();
 // var r = ss.Subsets(new[] { 1, 2, 3 });
@@ -85,7 +102,6 @@ wp.WordPattern("aba", "dog cat cat");
 //
 // var bc = new BasicCalculator();
 // Console.WriteLine(bc.Calculate("1+2"));
-
 
 // var mr = new MaximalRectangleTask();
 // var matrix = new[]

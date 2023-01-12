@@ -225,7 +225,7 @@ public class MaximalRectangleTask
 		sw.Restart();
 		sw.Stop();
 
-		for (int i = 10; i < 10; i++)
+		for (int i = 1; i < 10; i++)
 		{
 			var t1 = GridTest(2500, i);
 			sw.Restart();
@@ -237,7 +237,7 @@ public class MaximalRectangleTask
 		var randOuts = new[] { 0, 4602, 5388, 4635, 4431, 3954 };
 		for (int i = 1; i < randOuts.Length; i++)
 		{
-			var t1 = RandTest(1000, i);
+			var t1 = RandTest(2500, i);
 			sw.Restart();
 			Verify(t1, randOuts[i]);
 			sw.Stop();
@@ -287,5 +287,5 @@ public class MaximalRectangleTask
 
 	private static void Verify(char[][] input, int output) =>
 		//Trace.Assert(output == new MaximalRectangleTask().MaximalRectangle(input));
-		new MaximalRectangleTask().MaximalRectangle(input);
+		new MaximalRectangleTask2().MaximalRectangle(input);
 }
