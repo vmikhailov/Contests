@@ -17,4 +17,4 @@ endif()
 
 
 
-add_executable(Cpp main.cpp SummaryRangesTask.h RotateImage.h PascalTriangle.h SerializeDeserializeBinSearchTree.h Shift2DGrid.h MatrixHelpers.h IsSubsequence.h SetMatrixZeros.h DeciBinaryPartTask.h StrictlyPalindromicNumberTask.h PrimesTest.h PerfBinTree.h)
+add_executable(Cpp main.cpp SummaryRangesTask.h RotateImage.h PascalTriangle.h SerializeDeserializeBinSearchTree.h Shift2DGrid.h MatrixHelpers.h IsSubsequence.h SetMatrixZeros.h DeciBinaryPartTask.h StrictlyPalindromicNumberTask.h PrimesTest.h PerfBinTree.h bimap.cpp bimap.h RandomMatrix.h move_all_zeros.h RemoveMatching.h GroupAnagrams.h GroupAnagramsData.h MaxLevelSum.h ReversePar.h LongestNonRepeatingSec.h Primes.h MaximumBombs.h RansomString.h FascinatingNumber.h IsPalindromeListClass.h main2.cpp CountPer.h SearchInRotatedSortedArray.h MaximumSplit.h RptString.h IsomorphicString.h StringsGTD.h)

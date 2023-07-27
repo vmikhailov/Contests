@@ -1,26 +1,243 @@
-﻿using System.Diagnostics;
-using CodeForcesSimple.LeetCode;
-using LeetCode;
+﻿using LeetCode;
 using LeetCode.Tasks;
 
+var intr = new Intervals();
 
-var sm = new SpiralMatrixTask();
-var m = new int[][]
-{
-	new[] { 1, 2, 3, 4 },
-	new[] { 5, 6, 7, 8 },
-	new[] { 9, 10, 11, 12 }
-};
+var a1 = new[] { new[] { 1, 3 }, new[] { 2, 6 }, new[] { 8, 10 }, new[] { 15, 18 } };
+var a2 = new[] { new[] { 1, 3 }, new[] { 4, 5 } };
+var a3 = new[] { new[] { 1, 4 }, new[] { 0, 2 } };
 
-var m3 = new int[][]
-{
-	new[] { 1, 2, 3 },
-	new[] { 8, 9, 4 },
-	new[] { 7, 6, 5 }
-};
+var b = intr.Merge(a3);
 
+// var sd = new StringDiv();
+//
+// //Console.WriteLine(sd.GcdOfStrings("ABCABC", "ABC"));
+// Console.WriteLine(sd.GcdOfStrings("ABABAB", "ABAB"));
+// Console.WriteLine(sd.GcdOfStrings("LEET", "CODE"));
 
-Console.WriteLine(string.Join(", ", sm.SpiralOrder(m)));
+// var fw = new FindWord();
+//
+// var w1 = new[]
+// {
+//     new[] { 'A', 'B', 'C', 'E' }, 
+//     new[] { 'S', 'F', 'C', 'S' }, 
+//     new[] { 'A', 'D', 'E', 'E' }
+// };
+//
+// var w2 = new[]
+// {
+//     new[] { 'A' } 
+// };
+// var word = "ABCCEED";
+// Console.WriteLine(fw.Exist(w1, word));
+// Console.WriteLine(fw.Exist(w2, "A"));
+
+// var aa = "123";
+// var bb = aa[1..];
+//
+// var p = new PathWithMinEffort();
+//
+// var m1 = new[]
+// {
+//     new[] { 1, 2, 2 },
+//     new[] { 3, 8, 2 },
+//     new[] { 5, 3, 5 }
+// };
+//
+// var m2 = new[]
+// {
+//     new[] { 1, 2, 1, 1, 1 },
+//     new[] { 1, 2, 1, 2, 1 },
+//     new[] { 1, 2, 1, 2, 1 },
+//     new[] { 1, 2, 1, 2, 1 },
+//     new[] { 1, 1, 1, 2, 1 }
+// };
+//
+// var m3 = new[] { new[] { 1, 10, 6, 7, 9, 10, 4, 9 } };
+//
+// Console.WriteLine(p.MinimumEffortPath(m3));
+// Console.WriteLine(p.MinimumEffortPath(m2));
+// Console.WriteLine(p.MinimumEffortPath(m1));
+
+//
+// var ds = new DirectoryServices1();
+//
+// var dirs = new[] { "/a", "/a/b", "/c/d", "/c/d/e", "/c/f" };
+//
+// var rr = ds.RemoveSubfolders(dirs);
+//
+// foreach (var r in rr)
+// {
+//     Console.WriteLine(r);
+// }
+
+// var sl = new NextGreaterElement1();
+//
+// var nums1 = new int[] { 4, 1, 2 }; 
+// var nums2 = new int[] { 1, 3, 4, 2 };
+// sl.NextGreaterElement(nums1, nums2);
+
+// var textFile = File.OpenText(@"..\..\..\..\Data\WP.txt");
+// var words = textFile.ReadToEnd().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+//
+// var n = 1500;
+// var k = words.Length;
+//
+// while (n > 3)
+// {
+//     var d = new int[n];
+//
+//     foreach (var w in words)
+//     {
+//         var v = (uint)w.GetHashCode() % n;
+//         d[v]++;
+//     }
+//
+//     var r = d.Select(x => x * 1d / k).ToArray();
+//     
+//
+//     var avg = r.Average();
+//     var sq = Math.Sqrt(r.Select(x => x - avg).Select(x => x * x).Sum() / n);
+//     Console.WriteLine($"{n}, {avg*100:F2}, {sq*1000:F3}");
+//     n--;
+
+//    var tops = r.Select((x, i) => (x, i)).OrderByDescending(x => x.x).Take(5).Select(x => x).ToList();
+//    var bottoms = r.Select((x, i) => (x, i)).OrderBy(x => x.x).Take(5).Select(x => x).ToList();
+//    var str_tops = string.Join(", ", tops.Select(x => $"{x.i}:{x.x:F2}"));
+//    var str_bottoms = string.Join(", ", bottoms.Select(x => $"{x.i}:{x.x:F2}"));
+//    Console.WriteLine(str_tops);
+//    Console.WriteLine(str_bottoms);
+//}
+
+// var sl = new SameLine();
+// Console.WriteLine(sl.CheckStraightLine(new[] { new[] { 1, 1 }, new[] { 2, 2 }, new[] { 5, 5 } }));
+// Console.WriteLine(sl.CheckStraightLine(new[] { new[] { 1, 2 }, new[] { 2, 4 }, new[] { 5, 10 } }));
+// Console.WriteLine(
+//     sl.CheckStraightLine(
+//         new[]
+//         {
+//             new[] { 1, 1 },
+//             new[] { 2, 2 },
+//             new[] { 3, 4 },
+//             new[] { 4, 5 },
+//             new[] { 5, 6 },
+//             new[] { 7, 7 }
+//         }));
+//
+// Console.WriteLine(
+//     sl.CheckStraightLine(
+//         new[]
+//         {
+//             new[] { 1, 2 },
+//             new[] { 2, 3 },
+//             new[] { 3, 4 },
+//             new[] { 4, 5 },
+//             new[] { 5, 6 },
+//             new[] { 6, 7 }
+//         }));
+
+// var ni = new NumberOfIslandsClass();
+// var a = new[]
+// {
+//     new []{ '1', '1', '0', '0', '0' },
+//     new []{ '1', '1', '0', '0', '0' },
+//     new []{ '0', '0', '1', '0', '0' },
+//     new []{ '0', '0', '0', '1', '1' }
+// };
+//
+// Console.WriteLine(ni.NumIslands(a));
+
+// var lp = new LargestNumberClass();
+//
+// var a = new int[] { 3, 30, 34, 5, 9 };
+// var b = new int[] { 10, 2 };
+// var c = new int[] { 34323, 3432 };
+// var d = new int[] { 1, 0 };
+// //var a = new int[] { 3, 30, 34 };
+//
+// Console.WriteLine(lp.LargestNumber(d));
+// Console.WriteLine(lp.LargestNumber(a));
+// Console.WriteLine(lp.LargestNumber(b));
+// Console.WriteLine(lp.LargestNumber(c));
+
+//var fmp = new FirstMissingPositive();
+//Console.WriteLine(fmp.Compute(new[] { 1 }));
+// Console.WriteLine(fmp.Compute(new[] { 1, 3, 1 }));
+// Console.WriteLine(fmp.Compute(new[] { 4, 1, 2, 6, -333, 0 }));
+// Console.WriteLine(fmp.Compute(new[] { 7, 8, 9, 11, 12 }));
+
+//var wc = new WildCards();
+
+// Console.WriteLine("{0} {1}", wc.IsMatch("", "**"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "*?*?*?*?"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("a", "a****"), true);
+//
+// Console.WriteLine(
+//     "{0} {1}",
+//     wc.IsMatch(
+//         "abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb",
+//         "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"),
+//     false);
+//
+// Console.WriteLine(
+//     "{0} {1}",
+//     wc.IsMatch("bbbbbbbabbaabbabbbbaaabbabbabaaabbababbbabbbabaaabaab", "b*b*ab**ba*b**b***bba"),
+//     false);
+// Console.WriteLine("{0} {1}", wc.IsMatch("a", "a****"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abczzzde", "abc???de*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcabczzzde", "*abc???de*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "abcd"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "ab?d"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "ab?dd"), false);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "*?c*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("abcd", "a?c*"), true);
+// Console.WriteLine("{0} {1}", wc.IsMatch("", "*"), true);
+
+// var sum = 0d;
+// var count = 0;
+// for (var i = 0; i < 50; i++)
+// {
+//     var p = new Primes();
+//     var sw = Stopwatch.StartNew();
+//     var n = p.CountPrimes(100_000_000);
+//     sw.Stop();
+//     count++;
+//     sum += sw.ElapsedMilliseconds;
+//     Console.WriteLine($"{n} {sw.ElapsedMilliseconds}ms {sum/count:F0}ms");
+// }
+
+// var ms = new MaximumCount();
+//
+// Console.WriteLine(ms.Compute(new[] { 1, 2, 3, 4 }));
+// Console.WriteLine(ms.Compute(new[] { -3, -2, -1 }));
+//
+// Console.WriteLine(ms.Compute(new[] { -3, -2, -1, 0, 0, 1, 2, 3, 5 }));
+// Console.WriteLine(ms.Compute(new[] { -3, -2, -1, 0, 0, 1, 2 }));
+// Console.WriteLine(ms.Compute(new[] { 0, 0, 1, 2 }));
+
+//var sq = new SimpleSqrt();
+//Console.WriteLine(sq.MySqrt(4));
+//Console.WriteLine(sq.MySqrt(2147483647));
+
+//
+// var sm = new SpiralMatrixTask();
+// var m = new int[][]
+// {
+// 	new[] { 1, 2, 3, 4 },
+// 	new[] { 5, 6, 7, 8 },
+// 	new[] { 9, 10, 11, 12 }
+// };
+//
+// var m3 = new int[][]
+// {
+// 	new[] { 1, 2, 3 },
+// 	new[] { 8, 9, 4 },
+// 	new[] { 7, 6, 5 }
+// };
+
+//Console.WriteLine(string.Join(", ", sm.SpiralOrder(m)));
 
 //var wp = new WordPatternTask();
 //wp.WordPattern("aba", "dog cat cat");
