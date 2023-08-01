@@ -1,13 +1,30 @@
 ﻿using LeetCode;
 using LeetCode.Tasks;
 
-var intr = new Intervals();
+var ss = new SudokuSolver();
 
-var a1 = new[] { new[] { 1, 3 }, new[] { 2, 6 }, new[] { 8, 10 }, new[] { 15, 18 } };
-var a2 = new[] { new[] { 1, 3 }, new[] { 4, 5 } };
-var a3 = new[] { new[] { 1, 4 }, new[] { 0, 2 } };
+ss.SolveSudoku(ss.Test3);
 
-var b = intr.Merge(a3);
+// var q = new Sq2();
+// q.countTriples(12);
+
+
+// var ch = new Change();
+// Console.WriteLine(ch.LemonadeChange(ch.Test1));
+
+// var sc = new ShortestCompletingWordClass();
+//
+// var a = sc.ShortestCompletingWord("1s3 PSt", new[] { "step", "steps", "stripe", "stepple" });
+// Console.WriteLine(a);
+
+
+// var intr = new Intervals();
+//
+// var a1 = new[] { new[] { 1, 3 }, new[] { 2, 6 }, new[] { 8, 10 }, new[] { 15, 18 } };
+// var a2 = new[] { new[] { 1, 3 }, new[] { 4, 5 } };
+// var a3 = new[] { new[] { 1, 4 }, new[] { 0, 2 } };
+//
+// var b = intr.Merge(a3);
 
 // var sd = new StringDiv();
 //
