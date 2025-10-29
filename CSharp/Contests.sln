@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeforce", "Codeforce\Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{CDFF598F-361D-4E9E-A305-62249252C66B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRank", "HackerRank\HackerRank.csproj", "{CBDC510A-8A00-44D9-870E-A39F4D9A2C0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{CDFF598F-361D-4E9E-A305-62249252C66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDFF598F-361D-4E9E-A305-62249252C66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDFF598F-361D-4E9E-A305-62249252C66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDC510A-8A00-44D9-870E-A39F4D9A2C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDC510A-8A00-44D9-870E-A39F4D9A2C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDC510A-8A00-44D9-870E-A39F4D9A2C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDC510A-8A00-44D9-870E-A39F4D9A2C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

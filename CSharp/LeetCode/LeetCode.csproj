@@ -30,4 +30,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Codewars\Codewars.csproj" />
+  </ItemGroup>
+
 </Project>

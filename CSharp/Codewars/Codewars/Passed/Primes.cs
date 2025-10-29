@@ -10,7 +10,7 @@ namespace Codewars.Codewars.Passed
             if (generator == null)
             {
                 generator = new Atkin();
-                generator.FindPrimes(1000000000);
+                generator.FindPrimes(1_000_000_000);
             }
 
             return generator.Primes;
