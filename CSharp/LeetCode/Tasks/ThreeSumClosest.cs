@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode
 {
 	public class ThreeSumClosest
@@ -44,7 +47,10 @@ namespace LeetCode
 					{
 						var c = FindClosest(nums, j + 1, b);
 						var s = a + c;
-						if (s == target) return s;
+						if (s == target)
+						{
+							return s;
+						}
 
 						if (d > Math.Abs(target - s))
 						{
@@ -56,6 +62,40 @@ namespace LeetCode
 			}
 
 			return f;
+		}
+	}
+
+	[TestFixture]
+	public class ThreeSumClosestTests
+	{
+		[Test]
+		public void Compute_ExactTarget_ReturnsTarget()
+		{
+			ClassicAssert.AreEqual(0, ThreeSumClosest.Compute([-1, 2, 1, -4], 1));
+		}
+
+		[Test]
+		public void Compute_BasicCase_ReturnsClosest()
+		{
+			ClassicAssert.AreEqual(2, ThreeSumClosest.Compute([-1, 2, 1, -4], 1));
+		}
+
+		[Test]
+		public void Compute_ThreeElements_ReturnsSum()
+		{
+			ClassicAssert.AreEqual(6, ThreeSumClosest.Compute([1, 2, 3], 6));
+		}
+
+		[Test]
+		public void Compute_AllNegative_ReturnsClosest()
+		{
+			ClassicAssert.AreEqual(-6, ThreeSumClosest.Compute([-3, -2, -1], -5));
+		}
+
+		[Test]
+		public void Compute_WithZero_ReturnsCorrect()
+		{
+			ClassicAssert.AreEqual(2, ThreeSumClosest.Compute([0, 1, 2], 3));
 		}
 	}
 }

@@ -57,11 +57,19 @@ public class IPDatabase3 : IIPDatabase
     private void Add(IPRange range)
     {
         var pos1 = _data.BinarySearch(range.From.Value);
-        if (pos1 < 0) pos1 = ~pos1;
+        if (pos1 < 0)
+        {
+            pos1 = ~pos1;
+        }
+
         //else pos1 += pos1 & 1;
 
         var pos2 = _data.BinarySearch(range.To.Value);
-        if (pos2 < 0) pos2 = ~pos2;
+        if (pos2 < 0)
+        {
+            pos2 = ~pos2;
+        }
+
         //else pos2 -= pos2 & 1;
 
         var p1inside = pos1 % 2 == 1;
@@ -99,7 +107,10 @@ public class IPDatabase3 : IIPDatabase
     public IPRange? Find(IPAddress address)
     {
         var pos1 = _data.BinarySearch(address.Value);
-        if (pos1 < 0) pos1 = ~pos1;
+        if (pos1 < 0)
+        {
+            pos1 = ~pos1;
+        }
         else
         {
             var offset = pos1 % 2;

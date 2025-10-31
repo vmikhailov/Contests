@@ -20,10 +20,17 @@ namespace LeetCode
 			    for (var j = 0; j < 9; j++)
 			    {
 				    var c = getter(i, j, board);
-				    if(c == '.') continue;
+				    if(c == '.')
+				    {
+					    continue;
+				    }
+
 				    var v = c - '0';
 				    s += v;
-				    if(!d.Add(v)) return false;
+				    if(!d.Add(v))
+				    {
+					    return false;
+				    }
 			    }
 
 			    if (s > 45)

@@ -57,7 +57,10 @@ public class Fancy
 		for (var i = _computed[idx]; i < _instructions.Count; i++)
 		{
 			val = _instructions[i](val, _args[i]);
-			if (val > _mod) val %= _mod;
+			if (val > _mod)
+			{
+				val %= _mod;
+			}
 		}
 
 		_listChanged = true;

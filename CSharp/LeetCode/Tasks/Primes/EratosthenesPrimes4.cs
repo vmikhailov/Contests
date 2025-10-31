@@ -9,7 +9,11 @@ public class EratosthenesPrimes4
         var estimatedCount = (int)(n / (Math.Log(n) - 1.5));
         Primes = new(estimatedCount) { 2 };
 
-        if (n <= 2) return 0;
+        if (n <= 2)
+        {
+            return 0;
+        }
+
         var block = 15_000_000;
         
         var n2 = n / 2;
@@ -26,7 +30,10 @@ public class EratosthenesPrimes4
 
         for (var k = 1; k < n2; k++)
         {
-            if (marks[k/block][k % block]) continue;
+            if (marks[k/block][k % block])
+            {
+                continue;
+            }
 
             var k1 = 2 * k + 1;
             var k2 = 2 * k * k;
@@ -35,7 +42,11 @@ public class EratosthenesPrimes4
             {
                 var v = i * k1 - k2;
 
-                if (v < 0 || v >= n2) break;
+                if (v < 0 || v >= n2)
+                {
+                    break;
+                }
+
                 //Console.WriteLine($"{v/block} {v % block}");
                 marks[v/block][v % block] = true;
             }

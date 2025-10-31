@@ -30,7 +30,11 @@ public class SmallestString
     public int MinDifference(int[] nums)
     {
         var n = nums.Length;
-        if (n <= 4) return 0;
+        if (n <= 4)
+        {
+            return 0;
+        }
+
         Array.Sort(nums);
         var min = int.MaxValue;
         for (var k = 0; k <= 3; k++)
@@ -38,7 +42,10 @@ public class SmallestString
             for (var l = 0; l <= k; l++)
             {
                 var m = nums[n - k + l - 1] - nums[l];
-                if (m < min) min = m;
+                if (m < min)
+                {
+                    min = m;
+                }
             }
         }
 

@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode;
 
 public class KFirst
@@ -10,7 +13,11 @@ public class KFirst
 		{
 			var pi = (low + high) / 2;
 			pi = Partition(nums, low, high, pi);
-			if(pi == k) return nums[..k];
+			if(pi == k)
+			{
+				return nums[..k];
+			}
+
 			if (k < pi)
 			{
 				high = pi - 1;
@@ -44,5 +51,43 @@ public class KFirst
 		(arr[high], arr[i]) = (arr[i], arr[high]);
 
 		return i;
+	}
+}
+
+[TestFixture]
+public class KFirstTests
+{
+	private KFirst _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new KFirst();
+
+	[Test]
+	public void GetTopK_BasicCase_ReturnsFirstK()
+	{
+		var result = _task.GetTopK([3, 2, 1, 5, 6, 4], 2);
+		ClassicAssert.AreEqual(2, result.Length);
+	}
+
+	[Test]
+	public void GetTopK_SingleElement_ReturnsElement()
+	{
+		var result = _task.GetTopK([1], 1);
+		ClassicAssert.AreEqual(new[] { 1 }, result);
+	}
+
+	[Test]
+	public void GetTopK_AllElements_ReturnsAll()
+	{
+		var arr = new[] { 1, 2, 3 };
+		var result = _task.GetTopK(arr, 3);
+		ClassicAssert.AreEqual(3, result.Length);
+	}
+
+	[Test]
+	public void GetTopK_UnsortedArray_ReturnsCorrect()
+	{
+		var result = _task.GetTopK([3, 2, 3, 1, 2, 4, 5, 5, 6], 4);
+		ClassicAssert.AreEqual(4, result.Length);
 	}
 }

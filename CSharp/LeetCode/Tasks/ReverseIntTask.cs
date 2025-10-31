@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class ReverseIntTask
@@ -20,14 +23,43 @@ public class ReverseIntTask
 
         return y;
     }
+}
 
+[TestFixture]
+public class ReverseIntTaskTests
+{
+    private ReverseIntTask _task = null!;
 
-    public static void Test()
+    [SetUp]
+    public void SetUp() => _task = new ReverseIntTask();
+
+    [Test]
+    public void Reverse_PositiveNumber_ReturnsReversed()
     {
-        var task = new ReverseIntTask();
+        ClassicAssert.AreEqual(321, _task.Reverse(123));
+    }
 
-        Console.WriteLine($"{task.Reverse(123)} {321}");
-        Console.WriteLine($"{task.Reverse(1534236469)} {0}");
+    [Test]
+    public void Reverse_Overflow_ReturnsZero()
+    {
+        ClassicAssert.AreEqual(0, _task.Reverse(1534236469));
+    }
 
+    [Test]
+    public void Reverse_NegativeNumber_ReturnsReversed()
+    {
+        ClassicAssert.AreEqual(-321, _task.Reverse(-123));
+    }
+
+    [Test]
+    public void Reverse_Zero_ReturnsZero()
+    {
+        ClassicAssert.AreEqual(0, _task.Reverse(0));
+    }
+
+    [Test]
+    public void Reverse_TrailingZeros_ReturnsCorrect()
+    {
+        ClassicAssert.AreEqual(21, _task.Reverse(120));
     }
 }

@@ -49,9 +49,19 @@ class TopNSortedArray<T> : IEnumerable<T>
 			var m = (l + r) / 2;
 			var d = _data[m];
 			var c = d.CompareTo(value);
-			if (c == 0) return m;
-			if (c < 0) l = m + 1;
-			else r = m - 1;
+			if (c == 0)
+			{
+				return m;
+			}
+
+			if (c < 0)
+			{
+				l = m + 1;
+			}
+			else
+			{
+				r = m - 1;
+			}
 		}
 
 		return l;

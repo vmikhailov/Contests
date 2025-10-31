@@ -61,7 +61,11 @@ public class LcaNodes
 
         void Traverse(TreeNode node)
         {
-            if(node is null) return;
+            if(node is null)
+            {
+                return;
+            }
+
             stack.Push(node);
             if(node.left is null && node.right is null)
             {

@@ -24,8 +24,16 @@ public class PerfectRectangle
 				for (var x = x1; x < x2; x++)
 				{
 					var row = field[y];
-					if (row == null) field[y] = row = new int[xx.Length];
-					if (row[x] != 0) return false;
+					if (row == null)
+					{
+						field[y] = row = new int[xx.Length];
+					}
+
+					if (row[x] != 0)
+					{
+						return false;
+					}
+
 					row[x] = 1;
 					s--;
 				}

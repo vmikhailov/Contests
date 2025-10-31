@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class NumberOfIslandsClass
@@ -24,12 +27,67 @@ public class NumberOfIslandsClass
 
     private void MarkIsland(int x, int y, int xx, int yy, char[][] grid)
     {
-        if (x < 0 || x >= xx || y < 0 || y >= yy || grid[y][x] != '1') return;
+        if (x < 0 || x >= xx || y < 0 || y >= yy || grid[y][x] != '1')
+        {
+            return;
+        }
 
         grid[y][x] = '*';
         MarkIsland(x - 1, y, xx, yy, grid);
         MarkIsland(x, y - 1, xx, yy, grid);
         MarkIsland(x + 1, y, xx, yy, grid);
         MarkIsland(x, y + 1, xx, yy, grid);
+    }
+}
+
+[TestFixture]
+public class NumberOfIslandsClassTests
+{
+    private NumberOfIslandsClass _task = null!;
+
+    [SetUp]
+    public void SetUp() => _task = new NumberOfIslandsClass();
+
+    [Test]
+    public void NumIslands_SingleIsland_ReturnsOne()
+    {
+        char[][] grid = [
+            ['1', '1', '1'],
+            ['0', '1', '0'],
+            ['1', '1', '1']
+        ];
+        ClassicAssert.AreEqual(1, _task.NumIslands(grid));
+    }
+
+    [Test]
+    public void NumIslands_MultipleIslands_ReturnsCorrectCount()
+    {
+        char[][] grid = [
+            ['1', '1', '0', '0', '0'],
+            ['1', '1', '0', '0', '0'],
+            ['0', '0', '1', '0', '0'],
+            ['0', '0', '0', '1', '1']
+        ];
+        ClassicAssert.AreEqual(3, _task.NumIslands(grid));
+    }
+
+    [Test]
+    public void NumIslands_NoIslands_ReturnsZero()
+    {
+        char[][] grid = [
+            ['0', '0', '0'],
+            ['0', '0', '0']
+        ];
+        ClassicAssert.AreEqual(0, _task.NumIslands(grid));
+    }
+
+    [Test]
+    public void NumIslands_AllIslands_ReturnsOne()
+    {
+        char[][] grid = [
+            ['1', '1'],
+            ['1', '1']
+        ];
+        ClassicAssert.AreEqual(1, _task.NumIslands(grid));
     }
 }

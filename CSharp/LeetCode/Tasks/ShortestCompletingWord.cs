@@ -22,7 +22,10 @@ public class ShortestCompletingWordClass
                     break;
                 }
             }
-            if(match) r.Add(w);
+            if(match)
+            {
+                r.Add(w);
+            }
         }
 
         return r.OrderBy(x => x.Length).First();

@@ -56,14 +56,23 @@ public class BasicCalculator
 
 		private bool ParseExpression(out Expression expression)
 		{
-			if (!ParseTerm(out expression)) return false;
+			if (!ParseTerm(out expression))
+			{
+				return false;
+			}
 
 			while (CheckToken(TokenType.Operator, "+", "-"))
 			{
 				var op = CurrentToken.Value;
-				if (!NextToken()) return false;
+				if (!NextToken())
+				{
+					return false;
+				}
 
-				if (!ParseTerm(out var operand)) return false;
+				if (!ParseTerm(out var operand))
+				{
+					return false;
+				}
 
 				expression = op == "+" ? Expression.Add(expression, operand) : Expression.Subtract(expression, operand);
 			}
@@ -73,14 +82,23 @@ public class BasicCalculator
 
 		private bool ParseTerm(out Expression expression)
 		{
-			if (!ParseFactor(out expression)) return false;
+			if (!ParseFactor(out expression))
+			{
+				return false;
+			}
 
 			while (CheckToken(TokenType.Operator, "*", "/"))
 			{
 				var op = CurrentToken.Value;
-				if (!NextToken()) return false;
+				if (!NextToken())
+				{
+					return false;
+				}
 
-				if (!ParseFactor(out var operand)) return false;
+				if (!ParseFactor(out var operand))
+				{
+					return false;
+				}
 
 				expression = op == "*" ? Expression.Multiply(expression, operand) : Expression.Divide(expression, operand);
 			}
@@ -119,7 +137,10 @@ public class BasicCalculator
 		private bool ParseNumber(out Expression expression)
 		{
 			expression = null;
-			if (!CheckToken(TokenType.Number)) return false;
+			if (!CheckToken(TokenType.Number))
+			{
+				return false;
+			}
 
 			expression = Expression.Constant(int.Parse(CurrentToken.Value));
 			return NextToken();
@@ -187,7 +208,11 @@ public class BasicCalculator
 					}
 				}
 
-				if (char.IsWhiteSpace(c)) continue;
+				if (char.IsWhiteSpace(c))
+				{
+					continue;
+				}
+
 				var t = c switch
 				{
 					'(' => TokenType.OpenParenthesis,

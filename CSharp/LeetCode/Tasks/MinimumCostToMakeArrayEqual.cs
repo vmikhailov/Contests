@@ -6,7 +6,11 @@ public class MinimumCostToMakeArrayEqual
 	{
 		var min = nums.Min();
 		var max = nums.Max();
-		if (min == max) return 0;
+		if (min == max)
+		{
+			return 0;
+		}
+
 		long avgCost1 = 0, avgCost2 = 0;
 
 		while (min < max)

@@ -11,9 +11,19 @@ public class SimpleSqrt
             var c = (a + b) / 2;
             var q = (long)c * c;
             var p = (long)(c + 1) * (c + 1);
-            if (q <= x && p > x) return c;
-            if (q < x) a = c;
-            else b = c;
+            if (q <= x && p > x)
+            {
+                return c;
+            }
+
+            if (q < x)
+            {
+                a = c;
+            }
+            else
+            {
+                b = c;
+            }
         }
     }
 }

@@ -9,14 +9,21 @@ public class EratosthenesPrimes2
         var estimatedCount = (int)(n / (Math.Log(n) - 1.5));
         Primes = new(estimatedCount);
 
-        if (n <= 2) return 0;
+        if (n <= 2)
+        {
+            return 0;
+        }
+
         var marks = new bool[n];
 
         var c = 1;
 
         for (var k = 2; k < n; k++)
         {
-            if (marks[k]) continue;
+            if (marks[k])
+            {
+                continue;
+            }
 
             for (var m = 2 * k ; m < n; m += k)
             {

@@ -13,8 +13,11 @@ namespace Codewars.Entry
         
         public static int MaxArea(int n, int[] height, int l, int r, int t)
         {
-            if (l >= r) return 0;
-            
+            if (l >= r)
+            {
+                return 0;
+            }
+
             var (m, i) = Max(height, l, r);
             if (t == 1)
             {

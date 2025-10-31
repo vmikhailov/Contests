@@ -19,7 +19,11 @@ public class ExpressionAddOperators
 			for (var i = start; i <= end; i++)
 			{
 				var s = num[start..(i + 1)];
-				if(s[0] == '0' && s.Length > 1) continue;
+				if(s[0] == '0' && s.Length > 1)
+				{
+					continue;
+				}
+
 				var v = long.Parse(s);
 				current.Push(v);
 				GetOpPermutation(i + 1, end);
@@ -32,7 +36,11 @@ public class ExpressionAddOperators
 			if (start > end)
 			{
 				var reversed = current.Reverse().ToList();
-				if(Compute(reversed) == target) result.Add(GetExpression(reversed));
+				if(Compute(reversed) == target)
+				{
+					result.Add(GetExpression(reversed));
+				}
+
 				return;
 			}
 			
@@ -50,8 +58,11 @@ public class ExpressionAddOperators
 			var en = parts.GetEnumerator();
 			var r = new Queue<long>();
 			
-			if (!en.MoveNext()) return 0;
-			
+			if (!en.MoveNext())
+			{
+				return 0;
+			}
+
 			var a = en.Current;
 			while (en.MoveNext())
 			{

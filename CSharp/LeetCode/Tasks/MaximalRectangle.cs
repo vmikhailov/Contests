@@ -150,7 +150,11 @@ public class MaximalRectangleTask
 
 		bool MarkConnectedNoRecursion(int xx, int yy)
 		{
-			if (visited[yy * sx + xx]) return false;
+			if (visited[yy * sx + xx])
+			{
+				return false;
+			}
+
 			if (matrix[yy][xx] == '0')
 			{
 				visited[yy * sx + xx] = true;
@@ -172,10 +176,25 @@ public class MaximalRectangleTask
 					y2 = Math.Max(y2, yy);
 					visited[yy * sx + xx] = true;
 					marked = true;
-					if (xx > 0) queue.Enqueue((xx - 1, yy));
-					if (yy > 0) queue.Enqueue((xx, yy - 1));
-					if (xx < sx - 1) queue.Enqueue((xx + 1, yy));
-					if (yy < sy - 1) queue.Enqueue((xx, yy + 1));
+					if (xx > 0)
+					{
+						queue.Enqueue((xx - 1, yy));
+					}
+
+					if (yy > 0)
+					{
+						queue.Enqueue((xx, yy - 1));
+					}
+
+					if (xx < sx - 1)
+					{
+						queue.Enqueue((xx + 1, yy));
+					}
+
+					if (yy < sy - 1)
+					{
+						queue.Enqueue((xx, yy + 1));
+					}
 				}
 			}
 
@@ -184,8 +203,11 @@ public class MaximalRectangleTask
 		
 		bool MarkConnected(int xx, int yy)
 		{
-			if (visited[yy * sx + xx]) return false;
-			
+			if (visited[yy * sx + xx])
+			{
+				return false;
+			}
+
 			visited[yy * sx + xx] = true;
 			if(matrix[yy][xx] == '1')
 			{
@@ -194,10 +216,26 @@ public class MaximalRectangleTask
 				x2 = Math.Max(x2, xx);
 				y2 = Math.Max(y2, yy);
 			
-				if (xx > 0) MarkConnected(xx - 1, yy);
-				if (yy > 0) MarkConnected(xx, yy - 1);
-				if (xx < sx - 1) MarkConnected(xx + 1, yy);
-				if (yy < sy - 1) MarkConnected(xx, yy + 1);
+				if (xx > 0)
+				{
+					MarkConnected(xx - 1, yy);
+				}
+
+				if (yy > 0)
+				{
+					MarkConnected(xx, yy - 1);
+				}
+
+				if (xx < sx - 1)
+				{
+					MarkConnected(xx + 1, yy);
+				}
+
+				if (yy < sy - 1)
+				{
+					MarkConnected(xx, yy + 1);
+				}
+
 				return true;
 			}
 			
@@ -275,11 +313,15 @@ public class MaximalRectangleTask
 			var b = rnd.Next(a, n);
 			var c = rnd.Next(n);
 			if (rnd.Next(2) == 0)
+			{
 				for (int i = a; i <= b; i++)
 					r[c][i] = '1';
+			}
 			else
+			{
 				for (int i = a; i <= b; i++)
 					r[i][c] = '1';
+			}
 		}
 
 		return r;

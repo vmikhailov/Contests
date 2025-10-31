@@ -4,11 +4,17 @@ public class SameLine
 {
     public bool CheckStraightLine(int[][] coordinates)
     {
-        if (coordinates.Length < 3) return true;
+        if (coordinates.Length < 3)
+        {
+            return true;
+        }
 
         for (var i = 0; i < coordinates.Length - 2; i++)
         {
-            if (GetDeterminant(coordinates[i..]) != 0) return false;
+            if (GetDeterminant(coordinates[i..]) != 0)
+            {
+                return false;
+            }
         }
 
         return true;

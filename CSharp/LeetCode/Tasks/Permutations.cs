@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode;
 
 public class Permutations
@@ -20,8 +23,11 @@ public class Permutations
 		
 		for (var i = 0; i < nums.Length; i++)
 		{
-			if (used[i]) continue;
-			
+			if (used[i])
+			{
+				continue;
+			}
+
 			used[i] = true;
 			current[p] = nums[i];
 			BuildPermutations(nums, used, current, p + 1, list);
@@ -50,13 +56,72 @@ public class Permutations2
 		
 			for (var i = 0; i < nums.Length; i++)
 			{
-				if (used[i]) continue;
-			
+				if (used[i])
+				{
+					continue;
+				}
+
 				used[i] = true;
 				current[p] = nums[i];
 				BuildPermutations(p + 1);
 				used[i] = false;
 			}
 		}
+	}
+}
+
+[TestFixture]
+public class PermutationsTests
+{
+	private Permutations _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new Permutations();
+
+	[Test]
+	public void Permute_ThreeElements_ReturnsSixPermutations()
+	{
+		var result = _task.Permute([1, 2, 3]);
+		ClassicAssert.AreEqual(6, result.Count);
+	}
+
+	[Test]
+	public void Permute_TwoElements_ReturnsTwoPermutations()
+	{
+		var result = _task.Permute([0, 1]);
+		ClassicAssert.AreEqual(2, result.Count);
+		ClassicAssert.IsTrue(result.Any(p => p.SequenceEqual(new[] { 0, 1 })));
+		ClassicAssert.IsTrue(result.Any(p => p.SequenceEqual(new[] { 1, 0 })));
+	}
+
+	[Test]
+	public void Permute_SingleElement_ReturnsOnePermutation()
+	{
+		var result = _task.Permute([1]);
+		ClassicAssert.AreEqual(1, result.Count);
+		CollectionClassicAssert.AreEqual(new[] { 1 }, result[0]);
+	}
+}
+
+[TestFixture]
+public class Permutations2Tests
+{
+	private Permutations2 _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new Permutations2();
+
+	[Test]
+	public void Permute_ThreeElements_ReturnsSixPermutations()
+	{
+		var result = _task.Permute([1, 2, 3]);
+		ClassicAssert.AreEqual(6, result.Count);
+	}
+
+	[Test]
+	public void Permute_TwoElements_ReturnsTwoPermutations()
+	{
+		var result = _task.Permute([0, 1]);
+		ClassicAssert.AreEqual(2, result.Count);
 	}
 }

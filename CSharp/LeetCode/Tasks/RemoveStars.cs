@@ -11,7 +11,10 @@ public class RemoveStars
 		while (true)
 		{
 			while (i < chars.Length && chars[i] != '*') i++;
-			if (i == chars.Length) break;
+			if (i == chars.Length)
+			{
+				break;
+			}
 
 			chars[i] = (char)0;
 			if (i > 0)

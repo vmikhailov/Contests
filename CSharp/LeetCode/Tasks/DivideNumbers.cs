@@ -7,9 +7,16 @@ namespace LeetCode
 			var sa = dividend >= 0 ? 1 : -1;
 			var sb = divisor > 0 ? 1 : -1;
 			
-			if(dividend == int.MinValue && divisor== -1) return int.MaxValue;
-			if(dividend == 0) return 0;
-        
+			if(dividend == int.MinValue && divisor== -1)
+			{
+				return int.MaxValue;
+			}
+
+			if(dividend == 0)
+			{
+				return 0;
+			}
+
 			var d = (long)dividend * sa;
 			var v = (long)divisor * sb;
 
@@ -20,8 +27,11 @@ namespace LeetCode
 				v = v >> 1;
 			}
 			
-			if(v == 1) return (int)(d*sa*sb);
-			
+			if(v == 1)
+			{
+				return (int)(d*sa*sb);
+			}
+
 			while(d >= v)
 			{
 				d -= v;

@@ -6,14 +6,28 @@ public class Primitive2Primes
 
     public bool IsPrime(int num)
     {
-        if (num <= 1) return false; 
-        if (num == 2) return true;
-        
+        if (num <= 1)
+        {
+            return false;
+        }
+
+        if (num == 2)
+        {
+            return true;
+        }
+
         for (var i = 0; i < Primes.Count ; i++)
         {
             var p = Primes[i];
-            if (num % p == 0) return false;
-            if(p * p > num) break;
+            if (num % p == 0)
+            {
+                return false;
+            }
+
+            if(p * p > num)
+            {
+                break;
+            }
         }
 
         return true; 
@@ -22,11 +36,17 @@ public class Primitive2Primes
     public int CountPrimes(int n)
     {
         Primes = new() { 2 };
-        if (n <= 1) return 0;
+        if (n <= 1)
+        {
+            return 0;
+        }
 
         for (var i = 3; i < n; i++)
         {
-            if (IsPrime(i)) Primes.Add(i);
+            if (IsPrime(i))
+            {
+                Primes.Add(i);
+            }
         }
 
         return Primes.Count;

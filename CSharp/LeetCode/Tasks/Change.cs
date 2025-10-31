@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class Change
@@ -32,30 +35,51 @@ public class Change
                 b5++;
             }
 
-            if (b5 < 0 || b10 < 0 || b20 < 0) return false;
+            if (b5 < 0 || b10 < 0 || b20 < 0)
+            {
+                return false;
+            }
         }
 
         return true;
     }
+}
 
-    public int[] Test1 =
-        new[] { 5, 5, 10, 10, 20 };
+[TestFixture]
+public class ChangeTests
+{
+    private Change _task = null!;
 
-    public int[] Test2 =
-        new[]
-        {
-            5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5,
-            20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10,
-            5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5,
-            10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20,
-            5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5,
-            20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10,
-            5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5,
-            10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20,
-            5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5,
-            20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10,
-            5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5,
-            10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20,
-            5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20, 5, 10, 5, 20
-        };
+    [SetUp]
+    public void SetUp() => _task = new Change();
+
+    [Test]
+    public void LemonadeChange_AllFives_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 5, 5]));
+    }
+
+    [Test]
+    public void LemonadeChange_ValidSequence_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 10, 10, 20]));
+    }
+
+    [Test]
+    public void LemonadeChange_ImpossibleChange_ReturnsFalse()
+    {
+        ClassicAssert.IsFalse(_task.LemonadeChange([5, 5, 10, 10, 20, 20]));
+    }
+
+    [Test]
+    public void LemonadeChange_NoChange_ReturnsFalse()
+    {
+        ClassicAssert.IsFalse(_task.LemonadeChange([10]));
+    }
+
+    [Test]
+    public void LemonadeChange_ComplexSequence_ReturnsCorrect()
+    {
+        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 5, 10, 20]));
+    }
 }

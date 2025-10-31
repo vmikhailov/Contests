@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class MedianFinder
@@ -25,5 +28,57 @@ public class MedianFinder
 		{
 			return _data[c / 2];
 		}
+	}
+}
+
+[TestFixture]
+public class MedianFinderTests
+{
+	[Test]
+	public void FindMedian_SingleElement_ReturnsElement()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(1);
+		ClassicAssert.AreEqual(1.0, mf.FindMedian());
+	}
+
+	[Test]
+	public void FindMedian_TwoElements_ReturnsAverage()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(1);
+		mf.AddNum(2);
+		ClassicAssert.AreEqual(1.5, mf.FindMedian());
+	}
+
+	[Test]
+	public void FindMedian_OddElements_ReturnsMiddle()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(1);
+		mf.AddNum(2);
+		mf.AddNum(3);
+		ClassicAssert.AreEqual(2.0, mf.FindMedian());
+	}
+
+	[Test]
+	public void FindMedian_UnorderedInsert_ReturnsCorrect()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(5);
+		mf.AddNum(1);
+		mf.AddNum(3);
+		ClassicAssert.AreEqual(3.0, mf.FindMedian());
+	}
+
+	[Test]
+	public void FindMedian_MultipleOperations_WorksCorrectly()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(1);
+		mf.AddNum(2);
+		ClassicAssert.AreEqual(1.5, mf.FindMedian());
+		mf.AddNum(3);
+		ClassicAssert.AreEqual(2.0, mf.FindMedian());
 	}
 }

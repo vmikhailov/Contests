@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class LongestNonRepeatingString {
@@ -31,14 +34,49 @@ public class LongestNonRepeatingString {
         }
         return m;
     }
+}
 
-    public static void Test()
+[TestFixture]
+public class LongestNonRepeatingStringTests
+{
+    private LongestNonRepeatingString _task = null!;
+
+    [SetUp]
+    public void SetUp() => _task = new LongestNonRepeatingString();
+
+    [Test]
+    public void LengthOfLongestSubstring_RepeatingCharacters_ReturnsCorrect()
     {
-        var solution = new LongestNonRepeatingString();
-        var r1 = solution.LengthOfLongestSubstring("abcabcbb");
-        Console.WriteLine(r1); // Expected output: 3
+        ClassicAssert.AreEqual(3, _task.LengthOfLongestSubstring("abcabcbb"));
+    }
 
-        var r2 = solution.LengthOfLongestSubstring("aabaab!bb");
-        Console.WriteLine(r2); // Expected output: 3
+    [Test]
+    public void LengthOfLongestSubstring_WithSpecialChars_ReturnsCorrect()
+    {
+        ClassicAssert.AreEqual(3, _task.LengthOfLongestSubstring("aabaab!bb"));
+    }
+
+    [Test]
+    public void LengthOfLongestSubstring_AllSame_ReturnsOne()
+    {
+        ClassicAssert.AreEqual(1, _task.LengthOfLongestSubstring("bbbbb"));
+    }
+
+    [Test]
+    public void LengthOfLongestSubstring_AllUnique_ReturnsLength()
+    {
+        ClassicAssert.AreEqual(5, _task.LengthOfLongestSubstring("abcde"));
+    }
+
+    [Test]
+    public void LengthOfLongestSubstring_EmptyString_ReturnsZero()
+    {
+        ClassicAssert.AreEqual(0, _task.LengthOfLongestSubstring(""));
+    }
+
+    [Test]
+    public void LengthOfLongestSubstring_SingleChar_ReturnsOne()
+    {
+        ClassicAssert.AreEqual(1, _task.LengthOfLongestSubstring("a"));
     }
 }

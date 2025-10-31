@@ -41,10 +41,25 @@ public class PathWithMinEffort
 
         IEnumerable<(int X, int Y)> EnumCells(int x, int y)
         {
-            if (x > 0) yield return (x - 1, y);
-            if (y > 0) yield return (x, y - 1);
-            if (x < nCols - 1) yield return (x + 1, y);
-            if (y < nRows - 1) yield return (x, y + 1);
+            if (x > 0)
+            {
+                yield return (x - 1, y);
+            }
+
+            if (y > 0)
+            {
+                yield return (x, y - 1);
+            }
+
+            if (x < nCols - 1)
+            {
+                yield return (x + 1, y);
+            }
+
+            if (y < nRows - 1)
+            {
+                yield return (x, y + 1);
+            }
         }
     }
 }

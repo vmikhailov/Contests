@@ -25,7 +25,11 @@ public class RectangleArea
 				for (var x = x1; x < x2; x++)
 				{
 					var row = field[y];
-					if (row == null) field[y] = row = new int[xx.Length];
+					if (row == null)
+					{
+						field[y] = row = new int[xx.Length];
+					}
+
 					if(row[x] == 0)
 					{
 						s += (xx[x + 1] - xx[x]) * (yy[y + 1] - yy[y]);

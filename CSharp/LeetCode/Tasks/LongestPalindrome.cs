@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode;
 
 public class LongestPalindrome
@@ -5,8 +8,8 @@ public class LongestPalindrome
 	public string GetLongestPalindrome(string s)
 	{
 		var max = "";
-		if (s.Length == 1 || s.Length == 2 && s[0] == s[1]) return s; 
-		
+		if (s.Length == 1 || s.Length == 2 && s[0] == s[1]) return s;
+
 		for (var i = 0; i < s.Length - 1; i++)
 		{
 			string p;
@@ -43,7 +46,7 @@ public class LongestPalindrome
 
 		for (var i = 0; i <= n1; i++) m[i, 0] = 0;
 		for (var i = 0; i <= n2; i++) m[0, i] = 0;
-		
+
 
 		var max = 0;
 		var max_i = 0;
@@ -66,9 +69,9 @@ public class LongestPalindrome
 				}
 			}
 		}
-		
-		Print(m);
-		
+
+		//Print(m);
+
 		var result = str1[(max_i - max)..max_i];
 		return new(result);
 	}
@@ -83,5 +86,52 @@ public class LongestPalindrome
 			}	
 			Console.WriteLine();
 		}
+	}
+}
+
+[TestFixture]
+public class LongestPalindromeTests
+{
+	private LongestPalindrome _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new LongestPalindrome();
+
+	[Test]
+	public void GetLongestPalindrome_BasicPalindrome_ReturnsCorrect()
+	{
+		ClassicAssert.AreEqual("aba", _task.GetLongestPalindrome("babad"));
+	}
+
+	[Test]
+	public void GetLongestPalindrome_EvenLengthPalindrome_ReturnsCorrect()
+	{
+		ClassicAssert.AreEqual("bb", _task.GetLongestPalindrome("cbbd"));
+	}
+
+	[Test]
+	public void GetLongestPalindrome_SingleCharacter_ReturnsSelf()
+	{
+		ClassicAssert.AreEqual("a", _task.GetLongestPalindrome("a"));
+	}
+
+	[Test]
+	public void GetLongestPalindrome_TwoSameChars_ReturnsBoth()
+	{
+		ClassicAssert.AreEqual("aa", _task.GetLongestPalindrome("aa"));
+	}
+
+	[Test]
+	public void GetLongestCommon_BasicCase_ReturnsCommon()
+	{
+		var result = _task.GetLongestCommon("abcdef", "xbcdy");
+		ClassicAssert.AreEqual("bcd", result);
+	}
+
+	[Test]
+	public void GetLongestCommon_NoCommon_ReturnsEmpty()
+	{
+		var result = _task.GetLongestCommon("abc", "def");
+		ClassicAssert.AreEqual("", result);
 	}
 }

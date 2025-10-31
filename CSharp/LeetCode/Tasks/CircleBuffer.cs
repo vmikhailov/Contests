@@ -68,7 +68,11 @@ public class CircleBuffer<T> : IList<T>
 		var i = arrayIndex;
 		foreach (var item in this)
 		{
-			if (i >= array.Length) break;
+			if (i >= array.Length)
+			{
+				break;
+			}
+
 			array[i++] = item;
 		}
 	}
@@ -150,7 +154,10 @@ public class CircleBuffer<T> : IList<T>
 
 	public void RemoveAt(int index)
 	{
-		if (Count == 0) return;
+		if (Count == 0)
+		{
+			return;
+		}
 
 		_full = false;
 		if (index == 0)
@@ -202,7 +209,11 @@ public class CircleBuffer<T> : IList<T>
 		var i = 0;
 		foreach (var it in this)
 		{
-			if (it.CompareTo(item) == 0) return (it, i);
+			if (it.CompareTo(item) == 0)
+			{
+				return (it, i);
+			}
+
 			i++;
 		}
 

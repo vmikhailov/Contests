@@ -18,14 +18,24 @@ public static class SquareSums
 			graph.Add(sq);
 			for (var j = 0; j < n; j++)
 			{
-				if(i == j) continue;
+				if(i == j)
+				{
+					continue;
+				}
+
 				var v = nums[i] + nums[j];
 				var q = (int)Math.Sqrt(v);
-				if (v == q * q) sq.Add(j);
+				if (v == q * q)
+				{
+					sq.Add(j);
+				}
 			}
 		}
 
-		if (graph.Any(x => x.Count == 0)) return 0;
+		if (graph.Any(x => x.Count == 0))
+		{
+			return 0;
+		}
 
 		return Count(graph)/p;
 	}
@@ -44,9 +54,16 @@ public static class SquareSums
 		
 		int Impl(int i, int k)
 		{
-			if (used[i]) return 0;
-			if (k == n - 1) return 1;
-			
+			if (used[i])
+			{
+				return 0;
+			}
+
+			if (k == n - 1)
+			{
+				return 1;
+			}
+
 			used[i] = true;
 			var r = graph[i].Select(x => Impl(x, k + 1)).Sum();
 			used[i] = false;

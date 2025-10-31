@@ -1,11 +1,17 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class WordBreaker
 {
     public bool WordBreak(string s, IList<string> wordDict)
     {
-        if(!wordDict.All(x => s.Contains(x))) return false;
-        
+        if(!wordDict.All(x => s.Contains(x)))
+        {
+            return false;
+        }
+
         var st = wordDict.ToHashSet();
 
         var q = new Stack<string>();
@@ -24,7 +30,11 @@ public class WordBreaker
                 if (st.Contains(w))
                 {
                     q.Push(w);
-                    if(Parse(j)) return true;
+                    if(Parse(j))
+                    {
+                        return true;
+                    }
+
                     q.Pop();
                 }
             }
@@ -32,3 +42,43 @@ public class WordBreaker
         }
     }
 }
+
+[TestFixture]
+public class WordBreakerTests
+{
+    private WordBreaker _task = null!;
+
+    [SetUp]
+    public void SetUp() => _task = new WordBreaker();
+
+    [Test]
+    public void WordBreak_ValidBreak_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.WordBreak("leetcode", new List<string> { "leet", "code" }));
+    }
+
+    [Test]
+    public void WordBreak_MultipleBreaks_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.WordBreak("applepenapple", new List<string> { "apple", "pen" }));
+    }
+
+    [Test]
+    public void WordBreak_InvalidBreak_ReturnsFalse()
+    {
+        ClassicAssert.IsFalse(_task.WordBreak("catsandog", new List<string> { "cats", "dog", "sand", "and", "cat" }));
+    }
+
+    [Test]
+    public void WordBreak_EmptyString_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.WordBreak("", new List<string> { "a" }));
+    }
+
+    [Test]
+    public void WordBreak_SingleWord_ReturnsTrue()
+    {
+        ClassicAssert.IsTrue(_task.WordBreak("a", new List<string> { "a" }));
+    }
+}
+

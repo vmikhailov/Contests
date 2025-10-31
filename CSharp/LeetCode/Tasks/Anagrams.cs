@@ -1,5 +1,7 @@
+using NUnit.Framework.Legacy;
 using System.Collections;
 using System.Text;
+using NUnit.Framework;
 
 namespace LeetCode;
 
@@ -62,26 +64,60 @@ public class Anagrams
 
         return h.Values.ToList();
     }
+}
 
+[TestFixture]
+public class AnagramsTests
+{
+    private Anagrams _task = null!;
 
-    public static void Test()
+    [SetUp]
+    public void SetUp() => _task = new Anagrams();
+
+    private static void AssertAnagramGroups(IList<IList<string>> expected, IList<IList<string>> actual)
     {
-        var solution = new Anagrams();
-        var input = new string[] { "eat", "tea", "tan", "ate", "nat", "bat", "teea" };
-        var output = solution.GroupAnagrams1(input);
+        ClassicAssert.AreEqual(expected.Count, actual.Count);
+        var sortedExpected = expected.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
+        var sortedActual = actual.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
 
-        foreach (var group in output)
+        for (int i = 0; i < sortedExpected.Count; i++)
         {
-            Console.WriteLine($"[{string.Join(", ", group)}]");
+            CollectionClassicAssert.AreEqual(sortedExpected[i], sortedActual[i]);
         }
+    }
 
-        var input2 = new string[] { "abbbbbbbbbbb", "aaaaaaaaaaab" };
-        var output2 = solution.GroupAnagrams1(input2);
+    [Test]
+    public void GroupAnagrams_BasicCase_ReturnsCorrectGroups()
+    {
+        var input = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
+        var result = _task.GroupAnagrams1(input);
+        ClassicAssert.AreEqual(3, result.Count);
+    }
 
-        foreach (var group in output2)
-        {
-            Console.WriteLine($"[{string.Join(", ", group)}]");
-        }
+    [Test]
+    public void GroupAnagrams_EmptyString_ReturnsOneGroup()
+    {
+        var input = new string[] { "" };
+        var result = _task.GroupAnagrams1(input);
+        ClassicAssert.AreEqual(1, result.Count);
+        CollectionClassicAssert.AreEqual(new[] { "" }, result[0]);
+    }
+
+    [Test]
+    public void GroupAnagrams_SingleCharacter_ReturnsOneGroup()
+    {
+        var input = new string[] { "a" };
+        var result = _task.GroupAnagrams1(input);
+        ClassicAssert.AreEqual(1, result.Count);
+        CollectionClassicAssert.AreEqual(new[] { "a" }, result[0]);
+    }
+
+    [Test]
+    public void GroupAnagrams_DifferentLengths_GroupsSeparately()
+    {
+        var input = new string[] { "abbbbbbbbbbb", "aaaaaaaaaaab" };
+        var result = _task.GroupAnagrams1(input);
+        ClassicAssert.AreEqual(2, result.Count);
     }
 }
 
@@ -131,3 +167,33 @@ public class LetterCombinations
         return r;
     }
 }
+
+[TestFixture]
+public class LetterCombinationsTests
+{
+    [Test]
+    public void Solve_TwoDigits_ReturnsCorrectCombinations()
+    {
+        var result = LetterCombinations.Solve("23");
+        ClassicAssert.AreEqual(9, result.Count);
+        CollectionClassicAssert.Contains(result, "ad");
+        CollectionClassicAssert.Contains(result, "ae");
+        CollectionClassicAssert.Contains(result, "af");
+    }
+
+    [Test]
+    public void Solve_EmptyString_ReturnsEmpty()
+    {
+        var result = LetterCombinations.Solve("");
+        ClassicAssert.AreEqual(0, result.Count);
+    }
+
+    [Test]
+    public void Solve_SingleDigit_ReturnsCorrectLetters()
+    {
+        var result = LetterCombinations.Solve("2");
+        ClassicAssert.AreEqual(3, result.Count);
+        CollectionClassicAssert.AreEquivalent(new[] { "a", "b", "c" }, result);
+    }
+}
+

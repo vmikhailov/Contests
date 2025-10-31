@@ -45,7 +45,10 @@ public class FindWord
         {
             for (var x = 0; x < nc; x++)
             {
-                if (Check(x, y, 0)) return true;
+                if (Check(x, y, 0))
+                {
+                    return true;
+                }
             }
         }
 
@@ -53,15 +56,33 @@ public class FindWord
 
         bool Check(int x, int y, int i)
         {
-            if (visited[x, y]) return false;
-            if (i == n) return true;
-            if (word[i] != board[y][x]) return false;
-            if (i == n - 1) return true;
+            if (visited[x, y])
+            {
+                return false;
+            }
+
+            if (i == n)
+            {
+                return true;
+            }
+
+            if (word[i] != board[y][x])
+            {
+                return false;
+            }
+
+            if (i == n - 1)
+            {
+                return true;
+            }
 
             visited[x, y] = true;
             foreach (var d in paths[x, y])
             {
-                if (Check(x + d.X, y + d.Y, i + 1)) return true;
+                if (Check(x + d.X, y + d.Y, i + 1))
+                {
+                    return true;
+                }
             }
 
             visited[x, y] = false;

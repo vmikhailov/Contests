@@ -64,7 +64,10 @@ public class SudokuSolver
     private PuzzleState Solve(Cell[,] cells, Stack<IList<(int X, int Y, int C)>> stack)
     {
         var state = Reduce(cells);
-        if (state != PuzzleState.InProgress) return state;
+        if (state != PuzzleState.InProgress)
+        {
+            return state;
+        }
 
         var toCheck = ForEach(cells, x => ToListOfInt(x.Candidates))
                       .Where(x => x.Value.Count > 1)
@@ -79,7 +82,11 @@ public class SudokuSolver
                 cell.Candidates = 1 << (val - 1);
                 cell.Num = val;
                 state = Solve(cells, stack);
-                if (state == PuzzleState.Solved) return state;
+                if (state == PuzzleState.Solved)
+                {
+                    return state;
+                }
+
                 Pop(cells, stack);
             }
         }
@@ -193,7 +200,11 @@ public class SudokuSolver
                     foreach (var c in Cells(cells, i, w).Where(x => x.Num.HasValue))
                     {
                         var v = c.Num!.Value;
-                        if (dups[v - 1]) return PuzzleState.NoSolution;
+                        if (dups[v - 1])
+                        {
+                            return PuzzleState.NoSolution;
+                        }
+
                         dups[v - 1] = true;
                     }
                 }
@@ -288,7 +299,10 @@ public class SudokuSolver
         var r = new List<int>();
         for (var i = 0; i < 9; i++)
         {
-            if ((n & (1 << i)) > 0) r.Add(i + 1);
+            if ((n & (1 << i)) > 0)
+            {
+                r.Add(i + 1);
+            }
         }
 
         return r;

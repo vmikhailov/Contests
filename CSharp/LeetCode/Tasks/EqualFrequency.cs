@@ -19,8 +19,16 @@ public class EqualFrequency
 				return g[0].Count == 1 || g[0].Key == 1;
 
 			case 2:
-				if (g.Any(x => x.Key == 1 && x.Count == 1)) return true;
-				if (Math.Abs(g[0].Key - g[1].Key) > 1) return false;
+				if (g.Any(x => x.Key == 1 && x.Count == 1))
+				{
+					return true;
+				}
+
+				if (Math.Abs(g[0].Key - g[1].Key) > 1)
+				{
+					return false;
+				}
+
 				return g[0].Key + 1 == g[1].Key && g[1].Count == 1 ||
 				       g[1].Key + 1 == g[0].Key && g[0].Count == 1;
 

@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class SpiralMatrixTask
@@ -9,7 +12,11 @@ public class SpiralMatrixTask
 
 	IEnumerable<(int x, int y)> GetSpiral(int n, int m)
 	{
-		if (n <= 0 || m <= 0) yield break;
+		if (n <= 0 || m <= 0)
+		{
+			yield break;
+		}
+
 		var x = 0;
 		var y = 0;
 		while (x < n) yield return (x++, y);
@@ -27,5 +34,54 @@ public class SpiralMatrixTask
 		{
 			yield return (p.x + 1, p.y + 1);
 		}
+	}
+}
+
+[TestFixture]
+public class SpiralMatrixTaskTests
+{
+	private SpiralMatrixTask _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new SpiralMatrixTask();
+
+	[Test]
+	public void SpiralOrder_3x3Matrix_ReturnsCorrect()
+	{
+		int[][] matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+		var expected = new List<int> { 1, 2, 3, 6, 9, 8, 7, 4, 5 };
+		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+	}
+
+	[Test]
+	public void SpiralOrder_3x4Matrix_ReturnsCorrect()
+	{
+		int[][] matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+		var expected = new List<int> { 1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7 };
+		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+	}
+
+	[Test]
+	public void SpiralOrder_1x1Matrix_ReturnsSingleElement()
+	{
+		int[][] matrix = [[1]];
+		var expected = new List<int> { 1 };
+		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+	}
+
+	[Test]
+	public void SpiralOrder_SingleRowMatrix_ReturnsCorrect()
+	{
+		int[][] matrix = [[1, 2, 3, 4]];
+		var expected = new List<int> { 1, 2, 3, 4 };
+		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+	}
+
+	[Test]
+	public void SpiralOrder_SingleColumnMatrix_ReturnsCorrect()
+	{
+		int[][] matrix = [[1], [2], [3], [4]];
+		var expected = new List<int> { 1, 2, 3, 4 };
+		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
 	}
 }

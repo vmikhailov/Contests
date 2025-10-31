@@ -1,3 +1,6 @@
+using NUnit.Framework.Legacy;
+using NUnit.Framework;
+
 namespace LeetCode;
 
 public class CheckBinSearchTree
@@ -25,5 +28,67 @@ public class CheckBinSearchTree
 		}
 
 		return v;
+	}
+}
+
+[TestFixture]
+public class CheckBinSearchTreeTests
+{
+	private CheckBinSearchTree _task = null!;
+
+	[SetUp]
+	public void SetUp() => _task = new CheckBinSearchTree();
+
+	[Test]
+	public void IsValidBST_ValidTree_ReturnsTrue()
+	{
+		var root = new TreeNode(2)
+		{
+			left = new TreeNode(1),
+			right = new TreeNode(3)
+		};
+		ClassicAssert.IsTrue(_task.IsValidBST(root));
+	}
+
+	[Test]
+	public void IsValidBST_InvalidTree_ReturnsFalse()
+	{
+		var root = new TreeNode(5)
+		{
+			left = new TreeNode(1),
+			right = new TreeNode(4)
+			{
+				left = new TreeNode(3),
+				right = new TreeNode(6)
+			}
+		};
+		ClassicAssert.IsFalse(_task.IsValidBST(root));
+	}
+
+	[Test]
+	public void IsValidBST_SingleNode_ReturnsTrue()
+	{
+		var root = new TreeNode(1);
+		ClassicAssert.IsTrue(_task.IsValidBST(root));
+	}
+
+	[Test]
+	public void IsValidBST_OnlyLeftChild_ReturnsCorrect()
+	{
+		var root = new TreeNode(2)
+		{
+			left = new TreeNode(1)
+		};
+		ClassicAssert.IsTrue(_task.IsValidBST(root));
+	}
+
+	[Test]
+	public void IsValidBST_OnlyRightChild_ReturnsCorrect()
+	{
+		var root = new TreeNode(1)
+		{
+			right = new TreeNode(2)
+		};
+		ClassicAssert.IsTrue(_task.IsValidBST(root));
 	}
 }

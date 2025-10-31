@@ -15,7 +15,10 @@ public class MaximalRectangleTask2
 			var s = new Stack<int>();
 			for (var x = 0; x < sx + 1; x++)
 			{
-				if (x < sx) h[x] = matrix[y][x] == '1' ? h[x] + 1 : 0;
+				if (x < sx)
+				{
+					h[x] = matrix[y][x] == '1' ? h[x] + 1 : 0;
+				}
 
 				while (s.Count > 0 && h[x] < h[s.Peek()])
 				{

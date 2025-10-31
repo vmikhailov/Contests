@@ -11,7 +11,11 @@ public class EratosthenesPrimes
         var estimatedCount = (int)(n / (Math.Log(n) - 1.5));
         Primes = new(estimatedCount) { 2 };
 
-        if (n <= 2) return 0;
+        if (n <= 2)
+        {
+            return 0;
+        }
+
         var n2 = n / 2;
         var marks = new BitArray(n2);
         
@@ -19,7 +23,10 @@ public class EratosthenesPrimes
 
         for (var k = 1; k < n2; k++)
         {
-            if (marks[k]) continue;
+            if (marks[k])
+            {
+                continue;
+            }
 
             var k1 = 2 * k + 1;
             var k2 = 2 * k * k;
@@ -28,7 +35,11 @@ public class EratosthenesPrimes
             {
                 var v = i * k1 - k2;
                 
-                if (v < 0 || v >= n2) break;
+                if (v < 0 || v >= n2)
+                {
+                    break;
+                }
+
                 marks[v] = true;
             }
 

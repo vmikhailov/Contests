@@ -12,7 +12,11 @@ public class WildCards
         var pr = (char)0;
         foreach (var c in p)
         {
-            if (c == '*' && pr == '*') continue;
+            if (c == '*' && pr == '*')
+            {
+                continue;
+            }
+
             pr = c;
             pp.Append(c);
         }
@@ -31,9 +35,20 @@ public class WildCards
         var sl = s.Length;
         while (true)
         {
-            if (si == sl && pi == pl) return true;
-            if (pi == pl) return false;
-            if (si == sl) return pi + 1 == pl && p[pi] == '*';
+            if (si == sl && pi == pl)
+            {
+                return true;
+            }
+
+            if (pi == pl)
+            {
+                return false;
+            }
+
+            if (si == sl)
+            {
+                return pi + 1 == pl && p[pi] == '*';
+            }
 
             if (p[pi] == s[si] || p[pi] == '?')
             {
@@ -46,7 +61,10 @@ public class WildCards
             {
                 for (var k = si; k <= s.Length; k++)
                 {
-                    if (IsMatchImpl(s, p, k, pi + 1)) return true;
+                    if (IsMatchImpl(s, p, k, pi + 1))
+                    {
+                        return true;
+                    }
                 }
             }
 

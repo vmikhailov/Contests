@@ -4,7 +4,11 @@ public class ShortestPalindromeTask
 {
 	public string ShortestPalindrome(string s)
 	{
-		if (s.Length == 0) return "";
+		if (s.Length == 0)
+		{
+			return "";
+		}
+
 		var i = 0;
 		var m = 1;
 		var ss = s.AsSpan();
