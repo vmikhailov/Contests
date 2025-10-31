@@ -7,10 +7,7 @@ public class TopKFreq
 		var d = new Dictionary<int, int>();
 		for (var i = 0; i < nums.Length; i++)
 		{
-			if (!d.TryGetValue(nums[i], out var n))
-			{
-				n = 0;
-			}
+			var n = d.GetValueOrDefault(nums[i], 0);
 
 			d[nums[i]] = n + 1;
 		}

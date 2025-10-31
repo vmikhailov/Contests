@@ -102,7 +102,7 @@ public:
     }
 };
 
-int main() {
+int main2() {
     cout << "step 1\n";
     Settings s{1, string("test") };
     cout << "step 2\n";

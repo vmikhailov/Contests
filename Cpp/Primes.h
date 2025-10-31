@@ -2,12 +2,14 @@
 
 #include <cmath>
 #include <vector>
+#include <cstring>
 
 class Primes {
 public:
     int countPrimes(int n) {
         if (n <= 2) return 0;
         std::vector<bool> marks(n / 2, false);
+        //auto marks = new int[n/2];
 
         int c = 1;
 
@@ -21,6 +23,7 @@ public:
             c++;
         }
 
+        //delete[] marks;
         return c;
     }
 };

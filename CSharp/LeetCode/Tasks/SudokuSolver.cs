@@ -13,66 +13,105 @@ public class SudokuSolver
         NoSolution
     }
 
-    class Cell
+    record Cell
     {
         public int Candidates = All;
         public int? Num;
-        private Stack<(int? N, int C)>? _stack;
 
-        public void Push()
+        public override string ToString()
         {
-            _stack ??= new();
-            _stack.Push((Num, Candidates));
-        }
-
-        public void Pop()
-        {
-            (Num, Candidates) = _stack!.Pop();
+            return Num.HasValue ? Num.Value.ToString() : "?" + string.Join(",", ToListOfInt(Candidates));
         }
     }
-
 
     public void SolveSudoku(char[][] board)
     {
         var b2 = Enumerable.Range(1, 9).Select(x => Enumerable.Range(1, 9).Select(x => '.').ToArray()).ToArray();
+
+        // var matrix = new List<IList<IList<(int X, int Y)>>>();
+        // foreach (var w in Ways)
+        // {
+        //     var slice = new List<IList<(int X, int Y)>>();
+        //     for (var i = 0; i < 9; i++)
+        //     {
+        //         slice.Add(Line(i, w).ToList());
+        //     }
+        //
+        //     matrix.Add(slice);
+        // }
+        
+        // var matrix1 = Ways.Select(
+        //                       w => Enumerable.Range(1, 9)
+        //                                      .Select(x => Line(x, w).ToList())
+        //                                      .OfType<IList<(int X, int Y)>>()
+        //                                      .ToList())
+        //                   .OfType<IList<IList<(int X, int Y)>>>()
+        //                   .ToList();
+
+        var stack = new Stack<IList<(int X, int Y, int C)>>();
         var sw = Stopwatch.StartNew();
+
         for (var i = 0; i < 1000; i++)
         {
             var cells = ToCells(board);
-            Solve(cells);
+            Solve(cells, stack);
             ToBoard(cells, b2);
         }
 
         Console.WriteLine(sw.ElapsedMilliseconds);
-        
     }
 
-    private PuzzleState Solve(Cell[,] cells)
+    private PuzzleState Solve(Cell[,] cells, Stack<IList<(int X, int Y, int C)>> stack)
     {
         var state = Reduce(cells);
         if (state != PuzzleState.InProgress) return state;
 
         var toCheck = ForEach(cells, x => ToListOfInt(x.Candidates))
                       .Where(x => x.Value.Count > 1)
-                      .OrderByDescending(x => x.Value.Count)
+                      .OrderBy(x => x.Value.Count)
                       .ToList();
 
         foreach (var (cell, candidates) in toCheck)
         {
-            ForEach(cells, x => x.Push());
-
             foreach (var val in candidates)
             {
+                Push(cells, stack);
                 cell.Candidates = 1 << (val - 1);
                 cell.Num = val;
-                state = Solve(cells);
+                state = Solve(cells, stack);
                 if (state == PuzzleState.Solved) return state;
+                Pop(cells, stack);
             }
-
-            ForEach(cells, x => x.Pop());
         }
 
         return PuzzleState.NoSolution;
+    }
+
+    private void Push(Cell[,] cells, Stack<IList<(int X, int Y, int C)>> stack)
+    {
+        var list = new List<(int X, int Y, int C)>();
+
+        ForEach(
+            cells,
+            (x, y, c) =>
+            {
+                if (!c.Num.HasValue)
+                {
+                    list.Add((x, y, c.Candidates));
+                }
+            });
+
+        stack.Push(list);
+    }
+
+    private void Pop(Cell[,] cells, Stack<IList<(int X, int Y, int C)>> stack)
+    {
+        var list = stack.Pop();
+        foreach (var (x, y, c) in list)
+        {
+            cells[x, y].Candidates = c;
+            cells[x, y].Num = null;
+        }
     }
 
     private PuzzleState Reduce(Cell[,] cells)
@@ -149,7 +188,7 @@ public class SudokuSolver
                     {
                         return PuzzleState.NoSolution;
                     }
-                    
+
                     var dups = new bool[9];
                     foreach (var c in Cells(cells, i, w).Where(x => x.Num.HasValue))
                     {
@@ -233,18 +272,18 @@ public class SudokuSolver
         }
     }
 
-    private static void ForEach(Cell[,] cells, Action<Cell> action)
+    private static void ForEach(Cell[,] cells, Action<int, int, Cell> action)
     {
         for (var i = 0; i < 9; i++)
         {
             for (var j = 0; j < 9; j++)
             {
-                action(cells[i, j]);
+                action(i, j, cells[i, j]);
             }
         }
     }
 
-    private IList<int> ToListOfInt(int n)
+    private static IList<int> ToListOfInt(int n)
     {
         var r = new List<int>();
         for (var i = 0; i < 9; i++)

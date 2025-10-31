@@ -1,188 +1,78 @@
-﻿using System.Diagnostics;
-using Codewars.Codewars.Passed;
-using LeetCode;
+﻿using LeetCode;
 using LeetCode.Tasks;
 
-var sw = new Stopwatch();
-var rpt = 74;
 
-var k = 1_000_000;
-var exclude = false;
+Anagrams.Test();
+//FindKthSmallestTask.Test();
+//ReverseIntTask.Test();
+//LongestNonRepeatingString.Test();
+//ThreeSumTask.Test();
+//SlidingWindow.Test();
+//MinHeapTest.Test();
+//TopKFrequency.Test();
 
-while (rpt-- > 0)
-{
-    //var p1 = new PrimitivePrimes();
-    //var p2 = new Primitive2Primes();
-    var p1 = new EratosthenesPrimes();
-    var p2 = new EratosthenesPrimes1();
-    var p3 = new EratosthenesPrimes4();
-    var p4 = new EratosthenesPrimes3();
+//var xo = Xor2.FindUniqueNumbers([-1, 2, 2, 3, 7, 7, 4, 4, 5, 5]);
 
-    var t = TimeSpan.FromSeconds(1).TotalMicroseconds;
-    Console.WriteLine($"Testing for K = {k} {rpt}");
-    // exclude &= rpt != 0;
-    // if (!exclude)
-    // {
-    //     sw.Restart();
-    //     p1.CountPrimes(k);
-    //     Console.WriteLine($"Primitive    {p1.Primes.Count} {sw.Elapsed}");
-    //     t = sw.Elapsed.TotalMicroseconds;
-    //     if (sw.Elapsed > TimeSpan.FromSeconds(1) && rpt != 0)
-    //     {
-    //         exclude = true;
-    //     }
-    // }
-    // else
-    // {
-    //     Console.WriteLine($"Primitive    excluded");
-    // }
+//Console.WriteLine(xo);
 
-    // sw.Restart();
-    // p2.CountPrimes(k);
-    // if (!exclude)
-    // {
-    //     Console.WriteLine($"Primitive    {p2.Primes.Count} {sw.Elapsed} {t / sw.Elapsed.TotalMicroseconds:F0}");
-    // }
-    // else
-    // {
-    //     Console.WriteLine($"Primitive    {p2.Primes.Count} {sw.Elapsed}");
-    // }
-    //
-    // t = sw.Elapsed.TotalMicroseconds;  
-    sw.Restart();
-    p1.CountPrimes(k);
-    p1.CountPrimes(k);
-    sw.Stop();
-    Console.WriteLine($"Eratosthenes 1 {p1.Primes.Count} {sw.Elapsed} {0:F2} {p1.Primes.Count/sw.Elapsed.TotalMicroseconds:F2} {k / 1024 /1024}");
-    t = sw.Elapsed.TotalMicroseconds; 
-    
-    sw.Restart();
-    p2.CountPrimes(k);
-    p2.CountPrimes(k);
-    sw.Stop();
-    Console.WriteLine($"Eratosthenes 2 {p2.Primes.Count} {sw.Elapsed} {t/sw.Elapsed.TotalMicroseconds:F2} {p2.Primes.Count/sw.Elapsed.TotalMicroseconds:F2}");
-    
-    sw.Restart();
-    p3.CountPrimes(k);
-    p3.CountPrimes(k);
-    sw.Stop();
-    Console.WriteLine($"Eratosthenes 3 {p3.Primes.Count} {sw.Elapsed} {t/sw.Elapsed.TotalMicroseconds:F2} {p2.Primes.Count/sw.Elapsed.TotalMicroseconds:F2}");
-    
-    sw.Restart();
-    p4.CountPrimes(k);
-    p4.CountPrimes(k);
-    sw.Stop();
-    Console.WriteLine($"Eratosthenes 4 {p4.Primes.Count} {sw.Elapsed} {t/sw.Elapsed.TotalMicroseconds:F2} {p4.Primes.Count/sw.Elapsed.TotalMicroseconds:F2}");
-    
-    Console.WriteLine();
-    k = (int)(k * 1.10);
-}
+//var n = new NumberOfStepsTo1();
 
-return;
+//Console.WriteLine(n.NumSteps("1101"));
 
-var aa = new IPDatabase3();
-aa.Init(new IPRange[]
-{
-    new(new(1), new(5)),
-    new(new(8), new(10)),
-    new(new(4), new(7)),
-    new(new(10), new(15)),
-    new(new(3), new(16)),
-    new(new(20), new(30)),
-    new(new(17), new(18)),
-    new(new(1), new(50)),
-    new(new(55), new(60)),
-    new(new(65), new(70)),
-    new(new(51), new(71))
-});
+//var lca = new LcaNodes();
 
-var rr = IPGenerator.GenerateRanges(500, 100).ToList();
 
-var dur = TimeSpan.FromSeconds(5);
+//[3,5,1,6,2,0,8,null,null,7,4]
 
-//var types = new[] { typeof(IPDatabase3), typeof(IPDatabase2) , typeof(IPDatabase) };
-var types = new[] { typeof(IPDatabase3), typeof(IPDatabase2) };
+//lca.LcaDeepestLeaves(new(3, new(5, new(6, new(10)), new(2, new(7), new(4))), new(1, new(0), new(8))));
 
-//var ips = IPGenerator.GenerateIP().Take(10000000).ToList();
-var processed = new List<(IPAddress, IPRange?)>();
-var ips = IPGenerator.GenerateIP().Take(10000000).ToList();
-foreach (var t in types)
-{
-    sw.Restart();
-    var db = (IIPDatabase)Activator.CreateInstance(t)!;
-    db.Init(rr);
 
-    var missing = 0;
-    var found = 0;
-    //processed.Clear();
-    foreach (var a in ips)
-    {
-        // if (sw.Elapsed >= dur)
-        // {
-        //     sw.Stop();
-        //     break;
-        // }
-
-        if (db.Find(a) is {} r)
-        {
-            found++;
-        }
-        else
-        {
-            missing++;
-            r = null;
-        }
-        
-        //processed.Add((a, r));
-    }
-
-    var total = found + missing;
-    Console.WriteLine(
-        $"Processed = {total, 10} Found = {found, 10} Missing = {missing, 10} " +
-        $"Missing Ratio = {missing*1.0/total} Speed = {total/sw.Elapsed.TotalMilliseconds:F4} per ms");
-    
-    // validation
-    // var dd = new IPDatabase2();
-    // dd.Init(rr);
-    // foreach (var (a, r) in processed)
-    // {
-    //     if ((dd.Find(a) is null) ^ (r is null))
-    //     {
-    //         Console.Write("!");
-    //     }
-    // }
-}
-
-// var wb = new WordBreaker();
+// var mbn = new MostBeautifulItemForEachQuery();
+// var r = mbn.MaximumBeauty(
+//     new[] { new[] { 1, 2 }, new[] { 3, 2 }, new[] { 2, 4 }, new[] { 5, 6 }, new[] { 3, 5 } },
+//     new[] { 1, 2, 3, 4, 5, 6 });
 //
-// var word =
-//     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
-// var wordDict = new List<string>()
+// foreach(var c in r)
 // {
-//     "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa"
-// };
-//
-// Console.WriteLine(wb.WordBreak(word, wordDict));
-// Console.WriteLine(wb.WordBreak("leetcode", new List<string>() { "leet", "code" }));
+//     Console.WriteLine(c);
+// }
+return;
+//var lp = new LongestPalindromeFromPairs();
 
-//var r = new RestoreIp();
+//Console.WriteLine(lp.LongestPalindrome(new[] { "ab", "ty", "yt", "lc", "cl", "ab", "aa" }));
+//Console.WriteLine(lp.LongestPalindrome(new[] { "ab", "ty", "yt", "lc", "cl", "ab", "aa", "ty", "yt", "bb", "bb" }));
+//Console.WriteLine(lp.LongestPalindrome(new[] { "lc", "cl", "gg" }));
+// Console.WriteLine(
+//     lp.LongestPalindrome(new[] { "dd", "aa", "bb", "dd", "aa", "dd", "bb", "dd", "aa", "cc", "bb", "cc", "dd", "cc" }));
+// return;
+// var cc = new CoinsChange();
+//
+// Console.WriteLine(cc.CoinChange(new[] { 1, 2, 5 }, 11));
+// return;
+// // var kd = new KDistanceInTree();
+//
+// var t1 = new TreeNode(3, new(5, new(6), new(2, new(7), new(4))), new(1, new(0), new(8)));
+// var t2 = new TreeNode(0, new(2), new(1, new(3)));
+//
+// //kd.DistanceK(t1, new(5), 2);
+// kd.DistanceK(t2, new(3), 3);
+// return;
 
-//var l = r.RestoreIpAddresses("25525511135");
-//var l = r.RestoreIpAddresses("101023");
-// var l = r.RestoreIpAddresses("010010");
+// var ss = new SudokuSolver();
 //
-// Console.WriteLine(string.Join("\n", l));
+// ss.SolveSudoku(ss.Test3);
 
-// var lb = new LongBinary();
-//
-// var sw = Stopwatch.StartNew();
-//
-// var r = lb.ConcatenatedBinary(72387);
-//
-// Console.WriteLine(r);
-// Console.WriteLine(sw.Elapsed);
+// var q = new Sq2();
+// q.countTriples(12);
 
+// var ch = new Change();
+// Console.WriteLine(ch.LemonadeChange(ch.Test1));
+
+// var sc = new ShortestCompletingWordClass();
 //
+// var a = sc.ShortestCompletingWord("1s3 PSt", new[] { "step", "steps", "stripe", "stepple" });
+// Console.WriteLine(a);
+
 // var intr = new Intervals();
 //
 // var a1 = new[] { new[] { 1, 3 }, new[] { 2, 6 }, new[] { 8, 10 }, new[] { 15, 18 } };
@@ -381,7 +271,7 @@ foreach (var t in types)
 // var count = 0;
 // for (var i = 0; i < 50; i++)
 // {
-//     var p = new Erathosphen();
+//     var p = new Primes();
 //     var sw = Stopwatch.StartNew();
 //     var n = p.CountPrimes(100_000_000);
 //     sw.Stop();
@@ -580,70 +470,8 @@ foreach (var t in types)
 //
 // Fancy fancy2 = new Fancy();
 // fancy2.Append(5);
-// fancy2.Append(8);
-// fancy2.MultAll(6);
-// fancy2.GetIndex(0);
-// fancy2.GetIndex(1);
-// fancy2.MultAll(2);
-// fancy2.MultAll(5);
-// Console.WriteLine(fancy2.GetIndex(1));
-//
-// var fancy = new Fancy();
-//
-// fancy.Append(12);
-// fancy.Append(8);
-// fancy.GetIndex(1);
-// fancy.Append(12);
-// fancy.GetIndex(0);
-// fancy.AddAll(12);
-// fancy.Append(8);
-// fancy.GetIndex(2);
-// fancy.GetIndex(2);
-// fancy.Append(4);
-// fancy.Append(13);
-// fancy.GetIndex(4);
-// fancy.Append(12);
-// fancy.GetIndex(6);
-// fancy.Append(11);
-// fancy.GetIndex(1);
-// fancy.Append(10);
-// fancy.GetIndex(2);
-// fancy.MultAll(3);
-// fancy.AddAll(1);
-// fancy.GetIndex(6);
-// fancy.Append(14);
-// fancy.AddAll(5);
-// fancy.GetIndex(6);
-// fancy.MultAll(12);
-// fancy.GetIndex(3);
-// fancy.MultAll(12);
-// fancy.AddAll(15);
-// fancy.AddAll(6);
-// fancy.Append(7);
-// fancy.MultAll(8);
-// fancy.Append(13);
-// fancy.Append(15);
-// fancy.Append(15);
-// fancy.MultAll(10);
-// fancy.GetIndex(9);
-// fancy.MultAll(12);
-// fancy.MultAll(12);
-// fancy.MultAll(9);
-// fancy.GetIndex(9);
-// fancy.AddAll(9);
-// fancy.Append(9);
-// fancy.MultAll(4);
-// fancy.AddAll(8);
-// fancy.AddAll(11);
-// fancy.MultAll(15);
-// fancy.AddAll(9);
-// fancy.AddAll(1);
-// fancy.Append(4);
-// fancy.Append(10);
-// Console.WriteLine(fancy.GetIndex(9));
-// Console.WriteLine(fancy.GetIndex(9));
 
-return;
+//return;
 
 var eq = new EqualFrequency();
 Console.WriteLine("{0},{1}", true, eq.Solve("zz"));

@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace LeetCode;
 
+[DebuggerDisplay("{val}")]
 public class TreeNode
 {
 	public int val;

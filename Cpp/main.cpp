@@ -101,8 +101,19 @@ int run(int (*body)()) {
     return (int) ms_int.count();
 }
 
-int main1() {
-    return 0;
+int main() {
+    int sum = 0;
+    int count = 0;
+    for (int i = 0; i < 20; i++) {
+        auto t1 = high_resolution_clock::now();
+        Primes pp;
+        auto ms = pp.countPrimes(100000000);
+        auto t2 = high_resolution_clock::now();
+        auto ms_int = duration_cast<milliseconds>(t2 - t1);
+        sum += ms_int.count();
+        count++;
+        cout << ms << " " << ms_int.count() << "ms " <<  sum/count << "ms\n";
+    }
 };
 
 //    IsPalindromeListClass ip;
