@@ -91,4 +91,11 @@ public class CheckBinSearchTreeTests
 		};
 		_task.IsValidBST(root).Should().BeTrue();
 	}
+
+	[Test]
+	public void IsValidBST_MinValueNode_ReturnsTrue()
+	{
+		var root = new TreeNode(int.MinValue);
+		_task.IsValidBST(root).Should().BeTrue();
+	}
 }

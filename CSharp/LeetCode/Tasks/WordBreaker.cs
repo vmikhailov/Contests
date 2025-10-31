@@ -80,5 +80,12 @@ public class WordBreakerTests
     {
         _task.WordBreak("a", new List<string> { "a" }).Should().BeTrue();
     }
-}
 
+    [Test]
+    public void WordBreak_LongRepeatedA_ReturnsFalse()
+    {
+        var word = new string('a', 100) + "b";
+        var wordDict = new List<string> { "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa" };
+        _task.WordBreak(word, wordDict).Should().BeFalse();
+    }
+}

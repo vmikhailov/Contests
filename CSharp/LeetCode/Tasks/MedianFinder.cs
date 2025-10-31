@@ -81,4 +81,18 @@ public class MedianFinderTests
 		mf.AddNum(3);
 		mf.FindMedian().Should().Be(2.0);
 	}
+
+	[Test]
+	public void FindMedian_IncrementalSequence_MatchesProgramCs()
+	{
+		var mf = new MedianFinder();
+		mf.AddNum(6);
+		mf.FindMedian().Should().Be(6.0);
+		mf.AddNum(10);
+		mf.FindMedian().Should().Be(8.0);
+		mf.AddNum(2);
+		mf.FindMedian().Should().Be(6.0);
+		mf.AddNum(6);
+		mf.FindMedian().Should().Be(6.0);
+	}
 }
