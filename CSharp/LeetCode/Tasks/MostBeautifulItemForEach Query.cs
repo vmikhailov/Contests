@@ -30,7 +30,7 @@ public class MostBeautifulItemForEachQuery
         for (var i = 0; i < queries.Length; i++)
         {
             var q = queries[i];
-            var j = Array.BinarySearch(items, new[] { q, 0 }, cmp);
+            var j = Array.BinarySearch(items, [q, 0], cmp);
             r[i] = j >= 0 ? items[j][1] : j <= -2 ? items[-j - 2][1] : 0;
         }
 

@@ -69,9 +69,9 @@ public class ZigzagLevelOrderTaskTests
 		};
 		var result = _task.ZigzagLevelOrder(root);
 		result.Should().HaveCount(3);
-		result[0].Should().Equal(new[] { 3 });
-		result[1].Should().Equal(new[] { 20, 9 });
-		result[2].Should().Equal(new[] { 15, 7 });
+		result[0].Should().Equal([3]);
+		result[1].Should().Equal([20, 9]);
+		result[2].Should().Equal([15, 7]);
 	}
 
 	[Test]
@@ -80,7 +80,7 @@ public class ZigzagLevelOrderTaskTests
 		var root = new TreeNode(1);
 		var result = _task.ZigzagLevelOrder(root);
 		result.Should().HaveCount(1);
-		result[0].Should().Equal(new[] { 1 });
+		result[0].Should().Equal([1]);
 	}
 
 	[Test]
@@ -102,8 +102,8 @@ public class ZigzagLevelOrderTaskTests
 		};
 		var result = _task.ZigzagLevelOrder(root);
 		result.Should().HaveCount(3);
-		result[0].Should().Equal(new[] { 1 });
-		result[1].Should().Equal(new[] { 2 });
-		result[2].Should().Equal(new[] { 3 });
+		result[0].Should().Equal([1]);
+		result[1].Should().Equal([2]);
+		result[2].Should().Equal([3]);
 	}
 }

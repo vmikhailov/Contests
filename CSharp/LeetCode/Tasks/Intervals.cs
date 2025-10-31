@@ -45,7 +45,7 @@ public class Intervals
         {
             var i = j;         
             while (m[j] == 1) j++;
-            v.Add(new[] { r[i], r[j] });
+            v.Add([r[i], r[j]]);
             j++;
         }
 

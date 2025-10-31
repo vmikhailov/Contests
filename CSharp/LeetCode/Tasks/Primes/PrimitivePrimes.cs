@@ -29,7 +29,7 @@ public class PrimitivePrimes
 
     public int CountPrimes(int n)
     {
-        Primes = new() { 2 };
+        Primes = [2];
         if (n <= 1)
         {
             return 0;

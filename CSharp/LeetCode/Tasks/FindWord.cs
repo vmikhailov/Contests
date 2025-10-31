@@ -10,10 +10,10 @@ public class FindWord
         var visited = new bool[nc, nr];
         var paths = new (int X, int Y)[nc, nr][];
 
-        paths[0, 0] = new[] { (1, 0), (0, 1) };
-        paths[nc - 1, 0] = new[] { (-1, 0), (0, 1) };
-        paths[0, nr - 1] = new[] { (1, 0), (0, -1) };
-        paths[nc - 1, nr - 1] = new[] { (-1, 0), (0, -1) };
+        paths[0, 0] = [(1, 0), (0, 1)];
+        paths[nc - 1, 0] = [(-1, 0), (0, 1)];
+        paths[0, nr - 1] = [(1, 0), (0, -1)];
+        paths[nc - 1, nr - 1] = [(-1, 0), (0, -1)];
 
         var noLeft = new[] { (1, 0), (0, 1), (0, -1) };
         var noRight = new[] { (-1, 0), (0, 1), (0, -1) };
