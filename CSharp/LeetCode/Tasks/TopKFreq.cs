@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode;
@@ -34,30 +34,30 @@ public class TopKFreqTests
 	public void GetTopK_BasicCase_ReturnsTopKFrequent()
 	{
 		var result = _task.GetTopK([1, 1, 1, 2, 2, 3], 2);
-		ClassicAssert.AreEqual(2, result.Length);
-		ClassicAssert.Contains(1, result);
-		ClassicAssert.Contains(2, result);
+		result.Should().HaveCount(2);
+		result.Should().Contain(1);
+		result.Should().Contain(2);
 	}
 
 	[Test]
 	public void GetTopK_SingleElement_ReturnsElement()
 	{
 		var result = _task.GetTopK([1], 1);
-		ClassicAssert.AreEqual(new[] { 1 }, result);
+		result.Should().Equal(new[] { 1 });
 	}
 
 	[Test]
 	public void GetTopK_AllUnique_ReturnsFirst()
 	{
 		var result = _task.GetTopK([1, 2, 3, 4], 2);
-		ClassicAssert.AreEqual(2, result.Length);
+		result.Should().HaveCount(2);
 	}
 
 	[Test]
 	public void GetTopK_AllSame_ReturnsOne()
 	{
 		var result = _task.GetTopK([4, 4, 4, 4], 1);
-		ClassicAssert.AreEqual(new[] { 4 }, result);
+		result.Should().Equal(new[] { 4 });
 	}
 }
 

@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode;
@@ -82,24 +82,24 @@ public class PermutationsTests
 	public void Permute_ThreeElements_ReturnsSixPermutations()
 	{
 		var result = _task.Permute([1, 2, 3]);
-		ClassicAssert.AreEqual(6, result.Count);
+		result.Should().HaveCount(6);
 	}
 
 	[Test]
 	public void Permute_TwoElements_ReturnsTwoPermutations()
 	{
 		var result = _task.Permute([0, 1]);
-		ClassicAssert.AreEqual(2, result.Count);
-		ClassicAssert.IsTrue(result.Any(p => p.SequenceEqual(new[] { 0, 1 })));
-		ClassicAssert.IsTrue(result.Any(p => p.SequenceEqual(new[] { 1, 0 })));
+		result.Should().HaveCount(2);
+		result.Should().Contain(p => p.SequenceEqual(new[] { 0, 1 }));
+		result.Should().Contain(p => p.SequenceEqual(new[] { 1, 0 }));
 	}
 
 	[Test]
 	public void Permute_SingleElement_ReturnsOnePermutation()
 	{
 		var result = _task.Permute([1]);
-		ClassicAssert.AreEqual(1, result.Count);
-		CollectionClassicAssert.AreEqual(new[] { 1 }, result[0]);
+		result.Should().HaveCount(1);
+		result[0].Should().Equal(new[] { 1 });
 	}
 }
 
@@ -115,13 +115,13 @@ public class Permutations2Tests
 	public void Permute_ThreeElements_ReturnsSixPermutations()
 	{
 		var result = _task.Permute([1, 2, 3]);
-		ClassicAssert.AreEqual(6, result.Count);
+		result.Should().HaveCount(6);
 	}
 
 	[Test]
 	public void Permute_TwoElements_ReturnsTwoPermutations()
 	{
 		var result = _task.Permute([0, 1]);
-		ClassicAssert.AreEqual(2, result.Count);
+		result.Should().HaveCount(2);
 	}
 }

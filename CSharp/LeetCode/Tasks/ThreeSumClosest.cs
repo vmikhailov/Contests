@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode
@@ -71,31 +71,31 @@ namespace LeetCode
 		[Test]
 		public void Compute_ExactTarget_ReturnsTarget()
 		{
-			ClassicAssert.AreEqual(0, ThreeSumClosest.Compute([-1, 2, 1, -4], 1));
+			ThreeSumClosest.Compute([-1, 2, 1, -4], 1).Should().Be(0);
 		}
 
 		[Test]
 		public void Compute_BasicCase_ReturnsClosest()
 		{
-			ClassicAssert.AreEqual(2, ThreeSumClosest.Compute([-1, 2, 1, -4], 1));
+			ThreeSumClosest.Compute([-1, 2, 1, -4], 1).Should().Be(2);
 		}
 
 		[Test]
 		public void Compute_ThreeElements_ReturnsSum()
 		{
-			ClassicAssert.AreEqual(6, ThreeSumClosest.Compute([1, 2, 3], 6));
+			ThreeSumClosest.Compute([1, 2, 3], 6).Should().Be(6);
 		}
 
 		[Test]
 		public void Compute_AllNegative_ReturnsClosest()
 		{
-			ClassicAssert.AreEqual(-6, ThreeSumClosest.Compute([-3, -2, -1], -5));
+			ThreeSumClosest.Compute([-3, -2, -1], -5).Should().Be(-6);
 		}
 
 		[Test]
 		public void Compute_WithZero_ReturnsCorrect()
 		{
-			ClassicAssert.AreEqual(2, ThreeSumClosest.Compute([0, 1, 2], 3));
+			ThreeSumClosest.Compute([0, 1, 2], 3).Should().Be(2);
 		}
 	}
 }

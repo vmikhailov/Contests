@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -50,7 +50,7 @@ public class SpiralMatrixTaskTests
 	{
 		int[][] matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 		var expected = new List<int> { 1, 2, 3, 6, 9, 8, 7, 4, 5 };
-		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+		_task.SpiralOrder(matrix).Should().Equal(expected);
 	}
 
 	[Test]
@@ -58,7 +58,7 @@ public class SpiralMatrixTaskTests
 	{
 		int[][] matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
 		var expected = new List<int> { 1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7 };
-		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+		_task.SpiralOrder(matrix).Should().Equal(expected);
 	}
 
 	[Test]
@@ -66,7 +66,7 @@ public class SpiralMatrixTaskTests
 	{
 		int[][] matrix = [[1]];
 		var expected = new List<int> { 1 };
-		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+		_task.SpiralOrder(matrix).Should().Equal(expected);
 	}
 
 	[Test]
@@ -74,7 +74,7 @@ public class SpiralMatrixTaskTests
 	{
 		int[][] matrix = [[1, 2, 3, 4]];
 		var expected = new List<int> { 1, 2, 3, 4 };
-		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+		_task.SpiralOrder(matrix).Should().Equal(expected);
 	}
 
 	[Test]
@@ -82,6 +82,6 @@ public class SpiralMatrixTaskTests
 	{
 		int[][] matrix = [[1], [2], [3], [4]];
 		var expected = new List<int> { 1, 2, 3, 4 };
-		ClassicAssert.AreEqual(expected, _task.SpiralOrder(matrix));
+		_task.SpiralOrder(matrix).Should().Equal(expected);
 	}
 }

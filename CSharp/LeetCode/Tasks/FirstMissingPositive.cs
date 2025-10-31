@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -71,37 +71,37 @@ public class FirstMissingPositiveTests
     [Test]
     public void Compute_BasicCase_ReturnsFirstMissing()
     {
-        ClassicAssert.AreEqual(3, _task.Compute([1, 2, 0]));
+        _task.Compute([1, 2, 0]).Should().Be(3);
     }
 
     [Test]
     public void Compute_ConsecutiveNumbers_ReturnsNextNumber()
     {
-        ClassicAssert.AreEqual(2, _task.Compute([3, 4, -1, 1]));
+        _task.Compute([3, 4, -1, 1]).Should().Be(2);
     }
 
     [Test]
     public void Compute_AllPositive_ReturnsNextNumber()
     {
-        ClassicAssert.AreEqual(3, _task.Compute([1, 2]));
+        _task.Compute([1, 2]).Should().Be(3);
     }
 
     [Test]
     public void Compute_SingleElement_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(2, _task.Compute([1]));
-        ClassicAssert.AreEqual(1, _task.Compute([2]));
+        _task.Compute([1]).Should().Be(2);
+        _task.Compute([2]).Should().Be(1);
     }
 
     [Test]
     public void Compute_AllNegative_ReturnsOne()
     {
-        ClassicAssert.AreEqual(1, _task.Compute([-1, -2, -3]));
+        _task.Compute([-1, -2, -3]).Should().Be(1);
     }
 
     [Test]
     public void Compute_WithDuplicates_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(3, _task.Compute([1, 1, 2, 2]));
+        _task.Compute([1, 1, 2, 2]).Should().Be(3);
     }
 }

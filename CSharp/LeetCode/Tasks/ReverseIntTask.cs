@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -36,30 +36,30 @@ public class ReverseIntTaskTests
     [Test]
     public void Reverse_PositiveNumber_ReturnsReversed()
     {
-        ClassicAssert.AreEqual(321, _task.Reverse(123));
+        _task.Reverse(123).Should().Be(321);
     }
 
     [Test]
     public void Reverse_Overflow_ReturnsZero()
     {
-        ClassicAssert.AreEqual(0, _task.Reverse(1534236469));
+        _task.Reverse(1534236469).Should().Be(0);
     }
 
     [Test]
     public void Reverse_NegativeNumber_ReturnsReversed()
     {
-        ClassicAssert.AreEqual(-321, _task.Reverse(-123));
+        _task.Reverse(-123).Should().Be(-321);
     }
 
     [Test]
     public void Reverse_Zero_ReturnsZero()
     {
-        ClassicAssert.AreEqual(0, _task.Reverse(0));
+        _task.Reverse(0).Should().Be(0);
     }
 
     [Test]
     public void Reverse_TrailingZeros_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(21, _task.Reverse(120));
+        _task.Reverse(120).Should().Be(21);
     }
 }

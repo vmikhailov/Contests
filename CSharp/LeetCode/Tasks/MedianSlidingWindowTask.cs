@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -31,34 +31,34 @@ public class MedianSlidingWindowTaskTests
     public void MedianSlidingWindow_BasicCase_ReturnsCorrect()
     {
         var result = _task.MedianSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3);
-        ClassicAssert.IsTrue(AreEqual([1, -1, 3, 5], result));
+        AreEqual([1, -1, 3, 5], result).Should().BeTrue();
     }
 
     [Test]
     public void MedianSlidingWindow_EvenWindowSize_ReturnsAverages()
     {
         var result = _task.MedianSlidingWindow([1, 2, 3, 4], 4);
-        ClassicAssert.IsTrue(AreEqual([2.5], result));
+        AreEqual([2.5], result).Should().BeTrue();
     }
 
     [Test]
     public void MedianSlidingWindow_WindowSizeTwo_ReturnsCorrect()
     {
         var result = _task.MedianSlidingWindow([1, 2, 3, 4, 5], 2);
-        ClassicAssert.IsTrue(AreEqual([1.5, 2.5, 3.5, 4.5], result));
+        AreEqual([1.5, 2.5, 3.5, 4.5], result).Should().BeTrue();
     }
 
     [Test]
     public void MedianSlidingWindow_AllSameValues_ReturnsSameValue()
     {
         var result = _task.MedianSlidingWindow([1, 1, 1, 1], 2);
-        ClassicAssert.IsTrue(AreEqual([1.0, 1.0, 1.0], result));
+        AreEqual([1.0, 1.0, 1.0], result).Should().BeTrue();
     }
 
     [Test]
     public void MedianSlidingWindow_SingleElement_ReturnsElement()
     {
         var result = _task.MedianSlidingWindow([5], 1);
-        ClassicAssert.IsTrue(AreEqual([5.0], result));
+        AreEqual([5.0], result).Should().BeTrue();
     }
 }

@@ -4,7 +4,7 @@ namespace LeetCode.Tasks;
 
 public class EratosthenesPrimes3
 {
-    public List<int> Primes { get; private set; }
+    public List<int>? Primes { get; private set; }
 
     public int CountPrimes(int n)
     {

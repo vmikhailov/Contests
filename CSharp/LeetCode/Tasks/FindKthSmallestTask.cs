@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -55,48 +55,48 @@ public class FindKthSmallestTaskTests
     public void FindKthSmallest_SmallestElement_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([2, 3, 4], [1, 5, 6], 1);
-        ClassicAssert.AreEqual(1, result);
+        result.Should().Be(1);
     }
 
     [Test]
     public void FindKthSmallest_LastElement_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([1, 2], [3, 4], 4);
-        ClassicAssert.AreEqual(4, result);
+        result.Should().Be(4);
     }
 
     [Test]
     public void FindKthSmallest_OneArraySmaller_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([1], [2, 3, 4, 5], 3);
-        ClassicAssert.AreEqual(3, result);
+        result.Should().Be(3);
     }
 
     [Test]
     public void FindKthSmallest_DuplicateValues_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([1, 3, 3], [2, 3, 4], 4);
-        ClassicAssert.AreEqual(3, result);
+        result.Should().Be(3);
     }
 
     [Test]
     public void FindKthSmallest_EmptySecondArray_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([1, 2, 3, 4], [], 3);
-        ClassicAssert.AreEqual(3, result);
+        result.Should().Be(3);
     }
 
     [Test]
     public void FindKthSmallest_KAtBoundaryOfSecondArray_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([5, 6, 7], [1, 2, 3], 3);
-        ClassicAssert.AreEqual(3, result);
+        result.Should().Be(3);
     }
 
     [Test]
     public void FindKthSmallest_KAtBoundaryOfFirstArray_ReturnsCorrect()
     {
         var result = _task.FindKthSmallest([1, 2, 3], [5, 6, 7], 3);
-        ClassicAssert.AreEqual(3, result);
+        result.Should().Be(3);
     }
 }

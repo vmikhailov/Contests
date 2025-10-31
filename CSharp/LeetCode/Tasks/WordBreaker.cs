@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -54,31 +54,31 @@ public class WordBreakerTests
     [Test]
     public void WordBreak_ValidBreak_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.WordBreak("leetcode", new List<string> { "leet", "code" }));
+        _task.WordBreak("leetcode", new List<string> { "leet", "code" }).Should().BeTrue();
     }
 
     [Test]
     public void WordBreak_MultipleBreaks_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.WordBreak("applepenapple", new List<string> { "apple", "pen" }));
+        _task.WordBreak("applepenapple", new List<string> { "apple", "pen" }).Should().BeTrue();
     }
 
     [Test]
     public void WordBreak_InvalidBreak_ReturnsFalse()
     {
-        ClassicAssert.IsFalse(_task.WordBreak("catsandog", new List<string> { "cats", "dog", "sand", "and", "cat" }));
+        _task.WordBreak("catsandog", new List<string> { "cats", "dog", "sand", "and", "cat" }).Should().BeFalse();
     }
 
     [Test]
     public void WordBreak_EmptyString_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.WordBreak("", new List<string> { "a" }));
+        _task.WordBreak("", new List<string> { "a" }).Should().BeTrue();
     }
 
     [Test]
     public void WordBreak_SingleWord_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.WordBreak("a", new List<string> { "a" }));
+        _task.WordBreak("a", new List<string> { "a" }).Should().BeTrue();
     }
 }
 

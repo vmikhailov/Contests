@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -33,33 +33,33 @@ public class MySqrtTaskTests
 	[Test]
 	public void MySqrt_PerfectSquare_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(2, _task.MySqrt(4));
-		ClassicAssert.AreEqual(3, _task.MySqrt(9));
-		ClassicAssert.AreEqual(4, _task.MySqrt(16));
+		_task.MySqrt(4).Should().Be(2);
+		_task.MySqrt(9).Should().Be(3);
+		_task.MySqrt(16).Should().Be(4);
 	}
 
 	[Test]
 	public void MySqrt_NonPerfectSquare_ReturnsFloor()
 	{
-		ClassicAssert.AreEqual(2, _task.MySqrt(8));
-		ClassicAssert.AreEqual(4, _task.MySqrt(20));
+		_task.MySqrt(8).Should().Be(2);
+		_task.MySqrt(20).Should().Be(4);
 	}
 
 	[Test]
 	public void MySqrt_Zero_ReturnsZero()
 	{
-		ClassicAssert.AreEqual(0, _task.MySqrt(0));
+		_task.MySqrt(0).Should().Be(0);
 	}
 
 	[Test]
 	public void MySqrt_One_ReturnsOne()
 	{
-		ClassicAssert.AreEqual(1, _task.MySqrt(1));
+		_task.MySqrt(1).Should().Be(1);
 	}
 
 	[Test]
 	public void MySqrt_LargeNumber_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(46340, _task.MySqrt(2147395600));
+		_task.MySqrt(2147395600).Should().Be(46340);
 	}
 }

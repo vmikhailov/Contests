@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -56,30 +56,30 @@ public class ChangeTests
     [Test]
     public void LemonadeChange_AllFives_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 5, 5]));
+        _task.LemonadeChange([5, 5, 5, 5]).Should().BeTrue();
     }
 
     [Test]
     public void LemonadeChange_ValidSequence_ReturnsTrue()
     {
-        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 10, 10, 20]));
+        _task.LemonadeChange([5, 5, 10, 10, 20]).Should().BeTrue();
     }
 
     [Test]
     public void LemonadeChange_ImpossibleChange_ReturnsFalse()
     {
-        ClassicAssert.IsFalse(_task.LemonadeChange([5, 5, 10, 10, 20, 20]));
+        _task.LemonadeChange([5, 5, 10, 10, 20, 20]).Should().BeFalse();
     }
 
     [Test]
     public void LemonadeChange_NoChange_ReturnsFalse()
     {
-        ClassicAssert.IsFalse(_task.LemonadeChange([10]));
+        _task.LemonadeChange([10]).Should().BeFalse();
     }
 
     [Test]
     public void LemonadeChange_ComplexSequence_ReturnsCorrect()
     {
-        ClassicAssert.IsTrue(_task.LemonadeChange([5, 5, 5, 10, 20]));
+        _task.LemonadeChange([5, 5, 5, 10, 20]).Should().BeTrue();
     }
 }

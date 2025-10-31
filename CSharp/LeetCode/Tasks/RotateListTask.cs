@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -91,7 +91,7 @@ public class RotateListTaskTests
 	{
 		var head = CreateList(1, 2, 3, 4, 5);
 		var result = _task.RotateRight(head, 2);
-		ClassicAssert.AreEqual(new[] { 4, 5, 1, 2, 3 }, ListToArray(result));
+		ListToArray(result).Should().Equal(new[] { 4, 5, 1, 2, 3 });
 	}
 
 	[Test]
@@ -99,14 +99,14 @@ public class RotateListTaskTests
 	{
 		var head = CreateList(1, 2, 3);
 		var result = _task.RotateRight(head, 3);
-		ClassicAssert.AreEqual(new[] { 1, 2, 3 }, ListToArray(result));
+		ListToArray(result).Should().Equal(new[] { 1, 2, 3 });
 	}
 
 	[Test]
 	public void RotateRight_NullHead_ReturnsNull()
 	{
 		var result = _task.RotateRight(null, 5);
-		ClassicAssert.IsNull(result);
+		result.Should().BeNull();
 	}
 
 	[Test]
@@ -114,7 +114,7 @@ public class RotateListTaskTests
 	{
 		var head = CreateList(1, 2, 3);
 		var result = _task.RotateRight(head, 0);
-		ClassicAssert.AreEqual(new[] { 1, 2, 3 }, ListToArray(result));
+		ListToArray(result).Should().Equal(new[] { 1, 2, 3 });
 	}
 
 	[Test]
@@ -122,7 +122,7 @@ public class RotateListTaskTests
 	{
 		var head = CreateList(1, 2);
 		var result = _task.RotateRight(head, 5);
-		ClassicAssert.AreEqual(new[] { 2, 1 }, ListToArray(result));
+		ListToArray(result).Should().Equal(new[] { 2, 1 });
 	}
 }
 

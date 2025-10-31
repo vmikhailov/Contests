@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode;
@@ -100,38 +100,38 @@ public class LongestPalindromeTests
 	[Test]
 	public void GetLongestPalindrome_BasicPalindrome_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual("aba", _task.GetLongestPalindrome("babad"));
+		_task.GetLongestPalindrome("babad").Should().Be("aba");
 	}
 
 	[Test]
 	public void GetLongestPalindrome_EvenLengthPalindrome_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual("bb", _task.GetLongestPalindrome("cbbd"));
+		_task.GetLongestPalindrome("cbbd").Should().Be("bb");
 	}
 
 	[Test]
 	public void GetLongestPalindrome_SingleCharacter_ReturnsSelf()
 	{
-		ClassicAssert.AreEqual("a", _task.GetLongestPalindrome("a"));
+		_task.GetLongestPalindrome("a").Should().Be("a");
 	}
 
 	[Test]
 	public void GetLongestPalindrome_TwoSameChars_ReturnsBoth()
 	{
-		ClassicAssert.AreEqual("aa", _task.GetLongestPalindrome("aa"));
+		_task.GetLongestPalindrome("aa").Should().Be("aa");
 	}
 
 	[Test]
 	public void GetLongestCommon_BasicCase_ReturnsCommon()
 	{
 		var result = _task.GetLongestCommon("abcdef", "xbcdy");
-		ClassicAssert.AreEqual("bcd", result);
+		result.Should().Be("bcd");
 	}
 
 	[Test]
 	public void GetLongestCommon_NoCommon_ReturnsEmpty()
 	{
 		var result = _task.GetLongestCommon("abc", "def");
-		ClassicAssert.AreEqual("", result);
+		result.Should().Be("");
 	}
 }

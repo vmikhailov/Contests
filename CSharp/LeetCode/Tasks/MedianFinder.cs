@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -39,7 +39,7 @@ public class MedianFinderTests
 	{
 		var mf = new MedianFinder();
 		mf.AddNum(1);
-		ClassicAssert.AreEqual(1.0, mf.FindMedian());
+		mf.FindMedian().Should().Be(1.0);
 	}
 
 	[Test]
@@ -48,7 +48,7 @@ public class MedianFinderTests
 		var mf = new MedianFinder();
 		mf.AddNum(1);
 		mf.AddNum(2);
-		ClassicAssert.AreEqual(1.5, mf.FindMedian());
+		mf.FindMedian().Should().Be(1.5);
 	}
 
 	[Test]
@@ -58,7 +58,7 @@ public class MedianFinderTests
 		mf.AddNum(1);
 		mf.AddNum(2);
 		mf.AddNum(3);
-		ClassicAssert.AreEqual(2.0, mf.FindMedian());
+		mf.FindMedian().Should().Be(2.0);
 	}
 
 	[Test]
@@ -68,7 +68,7 @@ public class MedianFinderTests
 		mf.AddNum(5);
 		mf.AddNum(1);
 		mf.AddNum(3);
-		ClassicAssert.AreEqual(3.0, mf.FindMedian());
+		mf.FindMedian().Should().Be(3.0);
 	}
 
 	[Test]
@@ -77,8 +77,8 @@ public class MedianFinderTests
 		var mf = new MedianFinder();
 		mf.AddNum(1);
 		mf.AddNum(2);
-		ClassicAssert.AreEqual(1.5, mf.FindMedian());
+		mf.FindMedian().Should().Be(1.5);
 		mf.AddNum(3);
-		ClassicAssert.AreEqual(2.0, mf.FindMedian());
+		mf.FindMedian().Should().Be(2.0);
 	}
 }

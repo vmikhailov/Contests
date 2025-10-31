@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -44,30 +44,30 @@ public class LargestNumberClassTests
     [Test]
     public void LargestNumber_BasicCase_ReturnsLargest()
     {
-        ClassicAssert.AreEqual("210", _task.LargestNumber([10, 2]));
+        _task.LargestNumber([10, 2]).Should().Be("210");
     }
 
     [Test]
     public void LargestNumber_MultipleDigits_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual("9534330", _task.LargestNumber([3, 30, 34, 5, 9]));
+        _task.LargestNumber([3, 30, 34, 5, 9]).Should().Be("9534330");
     }
 
     [Test]
     public void LargestNumber_AllZeros_ReturnsZero()
     {
-        ClassicAssert.AreEqual("0", _task.LargestNumber([0, 0]));
+        _task.LargestNumber([0, 0]).Should().Be("0");
     }
 
     [Test]
     public void LargestNumber_SingleElement_ReturnsElement()
     {
-        ClassicAssert.AreEqual("1", _task.LargestNumber([1]));
+        _task.LargestNumber([1]).Should().Be("1");
     }
 
     [Test]
     public void LargestNumber_SameDigits_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual("111", _task.LargestNumber([1, 1, 1]));
+        _task.LargestNumber([1, 1, 1]).Should().Be("111");
     }
 }

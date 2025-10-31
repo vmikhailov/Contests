@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -47,36 +47,36 @@ public class LongestNonRepeatingStringTests
     [Test]
     public void LengthOfLongestSubstring_RepeatingCharacters_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(3, _task.LengthOfLongestSubstring("abcabcbb"));
+        _task.LengthOfLongestSubstring("abcabcbb").Should().Be(3);
     }
 
     [Test]
     public void LengthOfLongestSubstring_WithSpecialChars_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(3, _task.LengthOfLongestSubstring("aabaab!bb"));
+        _task.LengthOfLongestSubstring("aabaab!bb").Should().Be(3);
     }
 
     [Test]
     public void LengthOfLongestSubstring_AllSame_ReturnsOne()
     {
-        ClassicAssert.AreEqual(1, _task.LengthOfLongestSubstring("bbbbb"));
+        _task.LengthOfLongestSubstring("bbbbb").Should().Be(1);
     }
 
     [Test]
     public void LengthOfLongestSubstring_AllUnique_ReturnsLength()
     {
-        ClassicAssert.AreEqual(5, _task.LengthOfLongestSubstring("abcde"));
+        _task.LengthOfLongestSubstring("abcde").Should().Be(5);
     }
 
     [Test]
     public void LengthOfLongestSubstring_EmptyString_ReturnsZero()
     {
-        ClassicAssert.AreEqual(0, _task.LengthOfLongestSubstring(""));
+        _task.LengthOfLongestSubstring("").Should().Be(0);
     }
 
     [Test]
     public void LengthOfLongestSubstring_SingleChar_ReturnsOne()
     {
-        ClassicAssert.AreEqual(1, _task.LengthOfLongestSubstring("a"));
+        _task.LengthOfLongestSubstring("a").Should().Be(1);
     }
 }

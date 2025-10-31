@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodeForcesSimple.LeetCode;
@@ -32,33 +32,33 @@ public class PalindromeNumberTests
 	[Test]
 	public void IsPalindrome_SingleDigit_ReturnsTrue()
 	{
-		ClassicAssert.IsTrue(PalindromeNumber.IsPalindrome(7));
-		ClassicAssert.IsTrue(PalindromeNumber.IsPalindrome(0));
+		PalindromeNumber.IsPalindrome(7).Should().BeTrue();
+		PalindromeNumber.IsPalindrome(0).Should().BeTrue();
 	}
 
 	[Test]
 	public void IsPalindrome_PalindromeNumber_ReturnsTrue()
 	{
-		ClassicAssert.IsTrue(PalindromeNumber.IsPalindrome(121));
-		ClassicAssert.IsTrue(PalindromeNumber.IsPalindrome(12321));
+		PalindromeNumber.IsPalindrome(121).Should().BeTrue();
+		PalindromeNumber.IsPalindrome(12321).Should().BeTrue();
 	}
 
 	[Test]
 	public void IsPalindrome_NonPalindromeNumber_ReturnsFalse()
 	{
-		ClassicAssert.IsFalse(PalindromeNumber.IsPalindrome(123));
-		ClassicAssert.IsFalse(PalindromeNumber.IsPalindrome(10));
+		PalindromeNumber.IsPalindrome(123).Should().BeFalse();
+		PalindromeNumber.IsPalindrome(10).Should().BeFalse();
 	}
 
 	[Test]
 	public void IsPalindrome_NegativeNumber_ReturnsFalse()
 	{
-		ClassicAssert.IsFalse(PalindromeNumber.IsPalindrome(-121));
+		PalindromeNumber.IsPalindrome(-121).Should().BeFalse();
 	}
 
 	[Test]
 	public void IsPalindrome_EvenLengthPalindrome_ReturnsTrue()
 	{
-		ClassicAssert.IsTrue(PalindromeNumber.IsPalindrome(1221));
+		PalindromeNumber.IsPalindrome(1221).Should().BeTrue();
 	}
 }

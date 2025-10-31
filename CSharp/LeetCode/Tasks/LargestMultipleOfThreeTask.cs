@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -49,34 +49,34 @@ public class LargestMultipleOfThreeTaskTests
 	public void LargestMultipleOfThree_BasicCase_ReturnsCorrect()
 	{
 		var result = _task.LargestMultipleOfThree([8, 1, 9]);
-		ClassicAssert.AreEqual("981", result);
+		result.Should().Be("981");
 	}
 
 	[Test]
 	public void LargestMultipleOfThree_WithZeros_ReturnsCorrect()
 	{
 		var result = _task.LargestMultipleOfThree([8, 6, 7, 1, 0]);
-		ClassicAssert.AreEqual("8760", result);
+		result.Should().Be("8760");
 	}
 
 	[Test]
 	public void LargestMultipleOfThree_AllZeros_ReturnsZero()
 	{
 		var result = _task.LargestMultipleOfThree([0, 0, 0, 0]);
-		ClassicAssert.AreEqual("", result);
+		result.Should().Be("");
 	}
 
 	[Test]
 	public void LargestMultipleOfThree_SingleDigit_ReturnsCorrect()
 	{
 		var result = _task.LargestMultipleOfThree([3]);
-		ClassicAssert.AreEqual("3", result);
+		result.Should().Be("3");
 	}
 
 	[Test]
 	public void LargestMultipleOfThree_NoValidResult_ReturnsEmpty()
 	{
 		var result = _task.LargestMultipleOfThree([1, 1]);
-		ClassicAssert.AreEqual("", result);
+		result.Should().Be("");
 	}
 }

@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -47,30 +47,30 @@ public class CoinsChangeTests
     [Test]
     public void CoinChange_ExactMatch_ReturnsOne()
     {
-        ClassicAssert.AreEqual(1, _task.CoinChange([1, 2, 5], 5));
+        _task.CoinChange([1, 2, 5], 5).Should().Be(1);
     }
 
     [Test]
     public void CoinChange_MultipleCoins_ReturnsMinimum()
     {
-        ClassicAssert.AreEqual(3, _task.CoinChange([1, 2, 5], 11));
+        _task.CoinChange([1, 2, 5], 11).Should().Be(3);
     }
 
     [Test]
     public void CoinChange_Impossible_ReturnsMinusOne()
     {
-        ClassicAssert.AreEqual(-1, _task.CoinChange([2], 3));
+        _task.CoinChange([2], 3).Should().Be(-1);
     }
 
     [Test]
     public void CoinChange_ZeroAmount_ReturnsZero()
     {
-        ClassicAssert.AreEqual(0, _task.CoinChange([1], 0));
+        _task.CoinChange([1], 0).Should().Be(0);
     }
 
     [Test]
     public void CoinChange_SingleCoin_ReturnsCorrect()
     {
-        ClassicAssert.AreEqual(2, _task.CoinChange([1], 2));
+        _task.CoinChange([1], 2).Should().Be(2);
     }
 }

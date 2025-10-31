@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using System.Collections;
 using System.Text;
 using NUnit.Framework;
@@ -76,13 +76,13 @@ public class AnagramsTests
 
     private static void AssertAnagramGroups(IList<IList<string>> expected, IList<IList<string>> actual)
     {
-        ClassicAssert.AreEqual(expected.Count, actual.Count);
+        actual.Should().HaveCount(expected.Count);
         var sortedExpected = expected.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
         var sortedActual = actual.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
 
         for (int i = 0; i < sortedExpected.Count; i++)
         {
-            CollectionClassicAssert.AreEqual(sortedExpected[i], sortedActual[i]);
+            sortedActual[i].Should().Equal(sortedExpected[i]);
         }
     }
 
@@ -91,7 +91,7 @@ public class AnagramsTests
     {
         var input = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
         var result = _task.GroupAnagrams1(input);
-        ClassicAssert.AreEqual(3, result.Count);
+        result.Should().HaveCount(3);
     }
 
     [Test]
@@ -99,8 +99,8 @@ public class AnagramsTests
     {
         var input = new string[] { "" };
         var result = _task.GroupAnagrams1(input);
-        ClassicAssert.AreEqual(1, result.Count);
-        CollectionClassicAssert.AreEqual(new[] { "" }, result[0]);
+        result.Should().HaveCount(1);
+        result[0].Should().Equal(new[] { "" });
     }
 
     [Test]
@@ -108,8 +108,8 @@ public class AnagramsTests
     {
         var input = new string[] { "a" };
         var result = _task.GroupAnagrams1(input);
-        ClassicAssert.AreEqual(1, result.Count);
-        CollectionClassicAssert.AreEqual(new[] { "a" }, result[0]);
+        result.Should().HaveCount(1);
+        result[0].Should().Equal(new[] { "a" });
     }
 
     [Test]
@@ -117,7 +117,7 @@ public class AnagramsTests
     {
         var input = new string[] { "abbbbbbbbbbb", "aaaaaaaaaaab" };
         var result = _task.GroupAnagrams1(input);
-        ClassicAssert.AreEqual(2, result.Count);
+        result.Should().HaveCount(2);
     }
 }
 
@@ -175,25 +175,25 @@ public class LetterCombinationsTests
     public void Solve_TwoDigits_ReturnsCorrectCombinations()
     {
         var result = LetterCombinations.Solve("23");
-        ClassicAssert.AreEqual(9, result.Count);
-        CollectionClassicAssert.Contains(result, "ad");
-        CollectionClassicAssert.Contains(result, "ae");
-        CollectionClassicAssert.Contains(result, "af");
+        result.Should().HaveCount(9);
+        result.Should().Contain("ad");
+        result.Should().Contain("ae");
+        result.Should().Contain("af");
     }
 
     [Test]
     public void Solve_EmptyString_ReturnsEmpty()
     {
         var result = LetterCombinations.Solve("");
-        ClassicAssert.AreEqual(0, result.Count);
+        result.Should().BeEmpty();
     }
 
     [Test]
     public void Solve_SingleDigit_ReturnsCorrectLetters()
     {
         var result = LetterCombinations.Solve("2");
-        ClassicAssert.AreEqual(3, result.Count);
-        CollectionClassicAssert.AreEquivalent(new[] { "a", "b", "c" }, result);
+        result.Should().HaveCount(3);
+        result.Should().BeEquivalentTo(new[] { "a", "b", "c" });
     }
 }
 

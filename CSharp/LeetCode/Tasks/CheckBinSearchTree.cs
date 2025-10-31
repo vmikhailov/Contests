@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode;
@@ -47,7 +47,7 @@ public class CheckBinSearchTreeTests
 			left = new TreeNode(1),
 			right = new TreeNode(3)
 		};
-		ClassicAssert.IsTrue(_task.IsValidBST(root));
+		_task.IsValidBST(root).Should().BeTrue();
 	}
 
 	[Test]
@@ -62,14 +62,14 @@ public class CheckBinSearchTreeTests
 				right = new TreeNode(6)
 			}
 		};
-		ClassicAssert.IsFalse(_task.IsValidBST(root));
+		_task.IsValidBST(root).Should().BeFalse();
 	}
 
 	[Test]
 	public void IsValidBST_SingleNode_ReturnsTrue()
 	{
 		var root = new TreeNode(1);
-		ClassicAssert.IsTrue(_task.IsValidBST(root));
+		_task.IsValidBST(root).Should().BeTrue();
 	}
 
 	[Test]
@@ -79,7 +79,7 @@ public class CheckBinSearchTreeTests
 		{
 			left = new TreeNode(1)
 		};
-		ClassicAssert.IsTrue(_task.IsValidBST(root));
+		_task.IsValidBST(root).Should().BeTrue();
 	}
 
 	[Test]
@@ -89,6 +89,6 @@ public class CheckBinSearchTreeTests
 		{
 			right = new TreeNode(2)
 		};
-		ClassicAssert.IsTrue(_task.IsValidBST(root));
+		_task.IsValidBST(root).Should().BeTrue();
 	}
 }

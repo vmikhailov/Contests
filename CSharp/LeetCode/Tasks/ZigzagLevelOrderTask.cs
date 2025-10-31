@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -68,10 +68,10 @@ public class ZigzagLevelOrderTaskTests
 			}
 		};
 		var result = _task.ZigzagLevelOrder(root);
-		ClassicAssert.AreEqual(3, result.Count);
-		CollectionClassicAssert.AreEqual(new[] { 3 }, result[0]);
-		CollectionClassicAssert.AreEqual(new[] { 20, 9 }, result[1]);
-		CollectionClassicAssert.AreEqual(new[] { 15, 7 }, result[2]);
+		result.Should().HaveCount(3);
+		result[0].Should().Equal(new[] { 3 });
+		result[1].Should().Equal(new[] { 20, 9 });
+		result[2].Should().Equal(new[] { 15, 7 });
 	}
 
 	[Test]
@@ -79,15 +79,15 @@ public class ZigzagLevelOrderTaskTests
 	{
 		var root = new TreeNode(1);
 		var result = _task.ZigzagLevelOrder(root);
-		ClassicAssert.AreEqual(1, result.Count);
-		CollectionClassicAssert.AreEqual(new[] { 1 }, result[0]);
+		result.Should().HaveCount(1);
+		result[0].Should().Equal(new[] { 1 });
 	}
 
 	[Test]
 	public void ZigzagLevelOrder_NullRoot_ReturnsEmpty()
 	{
 		var result = _task.ZigzagLevelOrder(null);
-		ClassicAssert.AreEqual(0, result.Count);
+		result.Should().BeEmpty();
 	}
 
 	[Test]
@@ -101,9 +101,9 @@ public class ZigzagLevelOrderTaskTests
 			}
 		};
 		var result = _task.ZigzagLevelOrder(root);
-		ClassicAssert.AreEqual(3, result.Count);
-		CollectionClassicAssert.AreEqual(new[] { 1 }, result[0]);
-		CollectionClassicAssert.AreEqual(new[] { 2 }, result[1]);
-		CollectionClassicAssert.AreEqual(new[] { 3 }, result[2]);
+		result.Should().HaveCount(3);
+		result[0].Should().Equal(new[] { 1 });
+		result[1].Should().Equal(new[] { 2 });
+		result[2].Should().Equal(new[] { 3 });
 	}
 }

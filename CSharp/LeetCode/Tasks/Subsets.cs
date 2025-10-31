@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -49,22 +49,22 @@ public class SubsetsTaskTests
 	public void Subsets_ThreeElements_ReturnsAllSubsets()
 	{
 		var result = _task.Subsets([1, 2, 3]);
-		ClassicAssert.AreEqual(8, result.Count);
-		ClassicAssert.IsTrue(result.Any(s => s.Count == 0));
-		ClassicAssert.IsTrue(result.Any(s => s.SequenceEqual(new[] { 1, 2, 3 })));
+		result.Should().HaveCount(8);
+		result.Should().Contain(s => s.Count == 0);
+		result.Should().Contain(s => s.SequenceEqual(new[] { 1, 2, 3 }));
 	}
 
 	[Test]
 	public void Subsets_TwoElements_ReturnsCorrect()
 	{
 		var result = _task.Subsets([0, 1]);
-		ClassicAssert.AreEqual(4, result.Count);
+		result.Should().HaveCount(4);
 	}
 
 	[Test]
 	public void Subsets_SingleElement_ReturnsTwo()
 	{
 		var result = _task.Subsets([1]);
-		ClassicAssert.AreEqual(2, result.Count);
+		result.Should().HaveCount(2);
 	}
 }

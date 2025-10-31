@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using System.Text;
 using NUnit.Framework;
 
@@ -54,30 +54,30 @@ public class WordPatternTaskTests
 	[Test]
 	public void WordPattern_ValidPattern_ReturnsTrue()
 	{
-		ClassicAssert.IsTrue(_task.WordPattern("abba", "dog cat cat dog"));
+		_task.WordPattern("abba", "dog cat cat dog").Should().BeTrue();
 	}
 
 	[Test]
 	public void WordPattern_InvalidPattern_ReturnsFalse()
 	{
-		ClassicAssert.IsFalse(_task.WordPattern("abba", "dog cat cat fish"));
+		_task.WordPattern("abba", "dog cat cat fish").Should().BeFalse();
 	}
 
 	[Test]
 	public void WordPattern_LengthMismatch_ReturnsFalse()
 	{
-		ClassicAssert.IsFalse(_task.WordPattern("aaaa", "dog cat cat dog"));
+		_task.WordPattern("aaaa", "dog cat cat dog").Should().BeFalse();
 	}
 
 	[Test]
 	public void WordPattern_OneToManyMapping_ReturnsFalse()
 	{
-		ClassicAssert.IsFalse(_task.WordPattern("abba", "dog dog dog dog"));
+		_task.WordPattern("abba", "dog dog dog dog").Should().BeFalse();
 	}
 
 	[Test]
 	public void WordPattern_SingleCharacter_ReturnsTrue()
 	{
-		ClassicAssert.IsTrue(_task.WordPattern("a", "dog"));
+		_task.WordPattern("a", "dog").Should().BeTrue();
 	}
 }

@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode;
@@ -66,14 +66,14 @@ public class KFirstTests
 	public void GetTopK_BasicCase_ReturnsFirstK()
 	{
 		var result = _task.GetTopK([3, 2, 1, 5, 6, 4], 2);
-		ClassicAssert.AreEqual(2, result.Length);
+		result.Should().HaveCount(2);
 	}
 
 	[Test]
 	public void GetTopK_SingleElement_ReturnsElement()
 	{
 		var result = _task.GetTopK([1], 1);
-		ClassicAssert.AreEqual(new[] { 1 }, result);
+		result.Should().Equal(new[] { 1 });
 	}
 
 	[Test]
@@ -81,13 +81,13 @@ public class KFirstTests
 	{
 		var arr = new[] { 1, 2, 3 };
 		var result = _task.GetTopK(arr, 3);
-		ClassicAssert.AreEqual(3, result.Length);
+		result.Should().HaveCount(3);
 	}
 
 	[Test]
 	public void GetTopK_UnsortedArray_ReturnsCorrect()
 	{
 		var result = _task.GetTopK([3, 2, 3, 1, 2, 4, 5, 5, 6], 4);
-		ClassicAssert.AreEqual(4, result.Length);
+		result.Should().HaveCount(4);
 	}
 }

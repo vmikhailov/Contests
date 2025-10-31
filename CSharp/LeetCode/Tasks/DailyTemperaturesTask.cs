@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -41,7 +41,7 @@ public class DailyTemperatureTaskTests
     {
         int[] input = [73, 74, 75, 71, 69, 72, 76, 73];
         int[] expected = [1, 1, 4, 2, 1, 1, 0, 0];
-        ClassicAssert.AreEqual(expected, _task.DailyTemperatures(input));
+        _task.DailyTemperatures(input).Should().Equal(expected);
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class DailyTemperatureTaskTests
     {
         int[] input = [5, 4, 3, 2, 1];
         int[] expected = [0, 0, 0, 0, 0];
-        ClassicAssert.AreEqual(expected, _task.DailyTemperatures(input));
+        _task.DailyTemperatures(input).Should().Equal(expected);
     }
 
     [Test]
@@ -57,6 +57,6 @@ public class DailyTemperatureTaskTests
     {
         var input = Array.Empty<int>();
         var expected = Array.Empty<int>();
-        ClassicAssert.AreEqual(expected, _task.DailyTemperatures(input));
+        _task.DailyTemperatures(input).Should().Equal(expected);
     }
 }

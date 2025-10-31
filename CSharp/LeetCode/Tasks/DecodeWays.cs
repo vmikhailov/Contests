@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodeForcesSimple.LeetCode;
@@ -52,34 +52,34 @@ public class DecodeWaysTests
 	[Test]
 	public void Decode_SingleDigit_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(1, DecodeWays.Decode("1"));
-		ClassicAssert.AreEqual(2, DecodeWays.Decode("2"));
+		DecodeWays.Decode("1").Should().Be(1);
+		DecodeWays.Decode("2").Should().Be(2);
 	}
 
 	[Test]
 	public void Decode_TwoDigits_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(12, DecodeWays.Decode("12"));
-		ClassicAssert.AreEqual(26, DecodeWays.Decode("26"));
+		DecodeWays.Decode("12").Should().Be(12);
+		DecodeWays.Decode("26").Should().Be(26);
 	}
 
 	[Test]
 	public void Decode_InvalidNumber_ReturnsMinusOne()
 	{
-		ClassicAssert.AreEqual(-1, DecodeWays.Decode("27"));
-		ClassicAssert.AreEqual(-1, DecodeWays.Decode("99"));
+		DecodeWays.Decode("27").Should().Be(-1);
+		DecodeWays.Decode("99").Should().Be(-1);
 	}
 
 	[Test]
 	public void Decode_WithZero_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(10, DecodeWays.Decode("10"));
-		ClassicAssert.AreEqual(20, DecodeWays.Decode("20"));
+		DecodeWays.Decode("10").Should().Be(10);
+		DecodeWays.Decode("20").Should().Be(20);
 	}
 
 	[Test]
 	public void Decode_MultipleDigits_ReturnsCorrect()
 	{
-		ClassicAssert.AreEqual(123, DecodeWays.Decode("123"));
+		DecodeWays.Decode("123").Should().Be(123);
 	}
 }

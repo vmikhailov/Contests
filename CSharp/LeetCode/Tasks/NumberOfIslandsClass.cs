@@ -1,4 +1,4 @@
-using NUnit.Framework.Legacy;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCode.Tasks;
@@ -56,7 +56,7 @@ public class NumberOfIslandsClassTests
             ['0', '1', '0'],
             ['1', '1', '1']
         ];
-        ClassicAssert.AreEqual(1, _task.NumIslands(grid));
+        _task.NumIslands(grid).Should().Be(1);
     }
 
     [Test]
@@ -68,7 +68,7 @@ public class NumberOfIslandsClassTests
             ['0', '0', '1', '0', '0'],
             ['0', '0', '0', '1', '1']
         ];
-        ClassicAssert.AreEqual(3, _task.NumIslands(grid));
+        _task.NumIslands(grid).Should().Be(3);
     }
 
     [Test]
@@ -78,7 +78,7 @@ public class NumberOfIslandsClassTests
             ['0', '0', '0'],
             ['0', '0', '0']
         ];
-        ClassicAssert.AreEqual(0, _task.NumIslands(grid));
+        _task.NumIslands(grid).Should().Be(0);
     }
 
     [Test]
@@ -88,6 +88,6 @@ public class NumberOfIslandsClassTests
             ['1', '1'],
             ['1', '1']
         ];
-        ClassicAssert.AreEqual(1, _task.NumIslands(grid));
+        _task.NumIslands(grid).Should().Be(1);
     }
 }
