@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using NUnit.Framework;
 using FluentAssertions;
+using LeetCode.Tasks2025;
 
 namespace LeetCode.Tasks;
 
@@ -51,109 +53,25 @@ public class NumArrayTask_Naive : INumArrayTask
 
 public class NumArrayTaskSegmentTree : INumArrayTask
 {
-    private readonly int _n;
-    private readonly int[] _tree; // 4*n узлов
-    private readonly int[] _tree2; // 4*n узлов
+    private readonly SegmentTree<int> _segmentTree;
 
     public NumArrayTaskSegmentTree(int[] nums)
     {
-        _n = nums.Length;
-        _tree = Build(nums, (a, b) => a + b);
-        _tree2 = Build(nums, Math.Min);
+        _segmentTree = new(nums, (a, b) => a + b, 0);
     }
 
-    private static int NextPowerOfTwo(int n)
-    {
-        var power = 1;
-        while (power < n)
-        {
-            power <<= 1;
-        }
-        return power;
-    }
-
-    private T[] Build<T>(T[] nums, Func<T, T, T> agg)
-    {
-        var tree = new T[NextPowerOfTwo(_n) * 2];
-        Build(nums, 1, 0, nums.Length - 1, tree, agg);
-        return tree;
-    }
-
-    private void Build<T>(T[] nums, int v, int tl, int tr, T[] tree, Func<T, T, T> agg)
-    {
-        if (tl == tr)
-        {
-            tree[v] = nums[tl];
-        }
-        else
-        {
-            var tm = (tl + tr) / 2;
-
-            Build(nums, v * 2, tl, tm, tree, agg);
-            Build(nums, v * 2 + 1, tm + 1, tr, tree, agg);
-            tree[v] = agg(tree[v * 2], tree[v * 2 + 1]);
-        }
-    }
-
-    // update single position
     public void Update(int index, int val)
     {
-        Update(1, 0, _n - 1, index, val);
+        _segmentTree.Update(index, val);
     }
 
-    private void Update(int v, int tl, int tr, int pos, int val)
-    {
-        if (tl == tr)
-        {
-            _tree[v] = val;
-            return;
-        }
-
-        var tm = (tl + tr) / 2;
-
-        if (pos <= tm)
-        {
-            Update(v * 2, tl, tm, pos, val);
-        }
-        else
-        {
-            Update(v * 2 + 1, tm + 1, tr, pos, val);
-        }
-
-        _tree[v] = _tree[v * 2] + _tree[v * 2 + 1];
-    }
-
-    // query sum in [l, r]
     public int SumRange(int l, int r)
     {
-        TestContext.Out.WriteLine("Querying range [{0}, {1}]", l, r);
-        _queriesCount = 0;
-        var result = Query(1, 0, _n - 1, l, r);
-        TestContext.Out.WriteLine("Query calls: {0}", _queriesCount);
-        return result;
-    }
-
-    private int _queriesCount;
-
-    private int Query(int v, int tl, int tr, int l, int r)
-    {
-        _queriesCount++;
-        if (l > r)
-        {
-            return 0;
-        }
-
-        if (l == tl && r == tr)
-        {
-            return _tree[v];
-        }
-
-        var tm = (tl + tr) / 2;
-
-        return Query(v * 2, tl, tm, l, Math.Min(r, tm))
-               + Query(v * 2 + 1, tm + 1, tr, Math.Max(l, tm + 1), r);
+        return _segmentTree.Query(l, r);
     }
 }
+
+
 
 // NUnit tests for NumArrayTask (10 tests). Implementation is intentionally not modified.
 [TestFixture]
@@ -205,7 +123,8 @@ public class NumArrayTaskTests
         var t = Create(nums);
         var n1 = Random.Shared.Next(n);
         var n2 = Random.Shared.Next(n);
-        if(n1 > n2)
+
+        if (n1 > n2)
         {
             (n1, n2) = (n2, n1);
         }
@@ -218,6 +137,7 @@ public class NumArrayTaskTests
     {
         var nums = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
         var t = Create(nums);
+        t.SumRange(1, 5).Should().Be(20);
         t.SumRange(0, 7).Should().Be(36);
     }
 
