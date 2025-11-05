@@ -13,7 +13,7 @@ public class SubsetsTask2
         void Dfs(int start)
         {
             res.Add(new List<int>(path));
-            for (int i = start; i < nums.Length; i++)
+            for (var i = start; i < nums.Length; i++)
             {
                 if (i > start && nums[i] == nums[i - 1]) continue;
 

@@ -61,7 +61,7 @@ public class MedianFinderTaskTests
 
         // Act
         mf.AddNum(5);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert
         Assert.That(median, Is.EqualTo(5.0));
@@ -76,7 +76,7 @@ public class MedianFinderTaskTests
         // Act
         mf.AddNum(1);
         mf.AddNum(2);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert
         Assert.That(median, Is.EqualTo(1.5));
@@ -92,7 +92,7 @@ public class MedianFinderTaskTests
         mf.AddNum(1);
         mf.AddNum(2);
         mf.AddNum(3);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert
         Assert.That(median, Is.EqualTo(2.0));
@@ -127,7 +127,7 @@ public class MedianFinderTaskTests
         mf.AddNum(8);
         mf.AddNum(1);
         mf.AddNum(3);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert - sorted: [1,2,3,5,8], median is 3
         Assert.That(median, Is.EqualTo(3.0));
@@ -143,7 +143,7 @@ public class MedianFinderTaskTests
         mf.AddNum(5);
         mf.AddNum(5);
         mf.AddNum(5);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert
         Assert.That(median, Is.EqualTo(5.0));
@@ -160,7 +160,7 @@ public class MedianFinderTaskTests
         mf.AddNum(-2);
         mf.AddNum(-3);
         mf.AddNum(-4);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert - sorted: [-4,-3,-2,-1], median is (-3 + -2) / 2 = -2.5
         Assert.That(median, Is.EqualTo(-2.5));
@@ -178,7 +178,7 @@ public class MedianFinderTaskTests
         mf.AddNum(-3);
         mf.AddNum(7);
         mf.AddNum(0);
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert - sorted: [-5,-3,0,7,10], median is 0
         Assert.That(median, Is.EqualTo(0.0));
@@ -191,12 +191,12 @@ public class MedianFinderTaskTests
         var mf = new MedianFinder();
 
         // Act - add numbers 1 through 10
-        for (int i = 1; i <= 10; i++)
+        for (var i = 1; i <= 10; i++)
         {
             mf.AddNum(i);
         }
 
-        double median = mf.FindMedian();
+        var median = mf.FindMedian();
 
         // Assert - sorted: [1,2,3,4,5,6,7,8,9,10], median is (5 + 6) / 2 = 5.5
         Assert.That(median, Is.EqualTo(5.5));

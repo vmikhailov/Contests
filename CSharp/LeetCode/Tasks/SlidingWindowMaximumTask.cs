@@ -3,7 +3,7 @@ namespace LeetCode;
 using System;
 using System.Collections.Generic;
 
-public static class SlidingWindow
+public static class SlidingWindowMaximumTask
 {
     // Returns max of each window of size k
     public static int[] MaxSlidingWindow(int[] nums, int k)
