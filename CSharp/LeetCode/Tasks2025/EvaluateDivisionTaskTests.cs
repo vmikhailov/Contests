@@ -495,7 +495,7 @@ public class EvaluateDivisionTaskTests
 
         // Assert
         result.Should().HaveCount(12);
-        for (int i = 0; i < 10; i++)
+        for (var i = 0; i < 10; i++)
         {
             result[i].Should().Be(-1.0, $"query {i} should be -1 (disconnected)");
         }
