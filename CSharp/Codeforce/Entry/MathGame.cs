@@ -23,8 +23,8 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var b = long.Parse(Console.ReadLine());
-            var c = long.Parse(Console.ReadLine());
+            var b = long.Parse(Console.ReadLine()!);
+            var c = long.Parse(Console.ReadLine()!);
             
             if(Compute(b, c, out var x1, out var x2))
             {

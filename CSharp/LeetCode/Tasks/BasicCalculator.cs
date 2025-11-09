@@ -5,250 +5,258 @@ namespace LeetCode.Tasks;
 
 public class BasicCalculator
 {
-	public int Calculate(string s)
-	{
-		var t = new Tokenizer(s);
-		var p = new Parser(t);
-		if (p.Parse(out var exp))
-		{
-			var lambda = Expression.Lambda<Func<int>>(exp);
-			var func = lambda.Compile();
-			return func();
-		}
+    public int Calculate(string s)
+    {
+        var t = new Tokenizer(s);
+        var p = new Parser(t);
 
-		
-		return 0;
-	}
+        if (p.Parse(out var exp))
+        {
+            var lambda = Expression.Lambda<Func<int>>(exp!);
+            var func = lambda.Compile();
+            return func();
+        }
 
-	public class Token
-	{
-		public TokenType Type { get; set; }
+        return 0;
+    }
 
-		public string Value { get; set; }
-	}
+    public class Token
+    {
+        public required TokenType Type { get; init; }
 
-	public enum TokenType
-	{
-		End,
-		Operator,
-		OpenParenthesis,
-		CloseParenthesis,
-		Number,
-		Unknown
-	}
+        public string Value { get; init; } = string.Empty;
+    }
 
-	public class Parser
-	{
-		private readonly Tokenizer _tokenizer;
-		private IEnumerator<Token> _tokens;
+    public enum TokenType
+    {
+        End,
+        Operator,
+        OpenParenthesis,
+        CloseParenthesis,
+        Number,
+        Unknown
+    }
 
-		public Parser(Tokenizer tokenizer)
-		{
-			_tokenizer = tokenizer;
-		}
+    public class Parser
+    {
+        private readonly IEnumerator<Token> _tokens;
 
-		public bool Parse(out Expression expression)
-		{
-			_tokens = _tokenizer.GetTokens().GetEnumerator();
-			expression = null;
-			return NextToken() && ParseExpression(out expression) && CheckToken(TokenType.End);
-		}
+        public Parser(Tokenizer tokenizer)
+        {
+            _tokens = tokenizer.GetTokens().GetEnumerator();
+        }
 
-		private bool ParseExpression(out Expression expression)
-		{
-			if (!ParseTerm(out expression))
-			{
-				return false;
-			}
+        public bool Parse(out Expression? expression)
+        {
+            expression = null;
+            return NextToken() && ParseExpression(out expression) && CheckToken(TokenType.End);
+        }
 
-			while (CheckToken(TokenType.Operator, "+", "-"))
-			{
-				var op = CurrentToken.Value;
-				if (!NextToken())
-				{
-					return false;
-				}
+        private bool ParseExpression(out Expression? expression)
+        {
+            if (!ParseTerm(out expression))
+            {
+                return false;
+            }
 
-				if (!ParseTerm(out var operand))
-				{
-					return false;
-				}
+            while (CheckToken(TokenType.Operator, "+", "-"))
+            {
+                var op = CurrentToken.Value;
 
-				expression = op == "+" ? Expression.Add(expression, operand) : Expression.Subtract(expression, operand);
-			}
+                if (!NextToken())
+                {
+                    return false;
+                }
 
-			return true;
-		}
+                if (!ParseTerm(out var operand))
+                {
+                    return false;
+                }
 
-		private bool ParseTerm(out Expression expression)
-		{
-			if (!ParseFactor(out expression))
-			{
-				return false;
-			}
+                expression = op == "+"
+                    ? Expression.Add(expression!, operand!)
+                    : Expression.Subtract(expression!, operand!);
+            }
 
-			while (CheckToken(TokenType.Operator, "*", "/"))
-			{
-				var op = CurrentToken.Value;
-				if (!NextToken())
-				{
-					return false;
-				}
+            return true;
+        }
 
-				if (!ParseFactor(out var operand))
-				{
-					return false;
-				}
+        private bool ParseTerm(out Expression? expression)
+        {
+            if (!ParseFactor(out expression))
+            {
+                return false;
+            }
 
-				expression = op == "*" ? Expression.Multiply(expression, operand) : Expression.Divide(expression, operand);
-			}
+            while (CheckToken(TokenType.Operator, "*", "/"))
+            {
+                var op = CurrentToken.Value;
 
-			return true;
-		}
+                if (!NextToken())
+                {
+                    return false;
+                }
 
-		private bool ParseFactor(out Expression expression)
-		{
-			expression = null;
-			switch (CurrentToken.Type)
-			{
-				case TokenType.Operator when CurrentToken.Value == "-":
-					if (NextToken() && ParseFactor(out expression))
-					{
-						expression = Expression.Negate(expression);
-					}
+                if (!ParseFactor(out var operand))
+                {
+                    return false;
+                }
 
-					return expression != null;
+                expression = op == "*"
+                    ? Expression.Multiply(expression!, operand!)
+                    : Expression.Divide(expression!, operand!);
+            }
 
-				case TokenType.Number:
-					return ParseNumber(out expression);
+            return true;
+        }
 
-				case TokenType.OpenParenthesis:
+        private bool ParseFactor(out Expression? expression)
+        {
+            expression = null;
 
-					return NextToken() &&
-					       ParseExpression(out expression) &&
-					       CheckToken(TokenType.CloseParenthesis) &&
-					       NextToken();
+            switch (CurrentToken.Type)
+            {
+                case TokenType.Operator when CurrentToken.Value == "-":
+                    if (NextToken() && ParseFactor(out expression))
+                    {
+                        expression = Expression.Negate(expression!);
+                    }
 
-				default:
-					return false;
-			}
-		}
+                    return expression != null;
 
-		private bool ParseNumber(out Expression expression)
-		{
-			expression = null;
-			if (!CheckToken(TokenType.Number))
-			{
-				return false;
-			}
+                case TokenType.Number:
+                    return ParseNumber(out expression);
 
-			expression = Expression.Constant(int.Parse(CurrentToken.Value));
-			return NextToken();
-		}
+                case TokenType.OpenParenthesis:
 
+                    return NextToken() &&
+                           ParseExpression(out expression) &&
+                           CheckToken(TokenType.CloseParenthesis) &&
+                           NextToken();
 
-		private bool NextToken() => _tokens.MoveNext();
+                default:
+                    return false;
+            }
+        }
 
-		private Token CurrentToken => _tokens.Current ?? throw new Exception("Unexpected end of expression");
+        private bool ParseNumber(out Expression? expression)
+        {
+            expression = null;
 
-		private bool CheckToken(TokenType type, params string[]? values)
-		{
-			return CurrentToken.Type == type && (values == null || values.Length == 0 || values.Contains(CurrentToken.Value));
-		}
+            if (!CheckToken(TokenType.Number))
+            {
+                return false;
+            }
 
-		private void EnsureToken(TokenType type, params string[] values)
-		{
-			if (!CheckToken(type, values))
-			{
-				ThrowInvalidExpression();
-			}
-		}
+            expression = Expression.Constant(int.Parse(CurrentToken.Value));
+            return NextToken();
+        }
 
-		private void ThrowInvalidExpression()
-		{
-			throw new Exception("Invalid expression");
-		}
-	}
+        private bool NextToken() => _tokens.MoveNext();
 
-	public class Tokenizer
-	{
-		private string _expression;
+        private Token CurrentToken => _tokens.Current ?? throw new Exception("Unexpected end of expression");
 
-		public Tokenizer(string expression)
-		{
-			_expression = expression;
-		}
+        private bool CheckToken(TokenType type, params string[]? values)
+        {
+            return CurrentToken.Type == type &&
+                   (values == null || values.Length == 0 || values.Contains(CurrentToken.Value));
+        }
 
-		public IEnumerable<Token> GetTokens()
-		{
-			var numberParsing = false;
-			var dotPassed = false;
-			var sb = new StringBuilder();
-			foreach (var c in _expression)
-			{
-				if (numberParsing)
-				{
-					if (char.IsDigit(c))
-					{
-						sb.Append(c);
-						continue;
-					}
-					else if (c == '.' && !dotPassed)
-					{
-						dotPassed = true;
-						sb.Append(c);
-						continue;
-					}
-					else
-					{
-						yield return new Token() { Type = TokenType.Number, Value = sb.ToString() };
-						numberParsing = false;
-						dotPassed = false;
-						sb.Clear();
-					}
-				}
+        private void EnsureToken(TokenType type, params string[] values)
+        {
+            if (!CheckToken(type, values))
+            {
+                ThrowInvalidExpression();
+            }
+        }
 
-				if (char.IsWhiteSpace(c))
-				{
-					continue;
-				}
+        private void ThrowInvalidExpression()
+        {
+            throw new Exception("Invalid expression");
+        }
+    }
 
-				var t = c switch
-				{
-					'(' => TokenType.OpenParenthesis,
-					')' => TokenType.CloseParenthesis,
-					'+' => TokenType.Operator,
-					'-' => TokenType.Operator,
-					'*' => TokenType.Operator,
-					'/' => TokenType.Operator,
-					'^' => TokenType.Operator,
-					_ => TokenType.Unknown
-				};
+    public class Tokenizer
+    {
+        private string _expression;
 
-				if (t != TokenType.Unknown)
-				{
-					yield return new Token() { Type = t, Value = new string(c, 1) };
-				}
-				else
-				{
-					if (char.IsDigit(c))
-					{
-						numberParsing = true;
-						sb.Append(c);
-					}
-					else
-					{
-						yield return new Token() { Type = t, Value = new string(c, 1) };
-					}
-				}
-			}
+        public Tokenizer(string expression)
+        {
+            _expression = expression;
+        }
 
-			if (numberParsing)
-			{
-				yield return new Token() { Type = TokenType.Number, Value = sb.ToString() };
-			}
+        public IEnumerable<Token> GetTokens()
+        {
+            var numberParsing = false;
+            var dotPassed = false;
+            var sb = new StringBuilder();
 
-			yield return new Token() { Type = TokenType.End };
-		}
-	}
+            foreach (var c in _expression)
+            {
+                if (numberParsing)
+                {
+                    if (char.IsDigit(c))
+                    {
+                        sb.Append(c);
+                        continue;
+                    }
+                    else if (c == '.' && !dotPassed)
+                    {
+                        dotPassed = true;
+                        sb.Append(c);
+                        continue;
+                    }
+                    else
+                    {
+                        yield return new Token() { Type = TokenType.Number, Value = sb.ToString() };
+
+                        numberParsing = false;
+                        dotPassed = false;
+                        sb.Clear();
+                    }
+                }
+
+                if (char.IsWhiteSpace(c))
+                {
+                    continue;
+                }
+
+                var t = c switch
+                {
+                    '(' => TokenType.OpenParenthesis,
+                    ')' => TokenType.CloseParenthesis,
+                    '+' => TokenType.Operator,
+                    '-' => TokenType.Operator,
+                    '*' => TokenType.Operator,
+                    '/' => TokenType.Operator,
+                    '^' => TokenType.Operator,
+                    _ => TokenType.Unknown
+                };
+
+                if (t != TokenType.Unknown)
+                {
+                    yield return new Token() { Type = t, Value = new string(c, 1) };
+                }
+                else
+                {
+                    if (char.IsDigit(c))
+                    {
+                        numberParsing = true;
+                        sb.Append(c);
+                    }
+                    else
+                    {
+                        yield return new Token() { Type = t, Value = new string(c, 1) };
+                    }
+                }
+            }
+
+            if (numberParsing)
+            {
+                yield return new Token() { Type = TokenType.Number, Value = sb.ToString() };
+            }
+
+            yield return new Token() { Type = TokenType.End };
+        }
+    }
 }

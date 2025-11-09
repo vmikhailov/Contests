@@ -6,21 +6,22 @@ namespace LeetCode.Tasks2025;
 public class DelNodesTask
 {
     /**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left;
- *     public TreeNode right;
- *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-    public IList<TreeNode> DelNodes(TreeNode? root, int[] to_delete) {
-        var toDeleteSet = new HashSet<int>(to_delete);
-        var result = new List<TreeNode?>();
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     public int val;
+     *     public TreeNode left;
+     *     public TreeNode right;
+     *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+    public IList<TreeNode> DelNodes(TreeNode? root, int[] toDelete)
+    {
+        var toDeleteSet = new HashSet<int>(toDelete);
+        var result = new List<TreeNode>();
 
         Add(DeleteNodes(root));
         return result;
@@ -44,7 +45,7 @@ public class DelNodesTask
 
         void Add(TreeNode? node)
         {
-            if(node != null) result.Add(node);
+            if (node != null) result.Add(node);
         }
     }
 }
@@ -55,7 +56,7 @@ public class DelNodesTaskTests
     private DelNodesTask _task = null!;
 
     [SetUp]
-    public void SetUp() => _task = new DelNodesTask();
+    public void SetUp() => _task = new();
 
     [Test]
     public void DelNodes_Example1_DeletesNodesCorrectly()
@@ -68,15 +69,15 @@ public class DelNodesTaskTests
         // Delete [3,5] -> Result: [[1,2,null,4], [6], [7]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(4),
-                right = new TreeNode(5)
+                left = new(4),
+                right = new(5)
             },
-            right = new TreeNode(3)
+            right = new(3)
             {
-                left = new TreeNode(6),
-                right = new TreeNode(7)
+                left = new(6),
+                right = new(7)
             }
         };
 
@@ -118,8 +119,8 @@ public class DelNodesTaskTests
         // Delete [1] -> Result: [[2], [3]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2),
-            right = new TreeNode(3)
+            left = new(2),
+            right = new(3)
         };
 
         var result = _task.DelNodes(root, [1]);
@@ -140,12 +141,12 @@ public class DelNodesTaskTests
         // Delete [4,5] -> Result: [[1,2,3]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(4),
-                right = new TreeNode(5)
+                left = new(4),
+                right = new(5)
             },
-            right = new TreeNode(3)
+            right = new(3)
         };
 
         var result = _task.DelNodes(root, [4, 5]);
@@ -167,8 +168,8 @@ public class DelNodesTaskTests
         // Delete [1,2,3] -> Result: []
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2),
-            right = new TreeNode(3)
+            left = new(2),
+            right = new(3)
         };
 
         var result = _task.DelNodes(root, [1, 2, 3]);
@@ -185,8 +186,8 @@ public class DelNodesTaskTests
         // Delete [] -> Result: [[1,2,3]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2),
-            right = new TreeNode(3)
+            left = new(2),
+            right = new(3)
         };
 
         var result = _task.DelNodes(root, []);
@@ -229,15 +230,15 @@ public class DelNodesTaskTests
         // Delete [2,3] -> Result: [[1], [4], [5], [6], [7]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(4),
-                right = new TreeNode(5)
+                left = new(4),
+                right = new(5)
             },
-            right = new TreeNode(3)
+            right = new(3)
             {
-                left = new TreeNode(6),
-                right = new TreeNode(7)
+                left = new(6),
+                right = new(7)
             }
         };
 
@@ -259,9 +260,9 @@ public class DelNodesTaskTests
         // Delete [2] -> Result: [[1], [3]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(3)
+                left = new(3)
             }
         };
 
@@ -290,9 +291,9 @@ public class DelNodesTaskTests
         // Delete [2] -> Result: [[1], [3]]
         var root = new TreeNode(1)
         {
-            right = new TreeNode(2)
+            right = new(2)
             {
-                right = new TreeNode(3)
+                right = new(3)
             }
         };
 
@@ -323,18 +324,18 @@ public class DelNodesTaskTests
         // Delete [5,6] -> Result: [[1,2,3]] with full structure
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(4)
+                left = new(4)
                 {
-                    left = new TreeNode(8)
+                    left = new(8)
                 },
-                right = new TreeNode(5)
+                right = new(5)
             },
-            right = new TreeNode(3)
+            right = new(3)
             {
-                left = new TreeNode(6),
-                right = new TreeNode(7)
+                left = new(6),
+                right = new(7)
             }
         };
 
@@ -363,11 +364,11 @@ public class DelNodesTaskTests
         // Delete [3] -> Result: [[1,2,null,4]]
         var root = new TreeNode(1)
         {
-            left = new TreeNode(2)
+            left = new(2)
             {
-                left = new TreeNode(4)
+                left = new(4)
             },
-            right = new TreeNode(3)
+            right = new(3)
         };
 
         var result = _task.DelNodes(root, [3]);

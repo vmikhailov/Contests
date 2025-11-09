@@ -104,7 +104,7 @@ public class SeparateSquaresTask
         {
             var (s1, s2, y) = Calculate();
 
-            if (Math.Abs(s1 - s2) < 1e-6)
+            if (Math.Abs(s1 - s2) < error)
             {
                 return y;
             }

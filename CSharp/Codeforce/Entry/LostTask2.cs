@@ -7,11 +7,11 @@ namespace Codewars.Entry
 {
     public static class FibonacciSpecial
     {
-        private static Dictionary<BigInteger, BigInteger> Fibs;
+        private static Dictionary<BigInteger, BigInteger> fibs = [];
 
         public static BigInteger Calculate(BigInteger n, BigInteger m)
         {
-            Fibs = new Dictionary<BigInteger, BigInteger>();
+            fibs = new();
             var v = Fib(n, m) % m;
 
             return v;
@@ -20,8 +20,8 @@ namespace Codewars.Entry
         private static BigInteger Fib(BigInteger n, BigInteger m)
         {
             if (n == 0) return 0;
-            if (n == 1 || n == 2) return (Fibs[n] = 1);
-            if (Fibs.TryGetValue(n, out var v)) return v;
+            if (n == 1 || n == 2) return (fibs[n] = 1);
+            if (fibs.TryGetValue(n, out var v)) return v;
 
             var k = (n & 1) == 1 ? (n + 1) / 2 : n / 2;
 
@@ -29,7 +29,7 @@ namespace Codewars.Entry
                 ? (Fib(k, m) * Fib(k, m) + Fib(k - 1, m) * Fib(k - 1, m))
                 : (2 * Fib(k - 1, m) + Fib(k, m)) * Fib(k, m);
 
-            Fibs[n] = v % m;
+            fibs[n] = v % m;
 
             return v;
         }
@@ -39,7 +39,7 @@ namespace Codewars.Entry
     {
         public static void Main2()
         {
-            var s = Console.ReadLine().Split(' ');
+            var s = Console.ReadLine()!.Split(' ');
             var n = BigInteger.Parse(s[0]);
             var m = BigInteger.Parse(s[1]);
             var f = FibonacciSpecial.Calculate(n, m);
@@ -51,7 +51,7 @@ namespace Codewars.Entry
             var r = new Random();
             while (true)
             {
-                var s = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var s = Console.ReadLine()!.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 BigInteger n = 0;
                 BigInteger m = 0;
                 if (s.Length == 0)

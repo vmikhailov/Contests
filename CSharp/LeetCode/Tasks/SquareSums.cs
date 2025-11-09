@@ -2,12 +2,12 @@ namespace LeetCode;
 
 public static class SquareSums
 {
-	private static int[] numbers;
+	private static int[]? numbers;
 	public static int GetPermutations(int[] nums)
 	{
 		numbers = nums;
 		Array.Sort(nums);
-		var c = nums.Where(x => x == 2).Count();
+		var c = nums.Count(x => x == 2);
 		var p = c > 0 ? Fact(c) : 1;
 		var n = nums.Length;
 		var graph = new List<IList<int>>();

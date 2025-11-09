@@ -47,8 +47,8 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
-            var m = Console.ReadLine().Split(' ').Select(long.Parse).ToList();
+            var n = int.Parse(Console.ReadLine()!);
+            var m = Console.ReadLine()!.Split(' ').Select(long.Parse).ToList();
             var r = Compute(m);
 
             Console.WriteLine(r.Count);

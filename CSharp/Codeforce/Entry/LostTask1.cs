@@ -5,12 +5,12 @@ namespace Codewars.Entry
 {
     public static class Fibonacci
     {
-        private static BigInteger[] Fibs;
+        private static BigInteger[] fibs = [];
         
         public static BigInteger Calculate(int n)
         {
             var k = Math.Abs(n);
-            Fibs = new BigInteger[k + 1];
+            fibs = new BigInteger[k + 1];
             var v = Fib(k);
 
             return n > 0 ? v : (k % 2 == 0 ? -1 : 1) * v;
@@ -19,8 +19,8 @@ namespace Codewars.Entry
         private static BigInteger Fib(int n)
         {
             if (n == 0) return 0;
-            if (n == 1 || n == 2) return (Fibs[n] = 1);
-            if (Fibs[n] != 0) return Fibs[n];
+            if (n == 1 || n == 2) return (fibs[n] = 1);
+            if (fibs[n] != 0) return fibs[n];
 
             BigInteger f;
             if (n % 2 == 1)
@@ -34,7 +34,7 @@ namespace Codewars.Entry
                 f = (2 * Fib(k - 1) + Fib(k)) * Fib(k);
             }
 
-            return Fibs[n] = f;
+            return fibs[n] = f;
         }
     }
 
@@ -42,7 +42,7 @@ namespace Codewars.Entry
     {
         public static void Main1()
         {
-            var s = Console.ReadLine().Split(' ');
+            var s = Console.ReadLine()!.Split(' ');
             var n = int.Parse(s[0]);
             var m = BigInteger.Parse(s[1]);
             var r = Fibonacci.Calculate(n) % m;

@@ -50,16 +50,16 @@ namespace Codewars.Entry
                 indents[i] = indent = string.Join("", Enumerable.Repeat("  ", i));    
             }
 
-            return indent;
+            return indent!;
         }
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
+            var n = int.Parse(Console.ReadLine()!);
             var p = new List<string>();
             for (var i = 0; i < n; i++)
             {
-                p.Add(Console.ReadLine());
+                p.Add(Console.ReadLine()!);
             }
             
             foreach (var s in Format(p))

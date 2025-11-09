@@ -4,25 +4,34 @@ public class MostBeautifulItemForEachQuery
 {
     public class FirstComparer : IComparer<int[]>
     {
-        public int Compare(int[] x, int[] y)
+        public int Compare(int[]? x, int[]? y)
         {
-            var comparison = Comparer<int>.Default.Compare(x[0], y[0]);
+            var comparison = Comparer<int>.Default.Compare(x![0], y![0]);
             return comparison != 0 ? comparison : -Comparer<int>.Default.Compare(x[1], y[1]);
         }
     }
     
     public class SecondComparer : IComparer<int[]>
     {
-        public int Compare(int[] x, int[] y) => Comparer<int>.Default.Compare(x[0], y[0]);
+        public int Compare(int[]? x, int[]? y)
+        {
+            if (x != null && y != null)
+            {
+                return Comparer<int>.Default.Compare(x[0], y[0]);
+            }
+
+            return ReferenceEquals(x, y) ? 0 : x is null ? -1 : 1;
+        }
     }
 
     public int[] MaximumBeauty(int[][] items, int[] queries)
     {
         Array.Sort(items, new FirstComparer());
         var m = 0;
-        for (var i = 0; i < items.Length; i++)
+
+        foreach (var t in items)
         {
-            items[i][1] = m = Math.Max(m, items[i][1]);
+            t[1] = m = Math.Max(m, t[1]);
         }
 
         var cmp = new SecondComparer();

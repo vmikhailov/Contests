@@ -37,11 +37,11 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
+            var n = int.Parse(Console.ReadLine()!);
             var v = new List<int[]>();
             for (var i = 0; i < n - 1; i++)
             {
-                v.Add(Console.ReadLine().Split(' ').Select(int.Parse).ToArray());
+                v.Add(Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray());
             }
 
             var code = GetCode(n, v);

@@ -31,8 +31,8 @@ namespace Codewars.Entry
         
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
-            var v = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var n = int.Parse(Console.ReadLine()!);
+            var v = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
             var compressed = Compress(v);
             Console.WriteLine(compressed.Length/2);
             for (var i = 0; i < compressed.Length - 1; i += 2)

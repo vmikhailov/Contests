@@ -95,9 +95,9 @@ namespace Codewars.Entry
         
         public static void Main1()
         {
-            var n = long.Parse(Console.ReadLine());
-            var w = Console.ReadLine();
-            var c = Console.ReadLine();
+            var n = long.Parse(Console.ReadLine()!);
+            var w = Console.ReadLine()!;
+            var c = Console.ReadLine()!;
             
             Console.WriteLine(Compute(w, c));
         }

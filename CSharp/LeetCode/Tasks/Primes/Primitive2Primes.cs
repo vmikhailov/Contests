@@ -2,7 +2,7 @@ namespace LeetCode.Tasks;
 
 public class Primitive2Primes
 {
-    public List<int>? Primes { get; private set; }
+    public List<int> Primes { get; private set; } = [];
 
     public bool IsPrime(int num)
     {
@@ -16,9 +16,8 @@ public class Primitive2Primes
             return true;
         }
 
-        for (var i = 0; i < Primes.Count ; i++)
+        foreach (var p in Primes)
         {
-            var p = Primes[i];
             if (num % p == 0)
             {
                 return false;

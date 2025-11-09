@@ -59,8 +59,8 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
-            var p = Console.ReadLine().Split(' ').Select(long.Parse).ToArray();
+            var n = int.Parse(Console.ReadLine()!);
+            var p = Console.ReadLine()!.Split(' ').Select(long.Parse).ToArray();
             
             Console.WriteLine(Compute(n, p));
         }

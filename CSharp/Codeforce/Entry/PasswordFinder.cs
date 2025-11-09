@@ -6,7 +6,7 @@ namespace Codewars.Entry
     {
         public static string FindPassword(string chars, string allowedChars, int maxLen)
         {
-            string password = null;
+            string? password = null;
             var minLen = allowedChars.Length;
             var i = chars.Length - 1;
             var j = i;
@@ -65,9 +65,9 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var s1 = Console.ReadLine();
-            var s2 = Console.ReadLine();
-            var n = int.Parse(Console.ReadLine());
+            var s1 = Console.ReadLine()!;
+            var s2 = Console.ReadLine()!;
+            var n = int.Parse(Console.ReadLine()!);
             
             Console.WriteLine(FindPassword(s1, s2, n));
         }

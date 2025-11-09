@@ -37,15 +37,18 @@ public class KDistanceInTree
     {
         Process(root.left);
         Process(root.right);
+        return;
 
-        void Process(TreeNode node)
+        void Process(TreeNode? node)
         {
-            if(node is not null)
+            if (node is null)
             {
-                Add(root.val, node.val);
-                Add(node.val, root.val);
-                Traverse(node, map);
+                return;
             }
+
+            Add(root.val, node.val);
+            Add(node.val, root.val);
+            Traverse(node, map);
         }
 
         void Add(int key, int val)

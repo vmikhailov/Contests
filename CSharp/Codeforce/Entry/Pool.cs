@@ -80,8 +80,8 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var s = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            var v = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var s = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+            var v = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
 
             var coords = Compute(s[0], s[1], v[0], v[1]);
 

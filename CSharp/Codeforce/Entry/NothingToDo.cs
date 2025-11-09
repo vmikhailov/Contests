@@ -32,7 +32,7 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var v = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var v = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
             
             foreach (var s in Build(v[0], v[1]))
             {

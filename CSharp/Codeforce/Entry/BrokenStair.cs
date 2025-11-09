@@ -42,9 +42,9 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            var b = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            var m = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var n = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+            var b = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+            var m = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
 
             Console.WriteLine(Compute(n[0], b, m[0], m[1]) ? "YES" : "NO");
         }

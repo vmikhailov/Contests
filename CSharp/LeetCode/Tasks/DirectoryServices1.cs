@@ -4,9 +4,9 @@ public class DirectoryServices1
 {
     private class Folder
     {
-        public string Name;
-        public bool Final;
-        public IDictionary<string, Folder> Subfolders = new Dictionary<string, Folder>();
+        public required string Name { get; init; }
+        private bool Final { get; set; }
+        private IDictionary<string, Folder> Subfolders { get; } = new Dictionary<string, Folder>();
 
         public void Add(string folder)
         {

@@ -7,7 +7,7 @@ public class ListToTreeHelper
         var node = new TreeNode(nodes[0]);
         var queue = new Queue<TreeNode>();
         queue.Enqueue(node);
-        var i = 1;
+
         while (queue.TryPeek(out var next))
         {
             //queue.

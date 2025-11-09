@@ -10,7 +10,7 @@ public interface IIPDatabase
 public class IPDatabase : IIPDatabase
 {
     private readonly List<IPRange> _data = new();
-    private IPRangeNode? _root;
+    //private IPRangeNode? _root;
 
     public void Init(IList<IPRange> ranges)
     {

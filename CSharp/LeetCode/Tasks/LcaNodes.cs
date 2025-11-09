@@ -17,18 +17,20 @@ public class LcaNodes
 {
     public TreeNode SubtreeWithAllDeepest(TreeNode root)
     {
-        return Dfs(root).Node;
+        return Dfs(root).Node!;
     }
 
-    private (TreeNode Node, int Depth) Dfs(TreeNode node) =>
-        node is null
+    private (TreeNode? Node, int Depth) Dfs(TreeNode? node)
+    {
+        return node is null
             ? (null, 0)
             : (Dfs(node.left), Dfs(node.right)) switch
             {
-                (var l, var r) when l.Depth > r.Depth => (l.Node, l.Depth + 1),
-                (var l, var r) when l.Depth < r.Depth => (r.Node, r.Depth + 1),
-                (var l, var r) => new(node, l.Depth + 1),
+                var (l, r) when l.Depth > r.Depth => (l.Node, l.Depth + 1),
+                var (l, r) when l.Depth < r.Depth => (r.Node, r.Depth + 1),
+                var (l, r) => new(node, l.Depth + 1),
             };
+    }
 
     public TreeNode LcaDeepestLeaves(TreeNode root) 
     {
@@ -59,7 +61,7 @@ public class LcaNodes
             return a.Take(i).ToList();
         }
 
-        void Traverse(TreeNode node)
+        void Traverse(TreeNode? node)
         {
             if(node is null)
             {

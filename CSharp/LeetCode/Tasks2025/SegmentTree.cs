@@ -1,9 +1,6 @@
 namespace LeetCode.Tasks2025;
 
 using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Buffers.Binary;
-using System.Numerics; // for BitOperations
 
 public sealed class SegmentTree<T> where T : INumber<T>
 {

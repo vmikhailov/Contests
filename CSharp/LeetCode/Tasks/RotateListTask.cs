@@ -45,7 +45,7 @@ public class RotateListTask
 		while (--k >= 0)
 		{
 			prev = head;
-			head = head.next;
+			head = head?.next;
 		}
 
 		prev!.next = null;

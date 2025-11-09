@@ -11,8 +11,8 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
-            var m = int.Parse(Console.ReadLine());
+            var n = int.Parse(Console.ReadLine()!);
+            var m = int.Parse(Console.ReadLine()!);
             Console.WriteLine(Compute(n, m));
         }
     }

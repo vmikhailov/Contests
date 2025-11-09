@@ -19,11 +19,11 @@ namespace Codewars.Entry
 
         public static void Main1()
         {
-            var n = int.Parse(Console.ReadLine());
+            var n = int.Parse(Console.ReadLine()!);
             var coords = new List<long[]>();
             for (var i = 0; i < n; i++)
             {
-                coords.Add(Console.ReadLine().Split(' ').Select(long.Parse).ToArray());
+                coords.Add(Console.ReadLine()!.Split(' ').Select(long.Parse).ToArray());
             }
 
             Console.WriteLine(Compute(n, coords));
