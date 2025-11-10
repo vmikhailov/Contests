@@ -52,6 +52,137 @@ public class CountAndSayTask
         }
     }
 
+    // Optimized version: works with strings directly and avoids StringBuilder indexing
+    // Time complexity: O(n * m) where m is the length of the current string
+    // Space complexity: O(m) for the result string
+    public string CountAndSayOptimized(int n)
+    {
+        var result = "1";
+
+        for (var i = 2; i <= n; i++)
+        {
+            result = RleString(result);
+        }
+
+        return result;
+    }
+
+    private string RleString(string s)
+    {
+        var r = new StringBuilder(s.Length * 2); // Pre-allocate capacity
+        var count = 1;
+        var prev = s[0];
+
+        for (var i = 1; i < s.Length; i++)
+        {
+            var curr = s[i];
+
+            if (curr == prev)
+            {
+                count++;
+            }
+            else
+            {
+                r.Append(count);     // Append int directly
+                r.Append(prev);      // Append char directly
+                prev = curr;
+                count = 1;
+            }
+        }
+
+        r.Append(count);
+        r.Append(prev);
+
+        return r.ToString();
+    }
+
+    // Most optimized version: uses ArrayPool to rent char arrays for zero-allocation performance
+    // Time complexity: O(n * m) where m is the length of the current string
+    // Space complexity: O(m) but with array pooling for better memory reuse
+    public string CountAndSayArrayPool(int n)
+    {
+        var pool = System.Buffers.ArrayPool<char>.Shared;
+
+        // Start with "1"
+        var buf = pool.Rent(2);
+        buf[0] = '1';
+        var len = 1;
+
+        for (var i = 2; i <= n; i++)
+        {
+            var nextBuf = pool.Rent(len * 4); // Estimate 2x growth with overhead
+            var nextLen = RleCharArray(buf, len, nextBuf);
+
+            pool.Return(buf);
+            buf = nextBuf;
+            len = nextLen;
+        }
+
+        var result = new string(buf, 0, len);
+        pool.Return(buf);
+
+        return result;
+    }
+
+    private int RleCharArray(char[] source, int sourceLength, char[] destination)
+    {
+        var destIndex = 0;
+        var count = 1;
+        var prev = source[0];
+
+        for (var i = 1; i < sourceLength; i++)
+        {
+            var curr = source[i];
+
+            if (curr == prev)
+            {
+                count++;
+            }
+            else
+            {
+                // Write count and character
+                destIndex += WriteInteger(count, destination, destIndex);
+                destination[destIndex++] = prev;
+
+                prev = curr;
+                count = 1;
+            }
+        }
+
+        // Write final count and character
+        destIndex += WriteInteger(count, destination, destIndex);
+        destination[destIndex++] = prev;
+
+        return destIndex;
+    }
+
+    // Efficiently writes an integer count to char array without string allocation
+    private int WriteInteger(int num, char[] buffer, int startIndex)
+    {
+        // if (num < 10)
+        // {
+        //     buffer[startIndex] = (char)('0' + num);
+        //     return 1;
+        // }
+
+        // Handle multi-digit counts (rare but possible for large sequences)
+        var digits = 0;
+        var temp = num;
+        while (temp > 0)
+        {
+            temp /= 10;
+            digits++;
+        }
+
+        for (var i = digits - 1; i >= 0; i--)
+        {
+            buffer[startIndex + i] = (char)('0' + (num % 10));
+            num /= 10;
+        }
+
+        return digits;
+    }
+
     [TestFixture]
     public class CountAndSayTaskTests
     {
@@ -128,6 +259,78 @@ public class CountAndSayTask
         {
             // countAndSay(10) is RLE of "31131211131221"
             _task.CountAndSay(10).Should().Be("13211311123113112211");
+        }
+
+        // Tests for optimized version
+        [Test]
+        public void CountAndSayOptimized_N1_Returns1()
+        {
+            _task.CountAndSayOptimized(1).Should().Be("1");
+        }
+
+        [Test]
+        public void CountAndSayOptimized_N5_Returns111221()
+        {
+            _task.CountAndSayOptimized(5).Should().Be("111221");
+        }
+
+        [Test]
+        public void CountAndSayOptimized_N10_Returns13211311123113112211()
+        {
+            _task.CountAndSayOptimized(10).Should().Be("13211311123113112211");
+        }
+
+        [Test]
+        public void BothVersions_ProduceSameResults()
+        {
+            // Verify both implementations produce identical results
+            for (int i = 1; i <= 15; i++)
+            {
+                _task.CountAndSay(i).Should().Be(_task.CountAndSayOptimized(i),
+                    $"both versions should return the same result for n={i}");
+            }
+        }
+
+        // Tests for ArrayPool version
+        [Test]
+        public void CountAndSayArrayPool_N1_Returns1()
+        {
+            _task.CountAndSayArrayPool(1).Should().Be("1");
+        }
+
+        [Test]
+        public void CountAndSayArrayPool_N5_Returns111221()
+        {
+            _task.CountAndSayArrayPool(5).Should().Be("111221");
+        }
+
+        [Test]
+        public void CountAndSayArrayPool_N10_Returns13211311123113112211()
+        {
+            _task.CountAndSayArrayPool(10).Should().Be("13211311123113112211");
+        }
+
+        [Test]
+        public void AllVersions_ProduceSameResults()
+        {
+            // Verify all three implementations produce identical results
+            for (int i = 1; i <= 20; i++)
+            {
+                var expected = _task.CountAndSay(i);
+                _task.CountAndSayOptimized(i).Should().Be(expected,
+                    $"optimized version should match for n={i}");
+                _task.CountAndSayArrayPool(i).Should().Be(expected,
+                    $"ArrayPool version should match for n={i}");
+            }
+        }
+
+        [Test]
+        public void CountAndSayArrayPool_LargeN_Works()
+        {
+            // Test with larger n to verify it handles longer sequences
+            var result = _task.CountAndSayArrayPool(15);
+            result.Should().NotBeNullOrEmpty();
+            result.Should().Be(_task.CountAndSay(15));
         }
     }
 }
