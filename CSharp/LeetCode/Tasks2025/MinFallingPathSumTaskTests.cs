@@ -177,4 +177,123 @@ public class MinFallingPathSumTaskTests
         // Path: 1 -> 6 -> 11 -> 16 -> 21 = 55
         _task.MinFallingPathSum(matrix).Should().Be(55);
     }
+
+    // Tests for optimized versions
+    [Test]
+    public void AllVersions_ProduceSameResults_BasicCases()
+    {
+        var testCases = new[]
+        {
+            new int[][] { [2, 1], [3, 4] },
+            new int[][] { [-19, 57], [-40, -5] },
+            new int[][] { [1, 2, 3], [4, 5, 6], [7, 8, 9] }
+        };
+
+        foreach (var matrix in testCases)
+        {
+            var expected = _task.MinFallingPathSum(CloneMatrix(matrix));
+            _task.MinFallingPathSumSpaceOptimized(CloneMatrix(matrix)).Should().Be(expected, "SpaceOptimized should match");
+            _task.MinFallingPathSumInPlace(CloneMatrix(matrix)).Should().Be(expected, "InPlace should match");
+            _task.MinFallingPathSumOptimized(CloneMatrix(matrix)).Should().Be(expected, "Optimized should match");
+            _task.MinFallingPathSumArrayPool(CloneMatrix(matrix)).Should().Be(expected, "ArrayPool should match");
+        }
+    }
+
+    [Test]
+    public void SpaceOptimized_AllNegative_ReturnsCorrect()
+    {
+        var matrix = new int[][]
+        {
+            [-1, -2, -3],
+            [-4, -5, -6],
+            [-7, -8, -9]
+        };
+        _task.MinFallingPathSumSpaceOptimized(matrix).Should().Be(-18);
+    }
+
+    [Test]
+    public void InPlace_ModifiesMatrix_ReturnsCorrect()
+    {
+        var matrix = new int[][]
+        {
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        };
+        var result = _task.MinFallingPathSumInPlace(matrix);
+        result.Should().Be(12);
+        // Verify matrix was modified
+        matrix[0][0].Should().NotBe(1);
+    }
+
+    [Test]
+    public void Optimized_LargeMatrix_ReturnsCorrect()
+    {
+        var matrix = new int[][]
+        {
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12, 13, 14, 15],
+            [16, 17, 18, 19, 20],
+            [21, 22, 23, 24, 25]
+        };
+        _task.MinFallingPathSumOptimized(matrix).Should().Be(55);
+    }
+
+    [Test]
+    public void ArrayPool_SingleElement_ReturnsElement()
+    {
+        var matrix = new int[][] { [42] };
+        _task.MinFallingPathSumArrayPool(matrix).Should().Be(42);
+    }
+
+    [Test]
+    public void AllVersions_ProduceSameResults_ComplexCase()
+    {
+        var matrix = new int[][]
+        {
+            [100, -42, -46, -41],
+            [31, 97, 10, -10],
+            [-58, -51, 82, 89],
+            [51, 81, 69, -51]
+        };
+
+        var expected = _task.MinFallingPathSum(CloneMatrix(matrix));
+        _task.MinFallingPathSumSpaceOptimized(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumInPlace(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumOptimized(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumArrayPool(CloneMatrix(matrix)).Should().Be(expected);
+    }
+
+    [Test]
+    public void AllVersions_LargeMatrix_SameResults()
+    {
+        // Test with a larger 10x10 matrix
+        var matrix = new int[10][];
+        for (int i = 0; i < 10; i++)
+        {
+            matrix[i] = new int[10];
+            for (int j = 0; j < 10; j++)
+            {
+                matrix[i][j] = (i * 10 + j) % 7 - 3; // Values from -3 to 3
+            }
+        }
+
+        var expected = _task.MinFallingPathSum(CloneMatrix(matrix));
+        _task.MinFallingPathSumSpaceOptimized(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumInPlace(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumOptimized(CloneMatrix(matrix)).Should().Be(expected);
+        _task.MinFallingPathSumArrayPool(CloneMatrix(matrix)).Should().Be(expected);
+    }
+
+    private static int[][] CloneMatrix(int[][] matrix)
+    {
+        var clone = new int[matrix.Length][];
+        for (int i = 0; i < matrix.Length; i++)
+        {
+            clone[i] = new int[matrix[i].Length];
+            Array.Copy(matrix[i], clone[i], matrix[i].Length);
+        }
+        return clone;
+    }
 }
