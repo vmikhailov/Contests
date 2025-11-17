@@ -67,7 +67,7 @@ public class RotateListTaskTests
 		if (values.Length == 0) return null!;
 		var head = new ListNode(values[0]);
 		var current = head;
-		for (int i = 1; i < values.Length; i++)
+		for (var i = 1; i < values.Length; i++)
 		{
 			current.next = new ListNode(values[i]);
 			current = current.next;

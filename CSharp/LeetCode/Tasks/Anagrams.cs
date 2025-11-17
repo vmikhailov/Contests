@@ -80,7 +80,7 @@ public class AnagramsTests
         var sortedExpected = expected.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
         var sortedActual = actual.Select(g => g.OrderBy(s => s).ToList()).OrderBy(g => g[0]).ToList();
 
-        for (int i = 0; i < sortedExpected.Count; i++)
+        for (var i = 0; i < sortedExpected.Count; i++)
         {
             sortedActual[i].Should().Equal(sortedExpected[i]);
         }

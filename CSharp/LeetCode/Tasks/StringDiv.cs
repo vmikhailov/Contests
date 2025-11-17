@@ -3,7 +3,7 @@ namespace LeetCode.Tasks;
 public class StringDiv
 {
     public string GcdOfStrings(string str1, string str2) {
-        int i = 0;
+        var i = 0;
         while(i < str1.Length && i < str2.Length && str1[i] == str2[i]) i++;
         
         if(i == 0)

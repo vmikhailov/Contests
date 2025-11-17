@@ -32,7 +32,7 @@ public sealed class SegmentTree<T> where T : INumber<T>
 
         // Строим родителей
         for (var i = _size - 1; i > 0; --i)
-            _tree[i] = _agg(_tree[i << 1], _tree[(i << 1) | 1]);
+            _tree[i] = _agg(_tree[i * 2], _tree[i * 2 + 1]);
     }
 
     /// <summary>
@@ -42,12 +42,12 @@ public sealed class SegmentTree<T> where T : INumber<T>
     {
         if ((uint)index >= (uint)_n) throw new ArgumentOutOfRangeException(nameof(index));
 
-        var p = _size + index;
-        _tree[p] = val;
+        var i = _size + index;
+        _tree[i] = val;
 
-        for (p >>= 1; p > 0; p >>= 1)
+        for (i >>= 1; i > 0; i >>= 1)
         {
-            _tree[p] = _agg(_tree[p << 1], _tree[p << 1 | 1]);
+            _tree[i] = _agg(_tree[i * 2], _tree[i * 2 + 1]);
         }
     }
 

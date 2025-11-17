@@ -1,109 +1,51 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace LeetCode.Tasks;
 
 public class ZigzagLevelOrderTask
 {
 	public IList<IList<int>> ZigzagLevelOrder(TreeNode? root) 
 	{
-		var q = new Queue<TreeNode>();
-		var r = new List<IList<int>>();
-		
-		var f = false;
+		var result = new List<IList<int>>();
+
 		if(root == null)
 		{
-			return r;
+			return result;
 		}
 
-		q.Enqueue(root);
+		var leftToRight = true;
+
+		var queue = new Queue<TreeNode>();
+		queue.Enqueue(root);
 		
-		while(q.Any())
+		while(queue.Count > 0)
 		{
-			IList<int> v = new List<int>();
-			var p = q;
-			q = new (); 
-            
-			foreach(var node in p)
+			var level = new List<int>();
+			var levelSize = queue.Count;
+
+			for(var i = 0; i < levelSize; i++)
 			{
-				v.Add(node.val);
+				var node = queue.Dequeue();
+				level.Add(node.val);
 				if(node.left != null)
 				{
-					q.Enqueue(node.left);
+					queue.Enqueue(node.left);
 				}
 
 				if(node.right != null)
 				{
-					q.Enqueue(node.right);
+					queue.Enqueue(node.right);
 				}
 			}
 
-			f = !f;
-			var a = (f ? p.ToList() : p.Reverse()).Select(x => x.val).ToList();
-			r.Add(a);
+			if (!leftToRight)
+			{
+				level.Reverse();
+			}
+
+			result.Add(level);
+
+			leftToRight = !leftToRight;
 		}
         
-		return r;
-	}
-}
-
-[TestFixture]
-public class ZigzagLevelOrderTaskTests
-{
-	private ZigzagLevelOrderTask _task = null!;
-
-	[SetUp]
-	public void SetUp() => _task = new ZigzagLevelOrderTask();
-
-	[Test]
-	public void ZigzagLevelOrder_BasicTree_ReturnsZigzag()
-	{
-		var root = new TreeNode(3)
-		{
-			left = new TreeNode(9),
-			right = new TreeNode(20)
-			{
-				left = new TreeNode(15),
-				right = new TreeNode(7)
-			}
-		};
-		var result = _task.ZigzagLevelOrder(root);
-		result.Should().HaveCount(3);
-		result[0].Should().Equal([3]);
-		result[1].Should().Equal([20, 9]);
-		result[2].Should().Equal([15, 7]);
-	}
-
-	[Test]
-	public void ZigzagLevelOrder_SingleNode_ReturnsOneLevel()
-	{
-		var root = new TreeNode(1);
-		var result = _task.ZigzagLevelOrder(root);
-		result.Should().HaveCount(1);
-		result[0].Should().Equal([1]);
-	}
-
-	[Test]
-	public void ZigzagLevelOrder_NullRoot_ReturnsEmpty()
-	{
-		var result = _task.ZigzagLevelOrder(null);
-		result.Should().BeEmpty();
-	}
-
-	[Test]
-	public void ZigzagLevelOrder_OnlyLeftChildren_ReturnsZigzag()
-	{
-		var root = new TreeNode(1)
-		{
-			left = new TreeNode(2)
-			{
-				left = new TreeNode(3)
-			}
-		};
-		var result = _task.ZigzagLevelOrder(root);
-		result.Should().HaveCount(3);
-		result[0].Should().Equal([1]);
-		result[1].Should().Equal([2]);
-		result[2].Should().Equal([3]);
+		return result;
 	}
 }

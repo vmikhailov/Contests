@@ -263,7 +263,7 @@ public class MaximalRectangleTask
 		sw.Restart();
 		sw.Stop();
 
-		for (int i = 1; i < 10; i++)
+		for (var i = 1; i < 10; i++)
 		{
 			var t1 = GridTest(2500, i);
 			sw.Restart();
@@ -273,7 +273,7 @@ public class MaximalRectangleTask
 		}
 
 		var randOuts = new[] { 0, 4602, 5388, 4635, 4431, 3954 };
-		for (int i = 1; i < randOuts.Length; i++)
+		for (var i = 1; i < randOuts.Length; i++)
 		{
 			var t1 = RandTest(2500, i);
 			sw.Restart();
@@ -286,10 +286,10 @@ public class MaximalRectangleTask
 	private static char[][] GridTest(int n, int k)
 	{
 		var r = new char[n][];
-		for (int i = 0; i < n; i++)
+		for (var i = 0; i < n; i++)
 		{
 			var q = r[i] = new char[n];
-			for (int j = 0; j < n; j++)
+			for (var j = 0; j < n; j++)
 			{
 				q[j] = (char)((i / k + j / k) % 2 + '0');
 			}
@@ -304,22 +304,22 @@ public class MaximalRectangleTask
 
 		var z = new string('0', n);
 		var r = new char[n][];
-		for (int k = 0; k < n; k++)
+		for (var k = 0; k < n; k++)
 			r[k] = z.ToCharArray();
 
-		for (int k = 0; k < n; k++)
+		for (var k = 0; k < n; k++)
 		{
 			var a = rnd.Next(n);
 			var b = rnd.Next(a, n);
 			var c = rnd.Next(n);
 			if (rnd.Next(2) == 0)
 			{
-				for (int i = a; i <= b; i++)
+				for (var i = a; i <= b; i++)
 					r[c][i] = '1';
 			}
 			else
 			{
-				for (int i = a; i <= b; i++)
+				for (var i = a; i <= b; i++)
 					r[i][c] = '1';
 			}
 		}

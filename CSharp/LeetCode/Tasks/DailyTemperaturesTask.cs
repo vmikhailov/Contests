@@ -13,11 +13,11 @@ public class DailyTemperaturesTask
         var result = new int[n];
         var stack = new Stack<int>(); // stores indices
 
-        for (int i = 0; i < n; i++)
+        for (var i = 0; i < n; i++)
         {
             while (stack.Count > 0 && temperatures[i] > temperatures[stack.Peek()])
             {
-                int prev = stack.Pop();
+                var prev = stack.Pop();
                 result[prev] = i - prev;
             }
 
