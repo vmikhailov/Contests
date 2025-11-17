@@ -126,10 +126,7 @@ public static class MyCalendarsOneTask
 
         public bool Book(int startTime, int endTime)
         {
-            // Используем флаг для отслеживания успеха вставки
-            bool inserted = false;
-            _root = InsertAVL(_root, startTime, endTime, ref inserted);
-            return inserted;
+            return Insert(ref _root, startTime, endTime);
         }
 
         // Вспомогательные методы для AVL балансировки
@@ -138,6 +135,7 @@ public static class MyCalendarsOneTask
         private static int GetBalance(Node? node)
         {
             if (node == null) return 0;
+
             return GetHeight(node.Left) - GetHeight(node.Right);
         }
 
@@ -152,20 +150,20 @@ public static class MyCalendarsOneTask
         //     x   C    =>      A   y
         //    / \                  / \
         //   A   B                B   C
-        private static Node RotateRight(Node y)
+        private static void RotateRight(ref Node? root)
         {
+            // root != null and root.Left != null are required for right rotation
+            var y = root!;
             var x = y.Left!;
             var b = x.Right;
 
-            // Выполняем поворот
             x.Right = y;
             y.Left = b;
 
-            // Обновляем высоты
             UpdateHeight(y);
             UpdateHeight(x);
 
-            return x;
+            root = x;
         }
 
         // Левый поворот:
@@ -174,87 +172,85 @@ public static class MyCalendarsOneTask
         //   A   y      =>      x   C
         //      / \            / \
         //     B   C          A   B
-        private static Node RotateLeft(Node x)
+        private static void RotateLeft(ref Node? root)
         {
+            // root != null and root.Right != null are required for left rotation
+            var x = root!;
             var y = x.Right!;
             var b = y.Left;
 
-            // Выполняем поворот
             y.Left = x;
             x.Right = b;
 
-            // Обновляем высоты
             UpdateHeight(x);
             UpdateHeight(y);
 
-            return y;
+            root = y;
         }
 
-        private Node InsertAVL(Node? node, int startTime, int endTime, ref bool inserted)
+        // New: isolate rebalancing logic (now by-ref)
+        private static void Rebalance(ref Node? node)
         {
-            // Стандартная вставка в BST
-            if (node == null)
-            {
-                inserted = true;
-                return new Node(startTime, endTime);
-            }
+            if (node is null) return;
 
-            // Проверка overlap
-            if (!(endTime <= node.Start || startTime >= node.End))
-            {
-                inserted = false;
-                return node; // overlap detected, не вставляем
-            }
-
-            // Рекурсивно идём влево или вправо
-            if (endTime <= node.Start)
-            {
-                node.Left = InsertAVL(node.Left, startTime, endTime, ref inserted);
-            }
-            else // startTime >= node.End
-            {
-                node.Right = InsertAVL(node.Right, startTime, endTime, ref inserted);
-            }
-
-            // Если вставка не произошла (был overlap), возвращаем без балансировки
-            if (!inserted) return node;
-
-            // Обновляем высоту текущего узла
             UpdateHeight(node);
 
-            // Получаем balance factor для проверки разбалансировки
-            int balance = GetBalance(node);
-
-            // Балансируем дерево, если нужно (4 случая):
-
-            // Left-Left Case: balance > 1 и новый узел в левом поддереве левого ребёнка
-            if (balance > 1 && endTime <= node.Left!.Start)
+            switch (GetBalance(node))
             {
-                return RotateRight(node);
+                // Left heavy
+                case > 1:
+                {
+                    // If left-right heavy, rotate left child first
+                    if (GetBalance(node.Left) < 0)
+                    {
+                        RotateLeft(ref node.Left);
+                    }
+                    // Then rotate right at this node
+                    RotateRight(ref node);
+                    break;
+                }
+
+                // Right heavy
+                case < -1:
+                {
+                    // If right-left heavy, rotate right child first
+                    if (GetBalance(node.Right) > 0)
+                    {
+                        RotateRight(ref node.Right);
+                    }
+                    // Then rotate left at this node
+                    RotateLeft(ref node);
+                    break;
+                }
+            }
+            // Already balanced: height was updated above
+        }
+
+        private bool Insert(ref Node? node, int startTime, int endTime)
+        {
+            // Standard BST insert
+            if (node == null)
+            {
+                node = new(startTime, endTime);
+                return true;
             }
 
-            // Right-Right Case: balance < -1 и новый узел в правом поддереве правого ребёнка
-            if (balance < -1 && startTime >= node.Right!.End)
+            // Overlap check: disallow insertion if overlaps existing interval
+            if (!(endTime <= node.Start || startTime >= node.End))
             {
-                return RotateLeft(node);
+                return false;
             }
 
-            // Left-Right Case: balance > 1 и новый узел в правом поддереве левого ребёнка
-            if (balance > 1 && startTime >= node.Left!.End)
+            var inserted = endTime <= node.Start ?
+                Insert(ref node.Left, startTime, endTime) :
+                Insert(ref node.Right, startTime, endTime);
+
+            if (inserted)
             {
-                node.Left = RotateLeft(node.Left);
-                return RotateRight(node);
+                Rebalance(ref node);
             }
 
-            // Right-Left Case: balance < -1 и новый узел в левом поддереве правого ребёнка
-            if (balance < -1 && endTime <= node.Right!.Start)
-            {
-                node.Right = RotateRight(node.Right);
-                return RotateLeft(node);
-            }
-
-            // Дерево уже сбалансировано
-            return node;
+            return inserted;
         }
     }
 
