@@ -4,14 +4,20 @@ namespace LeetCode.Tasks2025;
 
 public class SortListTask
 {
-    public ListNode SortList(ListNode head)
+    public ListNode? SortList(ListNode? head)
     {
         var n = Count(head);
         if(n < 2) return head;
-        while (Merge(Split(head, n), out head));
+
+        while (!IsSorted(head))
+        {
+            head = Merge(Split(head, n));
+        }
+
         return head;
 
-        int Count(ListNode node)
+
+        int Count(ListNode? node)
         {
             var c = 0;
 
@@ -24,15 +30,32 @@ public class SortListTask
             return c;
         }
 
-        (ListNode, ListNode) Split(ListNode node, int n)
+        bool IsSorted(ListNode? node)
+        {
+            if (node is null) return true;
+
+            var prev = node;
+            node = node.next;
+
+            while (node is not null)
+            {
+                if (prev.val > node.val) return false;
+                prev = node;
+                node = node.next;
+            }
+
+            return true;
+        }
+
+        (ListNode?, ListNode?) Split(ListNode? node, int cnt)
         {
             var left = node;
             ListNode? prev = null;
 
-            for (var i = 0; i < n / 2; i++)
+            for (var i = 0; i < cnt / 2; i++)
             {
                 prev = node;
-                node = node.next;
+                node = node!.next;
             }
 
             if (prev is not null) prev.next = null;
@@ -40,49 +63,34 @@ public class SortListTask
             return (SortList(left), SortList(node));
         }
 
-        bool Merge((ListNode Left, ListNode Right) nodes, out ListNode result)
+        ListNode? Merge((ListNode? Left, ListNode? Right) nodes)
         {
             var (left, right) = nodes;
-            result = null;
-            ListNode curr = null;
-            var reordered = false;
+            if (left is null) return right;
+            if (right is null) return left;
 
-            while (left != null && right != null)
+            var dummy = new ListNode();
+            var tail = dummy;
+
+            while (left is not null && right is not null)
             {
-                if (left.val < right.val)
+                if (left.val <= right.val)
                 {
-                    if (curr is not null) curr.next = left;
-                    else result = left;
-                    curr = left;
+                    tail.next = left;
                     left = left.next;
                 }
                 else
                 {
-                    reordered = true;
-                    if (curr is not null) curr.next = right;
-                    else result = right;
-                    curr = right;
+                    tail.next = right;
                     right = right.next;
                 }
+                tail = tail.next!;
+                // Cut any stale linkage to avoid accidental cycles during merge
+                tail.next = null;
             }
 
-            while (left != null)
-            {
-                if (curr is not null) curr.next = left;
-                else result = left;
-                curr = left;
-                left = left.next;
-            }
-
-            while (right != null)
-            {
-                if (curr is not null) curr.next = right;
-                else result = right;
-                curr = right;
-                right = right.next;
-            }
-
-            return reordered;
+            tail.next = left ?? right;
+            return dummy.next;
         }
     }
 }
