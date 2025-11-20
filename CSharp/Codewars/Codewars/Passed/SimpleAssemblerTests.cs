@@ -25,17 +25,16 @@ namespace Codewars.Codewars.Passed
         {
             Test(
                 new Dictionary<string, int> { { "a", 1 } },
-                SimpleAssembler.Interpret(new[] { "mov a 5", "inc a", "dec a", "dec a", "jnz a -1", "inc a" }));
+                SimpleAssembler.Interpret(["mov a 5", "inc a", "dec a", "dec a", "jnz a -1", "inc a"]));
             Test(
                 new Dictionary<string, int> { { "a", 0 }, { "b", -20 } },
-                SimpleAssembler.Interpret(new[] { "mov a -10", "mov b a", "inc a", "dec b", "jnz a -2" }));
+                SimpleAssembler.Interpret(["mov a -10", "mov b a", "inc a", "dec b", "jnz a -2"]));
 
             Test(
                 new Dictionary<string, int> { { "a", 318009 }, { "b", 196418 }, { "c", 0 }, { "d", 0 } },
                 SimpleAssembler.Interpret(
-                    new[]
-                    {
-                        "mov a 1",
+                [
+                    "mov a 1",
                         "mov b 1",
                         "mov c 0",
                         "mov d 26",
@@ -59,7 +58,7 @@ namespace Codewars.Codewars.Passed
                         "jnz d -2",
                         "dec c",
                         "jnz c -5"
-                    }));
+                ]));
         }
     }
 }

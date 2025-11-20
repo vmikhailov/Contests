@@ -193,11 +193,7 @@ public class BasicCalculatorTask
                 {
                     '(' => TokenType.OpenParenthesis,
                     ')' => TokenType.CloseParenthesis,
-                    '+' => TokenType.Operator,
-                    '-' => TokenType.Operator,
-                    '*' => TokenType.Operator,
-                    '/' => TokenType.Operator,
-                    '^' => TokenType.Operator,
+                    '+' or '-' or '*' or '/' or '^' => TokenType.Operator,
                     _ => TokenType.Unknown
                 };
 

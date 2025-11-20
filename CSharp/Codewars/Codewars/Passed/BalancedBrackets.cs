@@ -8,7 +8,7 @@ namespace Codewars.Codewars.Passed
     {
         public static List<string> BalancedParens(int n)
         {
-            if (n == 0) return new List<string> { "" };
+            if (n == 0) return [""];
 
             var original = Enumerable.Repeat(1, n).Concat(Enumerable.Repeat(-1, n)).ToArray();
             var all = new List<int[]> { original };

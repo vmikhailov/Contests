@@ -7,12 +7,12 @@ namespace Codewars.Codewars.Passed
         [Test]
         public void StripComments()
         {
-            Assert.AreEqual("", StripCommentsSolution.StripComments("#a", new string[] { "#", "$" }));
+            Assert.AreEqual("", StripCommentsSolution.StripComments("#a", ["#", "$"]));
             Assert.AreEqual(
                 "apples, pears\ngrapes\nbananas",
-                StripCommentsSolution.StripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new string[] { "#", "!" }));
+                StripCommentsSolution.StripComments("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]));
 
-            Assert.AreEqual("a\nc\nd", StripCommentsSolution.StripComments("a #b\nc\nd $e f g", new string[] { "#", "$" }));
+            Assert.AreEqual("a\nc\nd", StripCommentsSolution.StripComments("a #b\nc\nd $e f g", ["#", "$"]));
         
         
         }

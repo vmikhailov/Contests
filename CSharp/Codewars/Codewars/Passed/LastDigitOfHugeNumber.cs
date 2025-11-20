@@ -87,7 +87,7 @@ namespace Codewars.Codewars.Passed
                 cnt++;
             }
 
-            if (cnt == 0) return new[] { 0 };
+            if (cnt == 0) return [0];
             
             if (cnt < arr.Length)
             {

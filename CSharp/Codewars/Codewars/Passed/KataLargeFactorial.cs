@@ -65,7 +65,7 @@ namespace Codewars.Codewars.Passed
             while (n > 1)
             {
                 var m = Activator.CreateInstance(t, n);
-                o = mul.Invoke(o, new [] { o, m });
+                o = mul.Invoke(o, [o, m]);
                 n--;
             }
 

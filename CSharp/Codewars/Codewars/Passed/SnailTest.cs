@@ -10,11 +10,11 @@ namespace Codewars.Codewars.Passed
         public void SnailTest1()
         {
             int[][] array =
-            {
-                new []{1, 2, 3},
-                new []{4, 5, 6},
-                new []{7, 8, 9}
-            };
+            [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]
+            ];
             var r = new[] { 1, 2, 3, 6, 9, 8, 7, 4, 5 };
             Test(array, r);
         }
@@ -23,12 +23,12 @@ namespace Codewars.Codewars.Passed
         public void SnailTest2()
         {
             int[][] array =
-            {
-                new []{ 1,  2,  3, 13},
-                new []{ 4,  5,  6, 10},
-                new []{ 7,  8,  9, 11},
-                new []{12, 18, 19, 20},
-            };
+            [
+                [1,  2,  3, 13],
+                [4,  5,  6, 10],
+                [7,  8,  9, 11],
+                [12, 18, 19, 20]
+            ];
             var r = new[] { 1, 2, 3, 13, 10, 11, 20, 19, 18, 12, 7, 4, 5, 6, 9, 8 };
             Test(array, r);
         }

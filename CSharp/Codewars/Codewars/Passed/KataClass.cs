@@ -41,7 +41,7 @@ namespace Codewars.Codewars.Passed
                 var attr = MethodAttributes.Public;
 
                 //build setter
-                var setter = tb.DefineMethod("set_" + propName, attr, null, new Type[] { type });
+                var setter = tb.DefineMethod("set_" + propName, attr, null, [type]);
                 var setterILG = setter.GetILGenerator();
                 setterILG.Emit(OpCodes.Ldarg_0);
                 setterILG.Emit(OpCodes.Ldarg_1);

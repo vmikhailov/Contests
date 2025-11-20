@@ -51,8 +51,8 @@ namespace Codewars.Codewars.Passed
                 var rand1 = rnd.Next(0, 100);
                 var rand2 = rnd.Next(0, 10);
 
-                Assert.AreEqual(rand1 % 10, LastDigitOfHugeNumber.LastDigit(new[] { rand1 }));
-                Assert.AreEqual((int)Math.Pow(rand1 % 10, rand2) % 10, LastDigitOfHugeNumber.LastDigit(new[] { rand1, rand2 }));
+                Assert.AreEqual(rand1 % 10, LastDigitOfHugeNumber.LastDigit([rand1]));
+                Assert.AreEqual((int)Math.Pow(rand1 % 10, rand2) % 10, LastDigitOfHugeNumber.LastDigit([rand1, rand2]));
             }
         }
     }

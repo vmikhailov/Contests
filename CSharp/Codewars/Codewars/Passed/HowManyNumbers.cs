@@ -21,7 +21,7 @@ namespace Codewars.Codewars.Passed
                 n++;
             }
         
-            return n > 0 ? new List<long>{ n, nmin, nmax } : new List<long>();
+            return n > 0 ? [n, nmin, nmax] : [];
         }
 
         private static long GetMaxNumber(int sum, int num)

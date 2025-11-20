@@ -5,7 +5,7 @@ namespace Codewars.Codewars.Passed
         public static int[] Snail(int[][] array)
         {
             var n = array.GetLength(0);
-            if (n == 0) return new int[0];
+            if (n == 0) return [];
 
             int x = 0, y = 0, z = 0;
             var r = new int[n * n];
@@ -54,7 +54,7 @@ namespace Codewars.Codewars.Passed
         public static int[] Snail2(int[][] array)
         {
             var n = array.GetLength(0);
-            if (n == 0) return new int[0];
+            if (n == 0) return [];
 
             int x = 0, y = 0, z = 0;
             var r = new int[n * n];

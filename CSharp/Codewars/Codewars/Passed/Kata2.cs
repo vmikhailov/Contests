@@ -81,7 +81,7 @@ namespace Codewars.Codewars.Passed
             var methodName = $"set{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(propertyName.ToLower())}";
 
             var setterBuilder =
-                typeBuilder.DefineMethod(methodName, MethodAttributes.Public, null, new[] { propertyType });
+                typeBuilder.DefineMethod(methodName, MethodAttributes.Public, null, [propertyType]);
 
             var setterIl = setterBuilder.GetILGenerator();
 

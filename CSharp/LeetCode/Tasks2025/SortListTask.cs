@@ -6,91 +6,87 @@ public class SortListTask
 {
     public ListNode? SortList(ListNode? head)
     {
-        var n = Count(head);
-        if(n < 2) return head;
+        if (head?.next is null) return head;
 
-        while (!IsSorted(head))
+        var size = 1;
+
+        while (true)
         {
-            head = Merge(Split(head, n));
+            var dummy = new ListNode();
+            var tail = dummy;
+            var current = head;
+            var mergeCount = 0;
+
+            while (current is not null)
+            {
+                var (left, rest1) = Split(current, size);
+                var (right, rest2) = Split(rest1, size);
+
+                if (right is not null) mergeCount++;
+
+                tail.next = Merge((left, right));
+
+                while (tail.next is not null) tail = tail.next;
+
+                current = rest2;
+            }
+
+            head = dummy.next;
+
+            // Если не было слияний, список отсортирован
+            if (mergeCount == 0) break;
+
+            size *= 2;
         }
 
         return head;
+    }
 
+    private static (ListNode?, ListNode?) Split(ListNode? node, int size)
+    {
+        var left = node;
+        ListNode? prev = null;
 
-        int Count(ListNode? node)
+        for (var i = 0; i < size && node is not null; i++)
         {
-            var c = 0;
-
-            while (node is not null)
-            {
-                node = node.next;
-                c++;
-            }
-
-            return c;
-        }
-
-        bool IsSorted(ListNode? node)
-        {
-            if (node is null) return true;
-
-            var prev = node;
+            prev = node;
             node = node.next;
-
-            while (node is not null)
-            {
-                if (prev.val > node.val) return false;
-                prev = node;
-                node = node.next;
-            }
-
-            return true;
         }
 
-        (ListNode?, ListNode?) Split(ListNode? node, int cnt)
+        if (prev is not null) prev.next = null;
+
+        return (left, node);
+    }
+
+    private static ListNode? Merge((ListNode? Left, ListNode? Right) nodes)
+    {
+        var (left, right) = nodes;
+        if (left is null) return right;
+        if (right is null) return left;
+
+        var dummy = new ListNode();
+        var tail = dummy;
+
+        while (left is not null && right is not null)
         {
-            var left = node;
-            ListNode? prev = null;
-
-            for (var i = 0; i < cnt / 2; i++)
+            if (left.val <= right.val)
             {
-                prev = node;
-                node = node!.next;
+                tail.next = left;
+                left = left.next;
+            }
+            else
+            {
+                tail.next = right;
+                right = right.next;
             }
 
-            if (prev is not null) prev.next = null;
+            tail = tail.next!;
 
-            return (SortList(left), SortList(node));
+            // Cut any stale linkage to avoid accidental cycles during merge
+            tail.next = null;
         }
 
-        ListNode? Merge((ListNode? Left, ListNode? Right) nodes)
-        {
-            var (left, right) = nodes;
-            if (left is null) return right;
-            if (right is null) return left;
-
-            var dummy = new ListNode();
-            var tail = dummy;
-
-            while (left is not null && right is not null)
-            {
-                if (left.val <= right.val)
-                {
-                    tail.next = left;
-                    left = left.next;
-                }
-                else
-                {
-                    tail.next = right;
-                    right = right.next;
-                }
-                tail = tail.next!;
-                // Cut any stale linkage to avoid accidental cycles during merge
-                tail.next = null;
-            }
-
-            tail.next = left ?? right;
-            return dummy.next;
-        }
+        tail.next = left ?? right;
+        return dummy.next;
     }
 }

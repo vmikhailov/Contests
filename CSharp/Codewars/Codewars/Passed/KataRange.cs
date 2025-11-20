@@ -23,11 +23,11 @@ namespace Codewars.Codewars.Passed
                 if (d > l) break;
                 if (d == l && SameDigits(s, i, j, min, max))
                 {
-                    return new[] { i, j };
+                    return [i, j];
                 }
             }
 
-            return new int[0];
+            return [];
         }
 
         private static int Len(int min, int max)

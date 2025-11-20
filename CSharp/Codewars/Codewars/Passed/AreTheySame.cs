@@ -7,8 +7,8 @@ namespace Codewars.Codewars.Passed
     {
         public static bool comp(int[] a, int[] b)
         {
-            a ??= new int[0];
-            b ??= new int[0];
+            a ??= [];
+            b ??= [];
             if(a.Length != b.Length)
             {
                 return false; 

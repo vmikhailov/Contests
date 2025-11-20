@@ -12,7 +12,7 @@ namespace Codewars.Codewars.Passed
         public Atkin2(int limit)
         {
             this.limit = limit;
-            primes = new List<int>();
+            primes = [];
         }
 
 

@@ -18,7 +18,7 @@ namespace Codewars.Codewars.Passed
 
         public static string[] GetMethodNames(object obj)
         {
-            if (obj == null) return new string[0];
+            if (obj == null) return [];
 
             return obj.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).Select(x => x.Name).ToArray();
         }
