@@ -1,79 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using NUnit.Framework;
 using FluentAssertions;
-using LeetCode.Tasks2025;
+using NUnit.Framework;
 
 namespace LeetCode.Tasks;
 
-public interface INumArrayTask
-{
-    void Update(int index, int val);
-
-    int SumRange(int left, int right);
-}
-
-public class NumArrayTask_Naive : INumArrayTask
-{
-    private readonly List<int> _nums;
-    private readonly List<int> _sums;
-
-    public NumArrayTask_Naive(int[] nums)
-    {
-        _nums = nums.ToList();
-        _sums = new List<int>(nums.Length);
-        var s = 0;
-
-        for (var i = 0; i < nums.Length; i++)
-        {
-            _sums.Add(s += _nums[i]);
-        }
-    }
-
-    public void Update(int index, int val)
-    {
-        var old = _nums[index];
-        _nums[index] = val;
-        _sums[index] = index > 0 ? _sums[index - 1] + val : val;
-
-        for (var i = index + 1; i < _sums.Count; i++)
-        {
-            _sums[i] += val - old;
-        }
-    }
-
-    public int SumRange(int left, int right)
-    {
-        var s = left > 0 ? _sums[left - 1] : 0;
-        return _sums[right] - s;
-    }
-}
-
-public class NumArrayTaskSegmentTree : INumArrayTask
-{
-    private readonly SegmentTree<int> _segmentTree;
-
-    public NumArrayTaskSegmentTree(int[] nums)
-    {
-        _segmentTree = new(nums, (a, b) => a + b, 0);
-    }
-
-    public void Update(int index, int val)
-    {
-        _segmentTree.Update(index, val);
-    }
-
-    public int SumRange(int l, int r)
-    {
-        return _segmentTree.Query(l, r);
-    }
-}
-
-
-
-// NUnit tests for NumArrayTask (10 tests). Implementation is intentionally not modified.
 [TestFixture]
 public class NumArrayTaskTests
 {
