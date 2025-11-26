@@ -1,51 +1,49 @@
+using FluentAssertions;
+using NUnit.Framework;
+
 namespace LeetCode.Tasks;
 
 public class ZigzagLevelOrderTask
 {
 	public IList<IList<int>> ZigzagLevelOrder(TreeNode? root) 
 	{
-		var result = new List<IList<int>>();
-
+		var q = new Queue<TreeNode>();
+		var r = new List<IList<int>>();
+		
+		var f = false;
 		if(root == null)
 		{
-			return result;
+			return r;
 		}
 
-		var leftToRight = true;
-
-		var queue = new Queue<TreeNode>();
-		queue.Enqueue(root);
+		q.Enqueue(root);
 		
-		while(queue.Count > 0)
+		while(q.Any())
 		{
-			var level = new List<int>();
-			var levelSize = queue.Count;
-
-			for(var i = 0; i < levelSize; i++)
+			IList<int> v = new List<int>();
+			var p = q;
+			q = new (); 
+            
+			foreach(var node in p)
 			{
-				var node = queue.Dequeue();
-				level.Add(node.val);
+				v.Add(node.val);
 				if(node.left != null)
 				{
-					queue.Enqueue(node.left);
+					q.Enqueue(node.left);
 				}
 
 				if(node.right != null)
 				{
-					queue.Enqueue(node.right);
+					q.Enqueue(node.right);
 				}
 			}
 
-			if (!leftToRight)
-			{
-				level.Reverse();
-			}
-
-			result.Add(level);
-
-			leftToRight = !leftToRight;
+			f = !f;
+			var a = (f ? p.ToList() : p.Reverse()).Select(x => x.val).ToList();
+			r.Add(a);
 		}
         
-		return result;
+		return r;
 	}
 }
+
