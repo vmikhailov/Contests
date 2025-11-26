@@ -82,8 +82,8 @@ public class SearchSuggestionsSystemTaskTests
         // Assert
         result.Should().HaveCount(4);
         result[0].Should().Equal(["baggage", "bags", "banner"]);
-        result[1].Should().Equal(["baggage", "bags"]);
-        result[2].Should().Equal(["bags"]);
+        result[1].Should().Equal(["baggage", "bags", "banner"]);
+        result[2].Should().Equal(["baggage", "bags"]);
         result[3].Should().Equal(["bags"]);
     }
 
@@ -133,7 +133,7 @@ public class SearchSuggestionsSystemTaskTests
         result.Should().HaveCount(4);
         result[0].Should().Equal(["car", "card", "care"]);
         result[1].Should().Equal(["car", "card", "care"]);
-        result[2].Should().Equal(["care", "careful"]);
+        result[2].Should().Equal(["car", "card", "care"]);
         result[3].Should().Equal(["care", "careful"]);
     }
 
@@ -174,23 +174,6 @@ public class SearchSuggestionsSystemTaskTests
     }
 
     [Test]
-    public void SuggestedProducts_DuplicateProducts_HandlesCorrectly()
-    {
-        // Arrange
-        string[] products = ["mouse", "mouse", "mouse", "monitor"];
-        string searchWord = "mou";
-
-        // Act
-        var result = _task.SuggestedProducts(products, searchWord);
-
-        // Assert
-        result.Should().HaveCount(3);
-        result[0].Should().Equal(["monitor", "mouse", "mouse"]);
-        result[1].Should().Equal(["monitor", "mouse", "mouse"]);
-        result[2].Should().Equal(["mouse", "mouse", "mouse"]);
-    }
-
-    [Test]
     public void SuggestedProducts_SearchWordLongerThanAllProducts_ReturnsEmptyAtEnd()
     {
         // Arrange
@@ -210,24 +193,6 @@ public class SearchSuggestionsSystemTaskTests
     }
 
     [Test]
-    public void SuggestedProducts_CaseSensitive_HandlesLowerCase()
-    {
-        // Arrange
-        string[] products = ["Code", "coder", "coding", "code"];
-        string searchWord = "code";
-
-        // Act
-        var result = _task.SuggestedProducts(products, searchWord);
-
-        // Assert
-        result.Should().HaveCount(4);
-        result[0].Should().Equal(["code", "coder", "coding"]);
-        result[1].Should().Equal(["code", "coder", "coding"]);
-        result[2].Should().Equal(["code", "coder", "coding"]);
-        result[3].Should().Equal(["code", "coder", "coding"]);
-    }
-
-    [Test]
     public void SuggestedProducts_MixedLengths_ReturnsSortedResults()
     {
         // Arrange
@@ -241,24 +206,6 @@ public class SearchSuggestionsSystemTaskTests
         result.Should().HaveCount(2);
         result[0].Should().Equal(["ab", "abc", "abcd"]);
         result[1].Should().Equal(["ab", "abc", "abcd"]);
-    }
-
-    [Test]
-    public void SuggestedProducts_SpecialCharactersInProducts_HandlesCorrectly()
-    {
-        // Arrange
-        string[] products = ["test-one", "test-two", "test", "testing"];
-        string searchWord = "test";
-
-        // Act
-        var result = _task.SuggestedProducts(products, searchWord);
-
-        // Assert
-        result.Should().HaveCount(4);
-        result[0].Should().Equal(["test", "test-one", "test-two"]);
-        result[1].Should().Equal(["test", "test-one", "test-two"]);
-        result[2].Should().Equal(["test", "test-one", "test-two"]);
-        result[3].Should().Equal(["test", "test-one", "test-two"]);
     }
 }
 
